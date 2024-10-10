@@ -71,6 +71,9 @@ static q31_t biquadStateBand5Q31[4 * 2];
 
 q31_t inputQ31[N];
 q31_t outputQ31[N];
+q31_t *inputQ31_ptr= &inputQ31[0];
+q31_t *outputQ31_ptr= &outputQ31[0];
+
 
 const q31_t coeffTable[950] = {
   /* Band 1, -9 dB gain */
@@ -595,100 +598,115 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc1) {
 	for( int n=0; n<halfN; n++){ filt_in[n] = (float32_t) adc_buffer[n];}
 	//arm_fir_f32(&filter1, filt_in_ptr, filt_out_ptr, halfN);
 
-
 	/* ----------------------------------------------------------------------
 	** Convert block of input data from float to Q31
 	** ------------------------------------------------------------------- */
-	arm_float_to_q31(filt_in_ptr, inputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Scale down by 1/8.  This provides additional headroom so that the
-	** graphic EQ can apply gain.
-	** ------------------------------------------------------------------- */
-	//arm_scale_q31(inputQ31, 0x7FFFFFFF, -3, inputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Call the Q31 Biquad Cascade DF1 32x64 process function for band1, band2
-	** ------------------------------------------------------------------- */
-	arm_biquad_cas_df1_32x64_q31(&S1, inputQ31, outputQ31, halfN);
-	//arm_biquad_cas_df1_32x64_q31(&S2, outputQ31, outputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Call the Q31 Biquad Cascade DF1 process function for band3, band4, band5
-	** ------------------------------------------------------------------- */
-	//arm_biquad_cascade_df1_q31(&S3, outputQ31, outputQ31, halfN);
-	//arm_biquad_cascade_df1_q31(&S4, outputQ31, outputQ31, halfN);
-	//arm_biquad_cascade_df1_q31(&S5, outputQ31, outputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Convert Q31 result back to float
-	** ------------------------------------------------------------------- */
-	arm_q31_to_float(outputQ31, filt_out_ptr, halfN);
-	/* ----------------------------------------------------------------------
-	** Scale back up
-	** ------------------------------------------------------------------- */
-	arm_scale_f32(filt_out_ptr, 8.0f, filt_out_ptr, halfN);
+	for (int i = 0; i < 16; i++) {
 
-	for( int n=0; n<halfN; n++)		{
-		filt_out[n] += 2;
-		dac_buffer[n] = (uint32_t) (filt_out[n] * 1000);
+
+		arm_float_to_q31(filt_in_ptr + (i * 32), inputQ31, 32);
+
+
+		/* ----------------------------------------------------------------------
+		** Scale down by 1/8.  This provides additional headroom so that the
+		** graphic EQ can apply gain.
+		** ------------------------------------------------------------------- */
+		arm_scale_q31(inputQ31, 0x7FFFFFFF, -3, inputQ31, 32);
+
+		/* ----------------------------------------------------------------------
+		** Call the Q31 Biquad Cascade DF1 32x64 process function for band1, band2
+		** ------------------------------------------------------------------- */
+		arm_biquad_cas_df1_32x64_q31(&S1, inputQ31, outputQ31, 32);
+		//arm_biquad_cas_df1_32x64_q31(&S2, outputQ31, outputQ31, halfN);
+		/* ----------------------------------------------------------------------
+		** Call the Q31 Biquad Cascade DF1 process function for band3, band4, band5
+		** ------------------------------------------------------------------- */
+		//arm_biquad_cascade_df1_q31(&S3, outputQ31, outputQ31, halfN);
+		//arm_biquad_cascade_df1_q31(&S4, outputQ31, outputQ31, halfN);
+		//arm_biquad_cascade_df1_q31(&S5, outputQ31, outputQ31, halfN);
+		/* ----------------------------------------------------------------------
+		** Convert Q31 result back to float
+		** ------------------------------------------------------------------- */
+		arm_q31_to_float(outputQ31, filt_out_ptr + (i * 32), 32);
+
+
+		/* ----------------------------------------------------------------------
+		** Scale back up
+		** ------------------------------------------------------------------- */
+		arm_scale_f32(filt_out_ptr + (i + 32), 8.0f, filt_out_ptr + (i + 32, 32), 32);
 	}
-}
-
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1) {
-
-	arm_biquad_cas_df1_32x64_init_q31(&S1, NUMSTAGES,
-		            (q31_t *) &coeffTable[190*0 + 10*(gainDB[0] + 9)],
-		            &biquadStateBand1Q31[0], 2);
-		  arm_biquad_cas_df1_32x64_init_q31(&S2, NUMSTAGES,
-		            (q31_t *) &coeffTable[190*1 + 10*(gainDB[1] + 9)],
-		            &biquadStateBand2Q31[0], 2);
-		  arm_biquad_cascade_df1_init_q31(&S3, NUMSTAGES,
-		          (q31_t *) &coeffTable[190*2 + 10*(gainDB[2] + 9)],
-		          &biquadStateBand3Q31[0], 2);
-		  arm_biquad_cascade_df1_init_q31(&S4, NUMSTAGES,
-		          (q31_t *) &coeffTable[190*3 + 10*(gainDB[3] + 9)],
-		          &biquadStateBand4Q31[0], 2);
-		  arm_biquad_cascade_df1_init_q31(&S5, NUMSTAGES,
-		          (q31_t *) &coeffTable[190*4 + 10*(gainDB[4] + 9)],
-		          &biquadStateBand5Q31[0], 2);
-
-	for( int n=halfN; n<N; n++){filt_in[n] = (float32_t) adc_buffer[n];}
-
-	//filt_in[n] = (float32_t) adc_buffer[n];
-
-	/* ----------------------------------------------------------------------
-	** Convert block of input data from float to Q31
-	** ------------------------------------------------------------------- */
-	arm_float_to_q31(filt_in_ptr + halfN, inputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Scale down by 1/8.  This provides additional headroom so that the
-	** graphic EQ can apply gain.
-	** ------------------------------------------------------------------- */
-	//arm_scale_q31(inputQ31, 0x7FFFFFFF, -3, inputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Call the Q31 Biquad Cascade DF1 32x64 process function for band1, band2
-	** ------------------------------------------------------------------- */
-	arm_biquad_cas_df1_32x64_q31(&S1, inputQ31 + halfN, outputQ31 + halfN, halfN);
-	//arm_biquad_cas_df1_32x64_q31(&S2, outputQ31 + halfN, outputQ31 + halfN, halfN);
-	/* ----------------------------------------------------------------------
-	** Call the Q31 Biquad Cascade DF1 process function for band3, band4, band5
-	** ------------------------------------------------------------------- */
-	//arm_biquad_cascade_df1_q31(&S3, outputQ31 + halfN, outputQ31 + halfN, halfN);
-	//arm_biquad_cascade_df1_q31(&S4, outputQ31 + halfN, outputQ31 + halfN, halfN);
-	//arm_biquad_cascade_df1_q31(&S5, outputQ31 + halfN, outputQ31, halfN);
-	/* ----------------------------------------------------------------------
-	** Convert Q31 result back to float
-	** ------------------------------------------------------------------- */
-	arm_q31_to_float(outputQ31, filt_out_ptr + halfN, halfN);
-	/* ----------------------------------------------------------------------
-	** Scale back up
-	** ------------------------------------------------------------------- */
-	arm_scale_f32(filt_out_ptr + halfN, 8.0f, filt_out_ptr + halfN, halfN);
 
 
-	//arm_fir_f32(&filter1, filt_in_ptr + halfN, filt_out_ptr + halfN, halfN);
-    for( int n=halfN; n<N; n++){
-    	filt_out[n] += 2;
-    	dac_buffer[n] = (uint32_t) (filt_out[n] * 1000);}
+//	for( int n=0; n<halfN; n++)		{
+//		filt_out[n] += 2;
+//		dac_buffer[n] = (uint32_t) (filt_out[n]);
+//	}
 
 }
+
+//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc1) {
+//
+//	arm_biquad_cas_df1_32x64_init_q31(&S1, NUMSTAGES,
+//		            (q31_t *) &coeffTable[190*0 + 10*(gainDB[0] + 9)],
+//		            &biquadStateBand1Q31[0], 2);
+//		  arm_biquad_cas_df1_32x64_init_q31(&S2, NUMSTAGES,
+//		            (q31_t *) &coeffTable[190*1 + 10*(gainDB[1] + 9)],
+//		            &biquadStateBand2Q31[0], 2);
+//		  arm_biquad_cascade_df1_init_q31(&S3, NUMSTAGES,
+//		          (q31_t *) &coeffTable[190*2 + 10*(gainDB[2] + 9)],
+//		          &biquadStateBand3Q31[0], 2);
+//		  arm_biquad_cascade_df1_init_q31(&S4, NUMSTAGES,
+//		          (q31_t *) &coeffTable[190*3 + 10*(gainDB[3] + 9)],
+//		          &biquadStateBand4Q31[0], 2);
+//		  arm_biquad_cascade_df1_init_q31(&S5, NUMSTAGES,
+//		          (q31_t *) &coeffTable[190*4 + 10*(gainDB[4] + 9)],
+//		          &biquadStateBand5Q31[0], 2);
+//
+//	for( int n=halfN; n<N; n++){filt_in[n] = (float32_t) adc_buffer[n];}
+//
+//	//filt_in[n] = (float32_t) adc_buffer[n];
+//
+//	/* ----------------------------------------------------------------------
+//	** Convert block of input data from float to Q31
+//	** ------------------------------------------------------------------- */
+//	for (int i = 16; i < 32; i++) {
+//
+//		arm_float_to_q31(filt_in_ptr + (i * 32), inputQ31, 32);
+//
+//	/* ----------------------------------------------------------------------
+//	** Scale down by 1/8.  This provides additional headroom so that the
+//	** graphic EQ can apply gain.
+//	** ------------------------------------------------------------------- */
+//		arm_scale_q31(inputQ31, 0x7FFFFFFF, -3, inputQ31, 32);
+//	/* ----------------------------------------------------------------------
+//	** Call the Q31 Biquad Cascade DF1 32x64 process function for band1, band2
+//	** ------------------------------------------------------------------- */
+//		arm_biquad_cas_df1_32x64_q31(&S1, inputQ31, outputQ31, 32);
+//	//arm_biquad_cas_df1_32x64_q31(&S2, outputQ31 + halfN, outputQ31 + halfN, halfN);
+//	/* ----------------------------------------------------------------------
+//	** Call the Q31 Biquad Cascade DF1 process function for band3, band4, band5
+//	** ------------------------------------------------------------------- */
+//	//arm_biquad_cascade_df1_q31(&S3, outputQ31 + halfN, outputQ31 + halfN, halfN);
+//	//arm_biquad_cascade_df1_q31(&S4, outputQ31 + halfN, outputQ31 + halfN, halfN);
+//	//arm_biquad_cascade_df1_q31(&S5, outputQ31 + halfN, outputQ31, halfN);
+//	/* ----------------------------------------------------------------------
+//	** Convert Q31 result back to float
+//	** ------------------------------------------------------------------- */
+//		arm_q31_to_float(outputQ31, filt_out_ptr + (i * 32), 32);
+//	/* ----------------------------------------------------------------------
+//	** Scale back up
+//	** ------------------------------------------------------------------- */
+//		arm_scale_f32(filt_out_ptr + (i * 32), 8.0f, filt_out_ptr + (i * 32), 32);
+//
+//	}
+//
+//
+//	//arm_fir_f32(&filter1, filt_in_ptr + halfN, filt_out_ptr + halfN, halfN);
+////    for( int n=halfN; n<N; n++){
+////    	filt_out[n] += 2;
+////    	dac_buffer[n] = (uint32_t) (filt_out[n] * 1000);}
+//
+//}
 
 /* USER CODE END 4 */
 
