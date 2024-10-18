@@ -19,4 +19,4 @@
 ../Core/Src/stm32u5xx_hal_msp.c:1040:6:HAL_PCD_MspInit	256	static
 ../Core/Src/stm32u5xx_hal_msp.c:1103:6:HAL_PCD_MspDeInit	16	static
 ../Core/Src/stm32u5xx_hal_msp.c:1130:6:HAL_SAI_MspInit	152	static
-../Core/Src/stm32u5xx_hal_msp.c:1279:6:HAL_SAI_MspDeInit	16	static
+../Core/Src/stm32u5xx_hal_msp.c:1289:6:HAL_SAI_MspDeInit	16	static

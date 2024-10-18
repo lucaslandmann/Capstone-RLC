@@ -75,13 +75,15 @@ UART_HandleTypeDef huart1;
 PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc1Vals[13] = {0};
+uint16_t adc1Vals[416] = {0};
 uint16_t adc4Vals[2] = {0};
 uint32_t pcmVals[128] = {0};
 uint16_t dacVals[2] = {0};
 uint8_t testRead[1] = {0};
-int32_t signal[4096];
+int32_t signal[1] = {0};
 float cpuTemp = 0;
+
+uint16_t index = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,7 +106,7 @@ static void MX_SAI2_Init(void);
 static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
-
+static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t command);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -168,87 +170,31 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc1Vals, DIM(adc1Vals));
   HAL_ADC_Start_DMA(&hadc4, (uint32_t*)adc4Vals, DIM(adc4Vals));
 
+
   //Set to "Awake" state
   uint8_t awake[] = {0x02, 0x81};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, awake, sizeof(awake), 1000);
+  I2C_Transmit(ADCAddress, 0x02, 0x81);
 
-  //Software Reset
-  uint8_t softwareReset[] = {0x01, 0x01};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, softwareReset, sizeof(softwareReset), 1000);
-
-  //Set MICBIAS and ADC to power down if needed
-  uint8_t thermalProtect[] = {0x28, 0x10};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, thermalProtect, sizeof(thermalProtect), 1000);
-
-  //Format Select
-  uint8_t formatSelect[] = {0x07, 0x60};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, formatSelect, sizeof(formatSelect), 1000);
-
-  //Master mode select
-  uint8_t masterMode[] = {0x13, 0x97};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, masterMode, sizeof(masterMode), 1000);
-
-  uint8_t masterModeConfig[] = {0x14, 0x58};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, masterModeConfig, sizeof(masterModeConfig), 1000);
-
-  uint8_t channel1Config[] = {0x3c, 0xa5};
-  uint8_t channel2Config[] = {0x41, 0xa5};
-  uint8_t channel3Config[] = {0x46, 0xa5};
-  uint8_t channel4Config[] = {0x4b, 0xa5};
-  uint8_t channel5Config[] = {0x50, 0xa5};
-  uint8_t channel6Config[] = {0x55, 0xa5};
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel1Config, sizeof(channel1Config), 1000);
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel2Config, sizeof(channel2Config), 1000);
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel3Config, sizeof(channel3Config), 1000);
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel4Config, sizeof(channel4Config), 1000);
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel5Config, sizeof(channel5Config), 1000);
-
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channel6Config, sizeof(channel6Config), 1000);
-
-  uint8_t inputChannelEnable[] = {0x73, 0xFC};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, inputChannelEnable, sizeof(inputChannelEnable), 1000);
-
-  uint8_t outputChannelEnable[] = {0x74, 0xFF};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, outputChannelEnable, sizeof(outputChannelEnable), 1000);
-
-  uint8_t enablePowerOuts[] = {0x75, 0x60};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, enablePowerOuts, sizeof(enablePowerOuts), 1000);
-  HAL_Delay(50);
+  uint8_t softwareReset[] = {0x020as00qwjkasdf}
+  I2C_Transmit(ADCAddress,)
 
 
 
-  HAL_SAI_Receive_DMA(&hsai_BlockA2, pcmVals, DIM(pcmVals));
-  //HAL_SAI_Transmit_DMA(&hsai_BlockB2, pcmVals, sizeof(pcmVals));
 
-  uint8_t asiRead[] = {0x15,0xFF};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, asiRead, sizeof(asiRead), 1000);
-  HAL_I2C_Master_Receive(&hi2c1, ADCAddress, testRead, sizeof(testRead), 1000);
-
-  uint8_t adcStatus[] = {0x76, 0xFF};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, adcStatus, sizeof(adcStatus), 1000);
-  HAL_I2C_Master_Receive(&hi2c1, ADCAddress, testRead, sizeof(testRead), 1000);
-
-  uint8_t channelStatus[] = {0x77, 0xFF};
-  HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, channelStatus, sizeof(channelStatus), 1000);
-  HAL_I2C_Master_Receive(&hi2c1, ADCAddress, testRead, sizeof(testRead), 1000);
-
-  for(int i = 0; i < DIM(signal); i+=2)
-  {
-	  signal[i] = i;
-	  signal[i+1] = signal[i];
-  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_SAI_Transmit(&hsai_BlockB2, signal, DIM(signal), 100);
+	  signal[1] = adc1Vals[index % 6];
+	  index++;
+	  if(index >= sizeof(adc1Vals))
+	  {
+		  index = 0;
+	  }
+	  HAL_SAI_Transmit(&hsai_BlockB2, pcmVals, DIM(pcmVals), 100);
+	  HAL_SAI_Transmit(&hsai_BlockA2, pcmVals, DIM(pcmVals), 100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -389,7 +335,7 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.Resolution = ADC_RESOLUTION_14B;
   hadc1.Init.GainCompensation = 0;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
@@ -745,7 +691,7 @@ static void MX_I2C1_Init(void)
   hi2c1.Init.OwnAddress2 = 0;
   hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_ENABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
   if (HAL_I2C_Init(&hi2c1) != HAL_OK)
   {
     Error_Handler();
@@ -976,23 +922,25 @@ static void MX_SAI2_Init(void)
 
   /* USER CODE END SAI2_Init 1 */
   hsai_BlockA2.Instance = SAI2_Block_A;
-  hsai_BlockA2.Init.AudioMode = SAI_MODESLAVE_RX;
-  hsai_BlockA2.Init.Synchro = SAI_SYNCHRONOUS;
-  hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
+  hsai_BlockA2.Init.AudioMode = SAI_MODEMASTER_TX;
+  hsai_BlockA2.Init.Synchro = SAI_ASYNCHRONOUS;
+  hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
   hsai_BlockA2.Init.TriState = SAI_OUTPUT_NOTRELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 6) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
   hsai_BlockB2.Instance = SAI2_Block_B;
-  hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_TX;
+  hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_RX;
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
-  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
   hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
@@ -1000,8 +948,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  hsai_BlockB2.Init.TriState = SAI_OUTPUT_NOTRELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 4) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1241,6 +1188,19 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t command)
+{
+	uint8_t pData[2] = {targetRegister, command};
+	HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, DIM(pData), 100);
+	HAL_Delay(1);
+	uint8_t readRegister[DIM(pData)] = {0};
+	uint8_t regRead[2] = {pData[1],0xFF};
+	HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, regRead, sizeof(regRead), 1000);
+	HAL_I2C_Master_Receive(&hi2c1, ADCAddress, readRegister, sizeof(readRegister), 1000);
+	HAL_Delay(1);
+
+	return 0;
+}
 /* USER CODE END 4 */
 
 /**
