@@ -77,10 +77,8 @@ PCD_HandleTypeDef hpcd_USB_OTG_HS;
 /* USER CODE BEGIN PV */
 uint16_t adc1Vals[13] = {0};
 uint16_t adc4Vals[2] = {0};
-uint32_t pcmVals[32] = {0};
+uint8_t pcmVals[8] = {0};
 uint16_t dacVals[2] = {0};
-uint8_t testRead[1] = {0};
-int32_t signal[1] = {0};
 float cpuTemp = 0;
 
 uint16_t index = 0;
@@ -163,32 +161,43 @@ int main(void)
   MX_ADC4_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(1);
+  HAL_SAI_Receive_DMA(&hsai_BlockB2,pcmVals,DIM(pcmVals));
   HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET);
-  HAL_Delay(10);
 
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc1Vals, DIM(adc1Vals));
   HAL_ADC_Start_DMA(&hadc4, (uint32_t*)adc4Vals, DIM(adc4Vals));
 
 
+
   //Set to "Awake" state
-  uint8_t awake[] = {0x02, 0x81};
   I2C_Transmit(ADCAddress, 0x02, 0x81);
+
+  //Reset all settings
+  I2C_Transmit(ADCAddress, 0x01, 0xFF);
+
+  //Config ASI
+  I2C_Transmit(ADCAddress, 0x07, 0x70);
+
+  //Slave Config
+  I2C_Transmit(ADCAddress, 0x13, 0x07);
 
   //power down mic bias and ADC channels on fault
   I2C_Transmit(ADCAddress, 0x28, 0x10);
 
+  //Set Micbias = 5V
+  I2C_Transmit(ADCAddress, 0x3B, 0x70);
+
   //config channel 1
-  I2C_Transmit(ADCAddress, 0x3C, 0x18);
+  I2C_Transmit(ADCAddress, 0x3C, 0xA8);
 
   //config channel 2
-  I2C_Transmit(ADCAddress, 0x41, 0x18);
+  I2C_Transmit(ADCAddress, 0x41, 0xA8);
 
   //config channel 3
-  I2C_Transmit(ADCAddress, 0x46, 0x18);
+  I2C_Transmit(ADCAddress, 0x46, 0xA8);
 
   //config channel 4
-  I2C_Transmit(ADCAddress, 0x4B, 0x18);
+  I2C_Transmit(ADCAddress, 0x4B, 0xA8);
 
   //enable input channel 1 to 4 I2C
   I2C_Transmit(ADCAddress, 0x73, 0xF0);
@@ -197,11 +206,10 @@ int main(void)
   I2C_Transmit(ADCAddress, 0x74, 0xF0);
 
   //power up mic bias
-  I2C_Transmit(ADCAddress, 0x75, 0xE0);
+  //I2C_Transmit(ADCAddress, 0x75, 0xE0);
 
 
-  HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t) pcmVals, DIM(pcmVals));
-
+  //HAL_SAI_Transmit_DMA(&hsai_BlockA2, pcmVals,DIM(pcmVals));
 
 
   /* USER CODE END 2 */
@@ -210,14 +218,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  signal[1] = adc1Vals[index % 6];
-	  index++;
-	  if(index >= sizeof(adc1Vals))
-	  {
-		  index = 0;
-	  }
-	  //HAL_SAI_Receive(&hsai_BlockB2, (uint8_t *) pcmVals, DIM(pcmVals), 100);
-	  HAL_SAI_Transmit(&hsai_BlockA2, (uint8_t *) pcmVals, DIM(pcmVals), 100);
+	  //HAL_SAI_Receive(&hsai_BlockB2, pcmVals, DIM(pcmVals), 100);
+	  //HAL_SAI_Transmit(&hsai_BlockA2, pcmVals, DIM(pcmVals), 100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -955,7 +957,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
-  hsai_BlockA2.Init.TriState = SAI_OUTPUT_NOTRELEASED;
+  hsai_BlockA2.Init.TriState = SAI_OUTPUT_RELEASED;
   if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
   {
     Error_Handler();
@@ -965,7 +967,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
   hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
+  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_HF;
   hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockB2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
@@ -1215,7 +1217,6 @@ static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t
 {
 	uint8_t pData[2] = {targetRegister, command};
 	HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, DIM(pData), 100);
-	HAL_Delay(10);
 	return 0;
 }
 /* USER CODE END 4 */
