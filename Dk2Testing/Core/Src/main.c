@@ -75,9 +75,9 @@ UART_HandleTypeDef huart1;
 PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc1Vals[416] = {0};
+uint16_t adc1Vals[13] = {0};
 uint16_t adc4Vals[2] = {0};
-uint32_t pcmVals[128] = {0};
+uint32_t pcmVals[32] = {0};
 uint16_t dacVals[2] = {0};
 uint8_t testRead[1] = {0};
 int32_t signal[1] = {0};
@@ -175,9 +175,32 @@ int main(void)
   uint8_t awake[] = {0x02, 0x81};
   I2C_Transmit(ADCAddress, 0x02, 0x81);
 
-  uint8_t softwareReset[] = {0x020as00qwjkasdf}
-  I2C_Transmit(ADCAddress,)
+  //power down mic bias and ADC channels on fault
+  I2C_Transmit(ADCAddress, 0x28, 0x10);
 
+  //config channel 1
+  I2C_Transmit(ADCAddress, 0x3C, 0x18);
+
+  //config channel 2
+  I2C_Transmit(ADCAddress, 0x41, 0x18);
+
+  //config channel 3
+  I2C_Transmit(ADCAddress, 0x46, 0x18);
+
+  //config channel 4
+  I2C_Transmit(ADCAddress, 0x4B, 0x18);
+
+  //enable input channel 1 to 4 I2C
+  I2C_Transmit(ADCAddress, 0x73, 0xF0);
+
+  //enable output channel 1 to 4 ASI
+  I2C_Transmit(ADCAddress, 0x74, 0xF0);
+
+  //power up mic bias
+  I2C_Transmit(ADCAddress, 0x75, 0xE0);
+
+
+  HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t) pcmVals, DIM(pcmVals));
 
 
 
@@ -193,8 +216,8 @@ int main(void)
 	  {
 		  index = 0;
 	  }
-	  HAL_SAI_Transmit(&hsai_BlockB2, pcmVals, DIM(pcmVals), 100);
-	  HAL_SAI_Transmit(&hsai_BlockA2, pcmVals, DIM(pcmVals), 100);
+	  //HAL_SAI_Receive(&hsai_BlockB2, (uint8_t *) pcmVals, DIM(pcmVals), 100);
+	  HAL_SAI_Transmit(&hsai_BlockA2, (uint8_t *) pcmVals, DIM(pcmVals), 100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -940,7 +963,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Instance = SAI2_Block_B;
   hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_RX;
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
-  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
+  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
   hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
@@ -1192,13 +1215,7 @@ static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t
 {
 	uint8_t pData[2] = {targetRegister, command};
 	HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, DIM(pData), 100);
-	HAL_Delay(1);
-	uint8_t readRegister[DIM(pData)] = {0};
-	uint8_t regRead[2] = {pData[1],0xFF};
-	HAL_I2C_Master_Transmit(&hi2c1, ADCAddress, regRead, sizeof(regRead), 1000);
-	HAL_I2C_Master_Receive(&hi2c1, ADCAddress, readRegister, sizeof(readRegister), 1000);
-	HAL_Delay(1);
-
+	HAL_Delay(10);
 	return 0;
 }
 /* USER CODE END 4 */
