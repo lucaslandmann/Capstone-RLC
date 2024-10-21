@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "math.h"
+#include "common.h"
+#include "platform.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,10 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DIM(a)					(sizeof(a) / sizeof(*a))
-#define ADCAddress 0x90
-#define PI 3.14159265358979323846
-#define TAU (2.0 * PI)
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -75,13 +73,7 @@ UART_HandleTypeDef huart1;
 PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
-uint16_t adc1Vals[13] = {0};
-uint16_t adc4Vals[2] = {0};
-uint8_t pcmVals[8] = {0};
-uint16_t dacVals[2] = {0};
-float cpuTemp = 0;
 
-uint16_t index = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,7 +96,8 @@ static void MX_SAI2_Init(void);
 static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
-static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t command);
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -120,7 +113,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  static trBsp rBsp;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -161,56 +154,15 @@ int main(void)
   MX_ADC4_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_SAI_Receive_DMA(&hsai_BlockB2,pcmVals,DIM(pcmVals));
-  HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET);
 
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc1Vals, DIM(adc1Vals));
-  HAL_ADC_Start_DMA(&hadc4, (uint32_t*)adc4Vals, DIM(adc4Vals));
-
-
-
-  //Set to "Awake" state
-  I2C_Transmit(ADCAddress, 0x02, 0x81);
-
-  //Reset all settings
-  I2C_Transmit(ADCAddress, 0x01, 0xFF);
-
-  //Config ASI
-  I2C_Transmit(ADCAddress, 0x07, 0x70);
-
-  //Slave Config
-  I2C_Transmit(ADCAddress, 0x13, 0x07);
-
-  //power down mic bias and ADC channels on fault
-  I2C_Transmit(ADCAddress, 0x28, 0x10);
-
-  //Set Micbias = 5V
-  I2C_Transmit(ADCAddress, 0x3B, 0x70);
-
-  //config channel 1
-  I2C_Transmit(ADCAddress, 0x3C, 0xA8);
-
-  //config channel 2
-  I2C_Transmit(ADCAddress, 0x41, 0xA8);
-
-  //config channel 3
-  I2C_Transmit(ADCAddress, 0x46, 0xA8);
-
-  //config channel 4
-  I2C_Transmit(ADCAddress, 0x4B, 0xA8);
-
-  //enable input channel 1 to 4 I2C
-  I2C_Transmit(ADCAddress, 0x73, 0xF0);
-
-  //enable output channel 1 to 4 ASI
-  I2C_Transmit(ADCAddress, 0x74, 0xF0);
-
-  //power up mic bias
-  //I2C_Transmit(ADCAddress, 0x75, 0xE0);
-
-
-  //HAL_SAI_Transmit_DMA(&hsai_BlockA2, pcmVals,DIM(pcmVals));
-
+  // Initialize BSP structure.
+  memset(&rBsp, 0, sizeof(rBsp));
+  rBsp.pUart1      = &huart1;
+  rBsp.pI2c1       = &hi2c1;
+  rBsp.pSaiBlockB2 = &hsai_BlockB2;
+  rBsp.pAdc1	   = &hadc1;
+  rBsp.pAdc4	   = &hadc4;
+  platformInit(&rBsp);
 
   /* USER CODE END 2 */
 
@@ -218,6 +170,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  platformService();
 	  //HAL_SAI_Receive(&hsai_BlockB2, pcmVals, DIM(pcmVals), 100);
 	  //HAL_SAI_Transmit(&hsai_BlockA2, pcmVals, DIM(pcmVals), 100);
     /* USER CODE END WHILE */
@@ -1213,12 +1166,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-static uint8_t I2C_Transmit(uint16_t DevAddress, uint8_t targetRegister, uint8_t command)
-{
-	uint8_t pData[2] = {targetRegister, command};
-	HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, DIM(pData), 100);
-	return 0;
-}
 /* USER CODE END 4 */
 
 /**

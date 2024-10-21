@@ -1,0 +1,7 @@
+../Core/Src/timer.c:40:13:tickHandler	32	static
+../Core/Src/timer.c:68:9:timerInit	8	static
+../Core/Src/timer.c:84:10:timerMilliseconds	4	static
+../Core/Src/timer.c:98:6:timerTimestamp	32	static
+../Core/Src/timer.c:126:9:timerAdd	40	static
+../Core/Src/timer.c:167:9:timerDelete	32	static
+../Core/Src/timer.c:203:6:timerService	16	static

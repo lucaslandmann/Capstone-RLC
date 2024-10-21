@@ -1,0 +1,7 @@
+../Core/Src/perf.c:27:13:dump	1
+../Core/Src/perf.c:45:9:perfInit	1
+../Core/Src/perf.c:60:9:perfCreate	3
+../Core/Src/perf.c:96:9:perfDestroy	3
+../Core/Src/perf.c:125:6:perfPrint	4
+../Core/Src/perf.c:154:6:perfStart	1
+../Core/Src/perf.c:169:6:perfStop	2

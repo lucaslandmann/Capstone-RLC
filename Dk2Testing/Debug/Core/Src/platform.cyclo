@@ -1,0 +1,5 @@
+../Core/Src/platform.c:34:13:heartbeatHandler	1
+../Core/Src/platform.c:49:16:version	1
+../Core/Src/platform.c:65:6:platformInit	10
+../Core/Src/platform.c:152:6:platformService	3
+../Core/Src/platform.c:183:6:platformShutdown	1

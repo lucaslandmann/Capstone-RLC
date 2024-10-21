@@ -1,0 +1,9 @@
+../Core/Src/ring.c:34:20:empty	1
+../Core/Src/ring.c:48:20:full	1
+../Core/Src/ring.c:62:24:space	3
+../Core/Src/ring.c:87:8:ringInit	1
+../Core/Src/ring.c:109:6:ringEmpty	1
+../Core/Src/ring.c:125:6:ringFull	1
+../Core/Src/ring.c:141:10:ringSpace	1
+../Core/Src/ring.c:159:10:ringWrite	4
+../Core/Src/ring.c:192:10:ringRead	3

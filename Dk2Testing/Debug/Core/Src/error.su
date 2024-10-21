@@ -1,0 +1,2 @@
+../Core/Src/error.c:80:14:errorString	24	static
+../Core/Src/error.c:95:9:errorCode	32	static

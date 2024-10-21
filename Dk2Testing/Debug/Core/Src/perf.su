@@ -1,0 +1,7 @@
+../Core/Src/perf.c:27:13:dump	64	static
+../Core/Src/perf.c:45:9:perfInit	8	static
+../Core/Src/perf.c:60:9:perfCreate	32	static
+../Core/Src/perf.c:96:9:perfDestroy	32	static
+../Core/Src/perf.c:125:6:perfPrint	24	static
+../Core/Src/perf.c:154:6:perfStart	24	static
+../Core/Src/perf.c:169:6:perfStop	32	static

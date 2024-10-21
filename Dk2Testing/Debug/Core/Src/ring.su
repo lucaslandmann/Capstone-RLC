@@ -1,0 +1,9 @@
+../Core/Src/ring.c:34:20:empty	24	static
+../Core/Src/ring.c:48:20:full	24	static
+../Core/Src/ring.c:62:24:space	24	static
+../Core/Src/ring.c:87:8:ringInit	32	static
+../Core/Src/ring.c:109:6:ringEmpty	32	static
+../Core/Src/ring.c:125:6:ringFull	32	static
+../Core/Src/ring.c:141:10:ringSpace	32	static
+../Core/Src/ring.c:159:10:ringWrite	40	static
+../Core/Src/ring.c:192:10:ringRead	40	static

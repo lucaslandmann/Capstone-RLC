@@ -1,0 +1,11 @@
+../Core/Src/log.c:30:15:logFilename	32	static
+../Core/Src/log.c:64:13:logPrefix	96	static
+../Core/Src/log.c:94:9:logInit	8	static
+../Core/Src/log.c:107:12:logLevelGet	4	static
+../Core/Src/log.c:118:6:logLevelSet	16	static
+../Core/Src/log.c:136:6:logAssert	40	static
+../Core/Src/log.c:176:6:logEntry	120	static
+../Core/Src/log.c:220:6:logDataEntry	120	static
+../Core/Src/log.c:273:9:logError	40	static
+../Core/Src/log.c:305:6:logFatal	48	static
+../Core/Src/log.c:343:6:logErrorHistory	24	static

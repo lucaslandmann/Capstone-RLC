@@ -45,7 +45,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pcd_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_xspi.h \
- ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_dlyb.h
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_dlyb.h \
+ ../Core/Inc/common.h ../Core/Inc/macros.h ../Core/Inc/macros.h \
+ ../Core/Inc/error.h ../Core/Inc/bsp.h ../Core/Inc/ring.h \
+ ../Core/Inc/timer.h ../Core/Inc/log.h ../Core/Inc/vt100.h \
+ ../Core/Inc/perf.h ../Core/Inc/shell.h ../Core/Inc/platform.h
 ../Core/Inc/main.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h:
 ../Core/Inc/stm32u5xx_hal_conf.h:
@@ -94,3 +98,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_xspi.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_dlyb.h:
+../Core/Inc/common.h:
+../Core/Inc/macros.h:
+../Core/Inc/macros.h:
+../Core/Inc/error.h:
+../Core/Inc/bsp.h:
+../Core/Inc/ring.h:
+../Core/Inc/timer.h:
+../Core/Inc/log.h:
+../Core/Inc/vt100.h:
+../Core/Inc/perf.h:
+../Core/Inc/shell.h:
+../Core/Inc/platform.h:

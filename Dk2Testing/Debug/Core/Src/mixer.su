@@ -1,0 +1,2 @@
+../Core/Src/mixer.c:76:9:mixerInit	8	static
+../Core/Src/mixer.c:90:6:mixerService	4	static
