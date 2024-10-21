@@ -74,7 +74,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *pUart)
 inline trBsp* bsp(void)
 {
     // Validate BSP pointer.
-    ASSERT(NULL != gprBsp);
+    //ASSERT(NULL != gprBsp);
 
     return gprBsp;
 }

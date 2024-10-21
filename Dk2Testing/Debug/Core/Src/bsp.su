@@ -1,6 +1,6 @@
 ../Core/Src/bsp.c:34:5:__io_putchar	24	static
 ../Core/Src/bsp.c:56:6:HAL_UART_RxCpltCallback	32	static
-../Core/Src/bsp.c:74:15:bsp	16	static
+../Core/Src/bsp.c:74:15:bsp	4	static
 ../Core/Src/bsp.c:87:6:bspConsoleDrain	16	static
 ../Core/Src/bsp.c:103:6:bspConsoleEmpty	8	static
 ../Core/Src/bsp.c:113:6:bspConsoleFlush	16	static

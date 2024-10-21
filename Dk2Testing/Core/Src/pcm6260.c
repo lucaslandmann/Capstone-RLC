@@ -52,9 +52,9 @@ teError pcm6260Init(void)
 	int index;
 
 	// Wait for a bit and take the ADC out of reset.
-	bspMillisecondDelay(PCM6260_RESET_WAIT);
+	bspMillisecondDelay(100);
 	HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET);
-
+	bspMillisecondDelay(100);
 	// Iterate over configuration.
 	for (index = 0; index < DIM(grPcm6260Config); index++)
 	{
@@ -65,6 +65,7 @@ teError pcm6260Init(void)
 		{
 			return eErrorInit;
 		}
+		bspMillisecondDelay(100);
 	}
 
 	return eErrorNone;

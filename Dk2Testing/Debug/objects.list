@@ -34,8 +34,6 @@
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_ltdc.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_ltdc_ex.o"
-"./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pcd.o"
-"./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pcd_ex.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o"
@@ -50,4 +48,3 @@
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart_ex.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_xspi.o"
 "./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_ll_dlyb.o"
-"./Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_ll_usb.o"

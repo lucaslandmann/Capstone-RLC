@@ -16,10 +16,10 @@
 #define PLATFORM_H
 
 // D E F I N E S
-#define PLATFORM_MFG                    "MFG"
-#define PLATFORM_MFG_FULL               "Manufacturer."
-#define PLATFORM_MDL					"101"
-#define PLATFORM_DESCRIPTION			"STM32U5 Eval Board"
+#define PLATFORM_MFG                    "RLC"
+#define PLATFORM_MFG_FULL               "RLC Audio Technologies"
+#define PLATFORM_MDL					"0.1"
+#define PLATFORM_DESCRIPTION			"STM32U5 Mixer Prototype"
 #define PLATFORM_COPYRIGHT				"(c) 2024,"
 #define PLATFORM_RIGHTS					"All Rights Reserved."
 #define PLATFORM_TYPE                   "app"
