@@ -100,12 +100,10 @@ bool platformInit(trBsp *prBsp)
 	}
 
 	// Initialize mixer.
-	/*
 	if (eErrorNone != (eError = mixerInit()))
 	{
 		LOGFATAL(eError);
 	}
-	*/
 
 	// Initialize shell.
 	if (eErrorNone != (eError = shellInit()))

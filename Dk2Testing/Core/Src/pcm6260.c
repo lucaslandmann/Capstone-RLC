@@ -27,18 +27,26 @@ typedef struct _trPcm6260Config
 // P R I V A T E  D A T A
 static trPcm6260Config grPcm6260Config[] =
 {
-	{0x02, 0x81},	// Set to "awake" state
+	{0x02, 0x01},	// Set to "awake" state
 	{0x01, 0xFF},	// Reset all settings
-	{0x07, 0x70},	// Config ASI
-	{0x13, 0x07},	// Slave Config
+	{0x02, 0x01},	// Set to "awake" state
 	{0x28, 0x10},	// Power down mic bias and ADC channels on fault
 	{0x3B, 0x70},	// Set Micbias = 5V
 	{0x3C, 0xA8},	// Config channel 1
 	{0x41, 0xA8},	// Config channel 2
 	{0x46, 0xA8},	// Config channel 3
 	{0x4B, 0xA8},	// Config channel 4
-	{0x73, 0xF0},	// Enable input channel 1 to 4 I2C
-	{0x74, 0xF0}	// Enable output channel 1 to 4 ASI
+	{0x50, 0xA8},	// Config channel 5
+	{0x55, 0xA8},	// Config channel 6
+	{0x73, 0xFC},	// Enable input channel 1 to 4 I2C
+	{0x74, 0xFC},	// Enable output channel 1 to 4 ASI
+	{0x75, 0x60}	//
+	/*
+	{0x02, 0x01},
+		{0x73, 0xFC},
+		{0x74, 0xFC},
+		{0x75, 0x60}
+*/
 };
 
 // P U B L I C   F U N C T I O N S
@@ -49,12 +57,13 @@ static trPcm6260Config grPcm6260Config[] =
 //
 teError pcm6260Init(void)
 {
-	int index;
-
-	// Wait for a bit and take the ADC out of reset.
 	bspMillisecondDelay(100);
 	HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET);
 	bspMillisecondDelay(100);
+	int index;
+
+	// Wait for a bit and take the ADC out of reset.
+
 	// Iterate over configuration.
 	for (index = 0; index < DIM(grPcm6260Config); index++)
 	{

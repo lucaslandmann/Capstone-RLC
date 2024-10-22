@@ -75,7 +75,7 @@ static inline trMixer* mixer(void)
 //
 teError mixerInit(void)
 {
-	HAL_SAI_Receive_DMA(bsp()->pSaiBlockB2,pcmVals,DIM(pcmVals));
+	//HAL_SAI_Receive_DMA(bsp()->pSaiBlockB2,pcmVals,DIM(pcmVals));
 	HAL_ADC_Start_DMA(bsp()->pAdc1, (uint32_t*)adc1Vals, DIM(adc1Vals));
 	HAL_ADC_Start_DMA(bsp()->pAdc4, (uint32_t*)adc4Vals, DIM(adc4Vals));
 

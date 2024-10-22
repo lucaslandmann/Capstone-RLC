@@ -71,6 +71,7 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+uint32_t pcmDMA[32] = {0};
 
 /* USER CODE END PV */
 
@@ -159,6 +160,7 @@ int main(void)
   rBsp.pAdc1	   = &hadc1;
   rBsp.pAdc4	   = &hadc4;
   platformInit(&rBsp);
+  HAL_SAI_Receive_DMA(bsp()->pSaiBlockB2,pcmDMA,DIM(pcmDMA));
 
   /* USER CODE END 2 */
 
