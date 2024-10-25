@@ -71,7 +71,7 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-uint32_t pcmDMA[32] = {0};
+int32_t pcmDMA[32] = {0};
 
 /* USER CODE END PV */
 
@@ -916,12 +916,12 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_HF;
-  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
+  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_8K;
   hsai_BlockB2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_32BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
