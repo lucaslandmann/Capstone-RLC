@@ -921,7 +921,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 4) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
   {
     Error_Handler();
   }
