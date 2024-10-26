@@ -71,7 +71,7 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-int32_t pcmDMA[32] = {0};
+uint32_t pcmDMA[32] = {0};
 
 /* USER CODE END PV */
 
@@ -254,12 +254,12 @@ void PeriphCommonClock_Config(void)
   PeriphClkInit.HspiClockSelection = RCC_HSPICLKSOURCE_PLL2;
   PeriphClkInit.PLL2.PLL2Source = RCC_PLLSOURCE_HSE;
   PeriphClkInit.PLL2.PLL2M = 1;
-  PeriphClkInit.PLL2.PLL2N = 12;
-  PeriphClkInit.PLL2.PLL2P = 2;
+  PeriphClkInit.PLL2.PLL2N = 9;
+  PeriphClkInit.PLL2.PLL2P = 3;
   PeriphClkInit.PLL2.PLL2Q = 3;
   PeriphClkInit.PLL2.PLL2R = 4;
   PeriphClkInit.PLL2.PLL2RGE = RCC_PLLVCIRANGE_1;
-  PeriphClkInit.PLL2.PLL2FRACN = 4096;
+  PeriphClkInit.PLL2.PLL2FRACN = 3072;
   PeriphClkInit.PLL2.PLL2ClockOut = RCC_PLL2_DIVP|RCC_PLL2_DIVQ;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -921,7 +921,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_32BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
   {
     Error_Handler();
   }
