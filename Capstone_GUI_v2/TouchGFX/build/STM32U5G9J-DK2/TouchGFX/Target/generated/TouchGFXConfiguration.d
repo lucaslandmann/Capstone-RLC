@@ -36,11 +36,8 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXConfiguration.o:
  Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/DebugPrinter.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp \
- TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \
- Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp \
- Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp \
- Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/WipeTransition.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/hal/HAL.hpp \
  Middlewares/ST/touchgfx/framework/include/platform/core/MCUInstrumentation.hpp \
  Middlewares/ST/touchgfx/framework/include/platform/driver/button/ButtonController.hpp \
@@ -50,16 +47,27 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXConfiguration.o:
  Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Atomic.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/hal/FrameBufferAllocator.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Gestures.hpp \
+ TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \
+ Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp \
+ Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp \
  TouchGFX/gui/include/gui/model/Model.hpp \
- TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp \
+ TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp \
  Middlewares/ST/touchgfx/framework/include/mvp/View.hpp \
- TouchGFX/gui/include/gui/screen1_screen/Screen1Presenter.hpp \
+ TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp \
  TouchGFX/gui/include/gui/model/ModelListener.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
- Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
+ TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp \
+ TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp \
  TouchGFX/generated/images/include/BitmapDatabase.hpp \
  TouchGFX/generated/images/include/images/BitmapDatabase.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/VectorFontRendererImpl.hpp \
@@ -199,15 +207,9 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Container.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:
 
-TouchGFX/gui/include/gui/common/FrontendApplication.hpp:
+Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/WipeTransition.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
-
-Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp:
-
-Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp:
-
-Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:
+Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/hal/HAL.hpp:
 
@@ -227,15 +229,25 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/hal/FrameBufferAllocator.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Gestures.hpp:
 
+TouchGFX/gui/include/gui/common/FrontendApplication.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
+
+Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp:
+
+Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:
+
 TouchGFX/gui/include/gui/model/Model.hpp:
 
-TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp:
+TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp:
+TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp:
 
 Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:
 
-TouchGFX/gui/include/gui/screen1_screen/Screen1Presenter.hpp:
+TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp:
 
 TouchGFX/gui/include/gui/model/ModelListener.hpp:
 
@@ -243,9 +255,21 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp:
 
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
+
 Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
 
-Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
+TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp:
+
+TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:
 
 TouchGFX/generated/images/include/BitmapDatabase.hpp:
 

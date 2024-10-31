@@ -178,17 +178,35 @@
     <Filter Include="Header Files\generated\simulator\include\simulator\video">
       <UniqueIdentifier>21D53CF1-7C7A-3993-14FF-53069CA32F99</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\gui\screen1_screen">
-      <UniqueIdentifier>B6E16E75-04CA-DDB1-67EC-B636CD982B02</UniqueIdentifier>
+    <Filter Include="Header Files\gui\mainscreen_screen">
+      <UniqueIdentifier>5ACA4F32-D390-8E14-A876-065650AF3E89</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gui\screen1_screen">
-      <UniqueIdentifier>1B7596A6-2492-D995-069B-7E26FAB9A4F4</UniqueIdentifier>
+    <Filter Include="Source Files\gui\mainscreen_screen">
+      <UniqueIdentifier>D856EE2A-F2CB-35A5-F8D3-BAF272A1E2E6</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>D7F7526E-A00C-D628-BFBE-207764FD93B5</UniqueIdentifier>
+    <Filter Include="Source Files\gui\effectsmatrix_screen">
+      <UniqueIdentifier>1F54D6C3-38D5-95E2-BAC9-9E4048856DDE</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>CD45B205-A4F8-A455-F44B-046BA3706014</UniqueIdentifier>
+    <Filter Include="Header Files\gui\effectsmatrix_screen">
+      <UniqueIdentifier>B4B32464-28B4-B513-402B-5B66265BCF5F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\effectsmatrix_screen">
+      <UniqueIdentifier>405BCFA9-4CF8-BA50-42C2-5E064940336C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\effectsmatrix_screen">
+      <UniqueIdentifier>3ADA7838-6273-5002-097A-541FDE58C78F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\mainscreen_screen">
+      <UniqueIdentifier>1E156527-4585-D17A-21B9-C20C67C0FD32</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\mainscreen_screen">
+      <UniqueIdentifier>DE9F0CD3-7F00-E9E5-3157-B3DDF2E4F825</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\containers">
+      <UniqueIdentifier>DAED1820-A602-5105-23E3-C6B976F43900</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\containers">
+      <UniqueIdentifier>0689EB3A-609B-50B8-E348-FDE36EECDA54</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,14 +240,29 @@
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp">
       <Filter>Source Files\generated\simulator\video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\screen1_screen\Screen1Presenter.cpp">
-      <Filter>Source Files\gui\screen1_screen</Filter>
+    <ClCompile Include="..\..\gui\src\effectsmatrix_screen\EffectsMatrixPresenter.cpp">
+      <Filter>Source Files\gui\effectsmatrix_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\screen1_screen\Screen1View.cpp">
-      <Filter>Source Files\gui\screen1_screen</Filter>
+    <ClCompile Include="..\..\gui\src\effectsmatrix_screen\EffectsMatrixView.cpp">
+      <Filter>Source Files\gui\effectsmatrix_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\screen1_screen\Screen1ViewBase.cpp">
-      <Filter>Source Files\generated\gui_generated\screen1_screen</Filter>
+    <ClCompile Include="..\..\generated\gui_generated\src\effectsmatrix_screen\EffectsMatrixViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\effectsmatrix_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\mainscreen_screen\MainScreenPresenter.cpp">
+      <Filter>Source Files\gui\mainscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\mainscreen_screen\MainScreenView.cpp">
+      <Filter>Source Files\gui\mainscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\mainscreen_screen\MainScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\mainscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\CustomContainer1.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\CustomContainer1Base.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -673,14 +706,29 @@
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\screen1_screen\Screen1Presenter.hpp">
-      <Filter>Header Files\gui\screen1_screen</Filter>
+    <ClInclude Include="..\..\gui\include\gui\effectsmatrix_screen\EffectsMatrixPresenter.hpp">
+      <Filter>Header Files\gui\effectsmatrix_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\screen1_screen\Screen1View.hpp">
-      <Filter>Header Files\gui\screen1_screen</Filter>
+    <ClInclude Include="..\..\gui\include\gui\effectsmatrix_screen\EffectsMatrixView.hpp">
+      <Filter>Header Files\gui\effectsmatrix_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\screen1_screen\Screen1ViewBase.hpp">
-      <Filter>Header Files\generated\gui_generated\screen1_screen</Filter>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\effectsmatrix_screen\EffectsMatrixViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\effectsmatrix_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_screen\MainScreenPresenter.hpp">
+      <Filter>Header Files\gui\mainscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_screen\MainScreenView.hpp">
+      <Filter>Header Files\gui\mainscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\mainscreen_screen\MainScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\mainscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\CustomContainer1.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer1Base.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

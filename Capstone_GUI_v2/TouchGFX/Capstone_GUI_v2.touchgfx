@@ -2,15 +2,434 @@
   "Application": {
     "Screens": [
       {
-        "Name": "Screen1",
+        "Name": "MainScreen",
         "Components": [
           {
             "Type": "Image",
             "Name": "image1",
-            "Y": 180,
             "Width": 800,
-            "Height": 300,
-            "RelativeFilename": "bitmap.png"
+            "Height": 480,
+            "RelativeFilename": "fullbackPlateV3.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "image1_1",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "fullbackPlateV3.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "image1_2",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "fullbackPlateV3.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "image1_3",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "fullbackPlateV3.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_2_4",
+            "X": 580,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_TDPA",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_2_3",
+            "X": 480,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_63AU",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_2_2",
+            "X": 380,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_GP56",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_2_1",
+            "X": 280,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_NAT0",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_4",
+            "X": 487,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_1CKN",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_5",
+            "X": 587,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_5HMT",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_3",
+            "X": 87,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_8NGO",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_2",
+            "X": 287,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_DH6C",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_1",
+            "X": 189,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_4L1H",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_2",
+            "X": 180,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_NC6O",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1",
+            "X": 387,
+            "Y": 85,
+            "Width": 30,
+            "Height": 16,
+            "TextId": "__SingleUse_WC53",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "Button",
+            "Name": "button2_5",
+            "X": 582,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button2_3",
+            "X": 382,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button2_4",
+            "X": 482,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button2_2",
+            "X": 282,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button2_1",
+            "X": 182,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button1_5",
+            "X": 582,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button1_4",
+            "X": 482,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button1_3",
+            "X": 382,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button1_2",
+            "X": 282,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "button1_1",
+            "X": 182,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "textureMapper1_4",
+            "X": 482,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "textureMapper1_5",
+            "X": 582,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "textureMapper1_3",
+            "X": 382,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "textureMapper1_2",
+            "X": 282,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_1",
+            "X": 62,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_F8U3",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_3",
+            "X": 362,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_1E6D",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2",
+            "X": 162,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_M40N",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1",
+            "X": 562,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_O89H",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_4",
+            "X": 662,
+            "Y": 443,
+            "Width": 84,
+            "Height": 26,
+            "TextId": "__SingleUse_D2RN",
+            "TextRotation": "0",
+            "AutoSize": true
           },
           {
             "Type": "Slider",
@@ -25,8 +444,9 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
           },
           {
             "Type": "Slider",
@@ -41,8 +461,9 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
           },
           {
             "Type": "Slider",
@@ -57,8 +478,20 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_2",
+            "X": 462,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_S8HP",
+            "TextRotation": "0",
+            "AutoSize": true
           },
           {
             "Type": "Slider",
@@ -73,8 +506,9 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
           },
           {
             "Type": "Slider",
@@ -89,15 +523,9 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
-          },
-          {
-            "Type": "Image",
-            "Name": "image2",
-            "Width": 800,
-            "Height": 182,
-            "RelativeFilename": "topPlate.png"
+            "InitValue": 16
           },
           {
             "Type": "Slider",
@@ -112,8 +540,9 @@
             "BackgroundX": 9,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
           },
           {
             "Type": "Slider",
@@ -125,19 +554,18 @@
             "BackgroundUnselected": "path27.png",
             "BackgroundSelected": "path27.png",
             "Indicator": "betterSlider2.png",
-            "BackgroundX": 9,
+            "BackgroundX": 10,
             "BackgroundY": 12,
             "IndicatorMax": 200,
+            "IndicatorMin": 16,
             "ValueMax": 100,
-            "InitValue": 14
+            "InitValue": 16
           },
           {
             "Type": "TextArea",
             "Name": "RLCHeader",
-            "X": 15,
-            "Y": 20,
-            "Width": 270,
-            "Height": 55,
+            "Width": 49,
+            "Height": 170,
             "TextId": "__SingleUse_3N9X",
             "TextRotation": "0",
             "Color": {
@@ -145,19 +573,290 @@
               "Green": 94,
               "Blue": 209
             }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 262,
+            "Y": 443,
+            "Width": 14,
+            "Height": 26,
+            "TextId": "__SingleUse_7MLS",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "Ch1PanKnob",
+            "X": 82,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "CH2PanKnob",
+            "X": 182,
+            "Y": 112,
+            "Width": 40,
+            "Height": 40,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "RedKnobV2.png",
+            "LockBitmapToCenter": true,
+            "Scale": 1.0,
+            "LockOrigoToCenter": true,
+            "XOrigo": 20.0,
+            "YOrigo": 20.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "Button",
+            "Name": "CH1Mute",
+            "X": 82,
+            "Y": 66,
+            "Width": 40,
+            "Height": 19,
+            "Pressed": "MuteButtonPressedV3.png",
+            "Released": "EffectSendV3.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "EXSendButton1",
+            "X": 82,
+            "Y": 12,
+            "Width": 40,
+            "Height": 30,
+            "Pressed": "EffectsSendV4Pressed.png",
+            "Released": "EffectsSendV4.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1EffectsSendText",
+            "X": 80,
+            "Y": 42,
+            "Width": 45,
+            "Height": 16,
+            "TextId": "__SingleUse_0LDN",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
           }
         ],
-        "Interactions": []
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerSliderValueChanged"
+            },
+            "Action": {
+              "Type": "ActionNone"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "EXSendButton1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "South",
+              "ActionComponent": "EffectsMatrix"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "EffectsMatrix",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "EffectsMatrixBackground",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "EffectsMatrixBackground.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "EffectsMatrixText",
+            "X": 8,
+            "Y": 6,
+            "Width": 28,
+            "Height": 270,
+            "TextId": "__SingleUse_3BZ7",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 78,
+              "Green": 130,
+              "Blue": 242
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "customContainer11",
+            "X": 154,
+            "Width": 214,
+            "Height": 150,
+            "Visible": false,
+            "CustomContainerDefinitionName": "CustomContainer1"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1",
+            "X": 50,
+            "Y": 27,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_disabled.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.png"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toggleButton1"
+            },
+            "Action": {
+              "Type": "ActionShow",
+              "ActionComponent": "customContainer11"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toggleButton1"
+            },
+            "Action": {
+              "Type": "ActionHide",
+              "ActionComponent": "customContainer11"
+            }
+          }
+        ]
       }
     ],
-    "CustomContainerDefinitions": [],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "CustomContainer1",
+        "Width": 214,
+        "Height": 150,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "Background",
+            "Width": 214,
+            "Height": 150,
+            "RelativeFilename": "__generated\\alternate_theme_images_containers_small_wide_dark.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "EQButton",
+            "X": 57,
+            "Y": 102,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.png",
+            "TextId": "__SingleUse_WIY6",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_round_action.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "ReverbButton",
+            "X": 57,
+            "Y": 9,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.png",
+            "TextId": "__SingleUse_CRIX",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_round_action.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "DelayButton",
+            "X": 57,
+            "Y": 57,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.png",
+            "TextId": "__SingleUse_ZSD0",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_round_action.json"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "ReverbButton"
+            },
+            "Action": {
+              "Type": "ActionNone"
+            }
+          }
+        ]
+      }
+    ],
     "Name": "Capstone_GUI_v2",
     "Resolution": {
       "Width": 800,
       "Height": 480
     },
     "SelectedColorDepth": 16,
-    "StartupScreenName": "Screen1",
+    "StartupScreenName": "MainScreen",
     "SelectedStartupLanguage": "GB",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",
     "UIPath": ".",

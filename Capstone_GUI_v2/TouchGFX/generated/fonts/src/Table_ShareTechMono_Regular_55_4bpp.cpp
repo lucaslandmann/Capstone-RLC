@@ -4,7 +4,6 @@
 
 FONT_TABLE_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::GlyphNode glyphs_ShareTechMono_Regular_55_4bpp[] FONT_TABLE_LOCATION_FLASH_ATTRIBUTE = {
-    {     0, 0x0020,   0,   0,   0,   0,  30,   0,   0, 0x00 }, // space
     {     0, 0x0025,  29,  39,  39,   0,  30,   0,   0, 0x00 }, // percent
     {   585, 0x0030,  20,  39,  39,   5,  30,   0,   0, 0x00 }, // zero
     {   975, 0x0031,  19,  39,  39,   5,  30,   0,   0, 0x00 }, // one
@@ -17,14 +16,9 @@ KEEP extern const touchgfx::GlyphNode glyphs_ShareTechMono_Regular_55_4bpp[] FON
     {  3666, 0x0038,  21,  39,  39,   4,  30,   0,   0, 0x00 }, // eight
     {  4095, 0x0039,  20,  39,  39,   5,  30,   0,   0, 0x00 }, // nine
     {  4485, 0x003F,  17,  39,  39,   6,  30,   0,   0, 0x00 }, // question
-    {  4836, 0x0041,  26,  39,  39,   2,  30,   0,   0, 0x00 }, // A
-    {  5343, 0x0043,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // C
-    {  5694, 0x004C,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // L
-    {  6045, 0x0052,  24,  39,  39,   3,  30,   0,   0, 0x00 }, // R
-    {  6513, 0x0064,  21,  39,  39,   4,  30,   0,   0, 0x00 }, // d
-    {  6942, 0x0069,  22,  39,  39,   4,  30,   0,   0, 0x00 }, // i
-    {  7371, 0x006F,  22,  28,  28,   4,  30,   0,   0, 0x00 }, // o
-    {  7679, 0x0075,  20,  28,  28,   5,  30,   0,   0, 0x00 }  // u
+    {  4836, 0x0043,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // C
+    {  5187, 0x004C,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // L
+    {  5538, 0x0052,  24,  39,  39,   3,  30,   0,   0, 0x00 }  // R
 };
 
 // ShareTechMono_Regular_55_4bpp
@@ -42,6 +36,6 @@ touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_55_4bpp();
 
 touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_55_4bpp()
 {
-    static touchgfx::GeneratedFont ShareTechMono_Regular_55_4bpp(glyphs_ShareTechMono_Regular_55_4bpp, 21, 55, 55, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_55_4bpp, kerning_ShareTechMono_Regular_55_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont ShareTechMono_Regular_55_4bpp(glyphs_ShareTechMono_Regular_55_4bpp, 15, 55, 55, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_55_4bpp, kerning_ShareTechMono_Regular_55_4bpp, 63, 0, 0, 0);
     return ShareTechMono_Regular_55_4bpp;
 }
