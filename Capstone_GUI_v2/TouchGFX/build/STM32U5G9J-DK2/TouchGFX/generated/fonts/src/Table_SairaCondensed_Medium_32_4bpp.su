@@ -1,0 +1,2 @@
+Table_SairaCondensed_Medium_32_4bpp.cpp:61:224:void __tcf_0()	0	static
+Table_SairaCondensed_Medium_32_4bpp.cpp:59:26:touchgfx::GeneratedFont& getFont_SairaCondensed_Medium_32_4bpp()	72	static
