@@ -106,7 +106,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
 
-uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup1[13 *  sampleSize] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 uint32_t pcmData[sampleSize  * 8] = {0}; //Buffer for 8 channels of audio data
 int32_t dacData[sampleSize * 2] = {0};
@@ -1260,10 +1260,48 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-static float bitToFloat(uint16_t value)
+static float twelveBitToFloat(uint16_t value)
 {
 	float convertedVal = (value / 4096.0);
 	return convertedVal;
+}
+
+static float fourteenBitToFloat(uint16_t value)
+{
+	float convertedVal = (value / 4096.0);
+	return convertedVal;
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	float audioVals[sampleSize / 2] = {0};
+	for(int i = (sizeof(adcGroup1) / 2); i < sizeof(adcGroup1); i += 13)
+	{
+		float audioVal = fourteenBitToFloat(adcGroup1[i]);
+		audioVals[i / 13] = audioVal * fourteenBitToFloat(adcGroup1[c1Vol]);
+	}
+
+	for(int i = 0; i < (sampleSize / 2); i += 2)
+	{
+		dacData[i] = audioVals[i];
+		dacData[i] = audioVals[i+1];
+	}
+}
+
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	float audioVals[sampleSize / 2] = {0};
+	for(int i = 0; i < (sizeof(adcGroup1) / 2); i += 13)
+	{
+		float audioVal = fourteenBitToFloat(adcGroup1[i]);
+		audioVals[i / 13] = audioVal * fourteenBitToFloat(adcGroup1[c1Vol]);
+	}
+
+	for(int i = 0; i < (sampleSize / 2); i += 2)
+	{
+		dacData[i] = audioVals[i];
+		dacData[i] = audioVals[i+1];
+	}
 }
 /* USER CODE END 4 */
 
