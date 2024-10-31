@@ -1,0 +1,30 @@
+
+{
+  "Application": {
+    "Name": "RTOSRendering",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "AvailableColorDepths": [ 24 ],
+    "AvailableLCDs":
+    {
+      "24": "LCD24bpp"
+    },
+    "AvailableResolutions": [
+      {
+        "Width": 800,
+        "Height": 480
+      }
+    ],
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "Family": "STM32U5",
+    "SubFamily": "STM32U5F9/5G9",
+    "Platform": "m33",
+    "Toolchain": "STM32CubeIDE",
+    "ProjectFile": "../RTOSRendering.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [
+    ],
+    "AdditionalFeatures": [
+    ]
+  },
+  "Version": "4.24.1"
+}

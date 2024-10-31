@@ -102,11 +102,14 @@ TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart1;
 
+PCD_HandleTypeDef hpcd_USB_OTG_HS;
+
 /* USER CODE BEGIN PV */
 
 uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 uint32_t pcmData[sampleSize  * 8] = {0}; //Buffer for 8 channels of audio data
+int32_t dacData[sampleSize * 2] = {0};
 
 
 //contains all instructions for configuring PCM6260
@@ -149,6 +152,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_SAI2_Init(void);
 static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_USB_OTG_HS_PCD_Init(void);
 /* USER CODE BEGIN PFP */
 static float bitToFloat(uint16_t value);
 /* USER CODE END PFP */
@@ -206,6 +210,7 @@ int main(void)
   MX_SAI2_Init();
   MX_ADC4_Init();
   MX_I2C1_Init();
+  MX_USB_OTG_HS_PCD_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcGroup1, DIM(adcGroup1)); //Begins DMA transfer for first ADC
   HAL_ADC_Start_DMA(&hadc4, (uint32_t*)adcGroup4, DIM(adcGroup4)); //begins DMA transfer for fourth ADC
@@ -222,7 +227,8 @@ int main(void)
   }
 
   HAL_Delay(10);
-  HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
+  //HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
+  HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
   //Populates each channel in the channels struct with initializer values
   for(int i = 0; i < sizeof(channels); i++)
@@ -1124,6 +1130,41 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * @brief USB_OTG_HS Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USB_OTG_HS_PCD_Init(void)
+{
+
+  /* USER CODE BEGIN USB_OTG_HS_Init 0 */
+
+  /* USER CODE END USB_OTG_HS_Init 0 */
+
+  /* USER CODE BEGIN USB_OTG_HS_Init 1 */
+
+  /* USER CODE END USB_OTG_HS_Init 1 */
+  hpcd_USB_OTG_HS.Instance = USB_OTG_HS;
+  hpcd_USB_OTG_HS.Init.dev_endpoints = 9;
+  hpcd_USB_OTG_HS.Init.speed = PCD_SPEED_HIGH;
+  hpcd_USB_OTG_HS.Init.phy_itface = USB_OTG_HS_EMBEDDED_PHY;
+  hpcd_USB_OTG_HS.Init.Sof_enable = DISABLE;
+  hpcd_USB_OTG_HS.Init.low_power_enable = DISABLE;
+  hpcd_USB_OTG_HS.Init.lpm_enable = DISABLE;
+  hpcd_USB_OTG_HS.Init.use_dedicated_ep1 = DISABLE;
+  hpcd_USB_OTG_HS.Init.vbus_sensing_enable = DISABLE;
+  hpcd_USB_OTG_HS.Init.dma_enable = DISABLE;
+  if (HAL_PCD_Init(&hpcd_USB_OTG_HS) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USB_OTG_HS_Init 2 */
+
+  /* USER CODE END USB_OTG_HS_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -1178,13 +1219,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(USB_FAULT_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : RED_LED_Pin GREEN_LED_Pin */
   GPIO_InitStruct.Pin = RED_LED_Pin|GREEN_LED_Pin;
