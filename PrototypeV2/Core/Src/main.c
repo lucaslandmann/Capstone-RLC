@@ -32,10 +32,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 1024	//System will capture specificed number of samples per channel
+#define sampleSize 32	//System will capture specificed number of samples per channel
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
-#define c1Vol 0
+#define c1Vol 2
 #define c2Vol 1
 #define c3Vol 2
 #define c4Vol 3
@@ -93,6 +93,8 @@ RTC_HandleTypeDef hrtc;
 
 SAI_HandleTypeDef hsai_BlockA2;
 SAI_HandleTypeDef hsai_BlockB2;
+DMA_NodeTypeDef Node_GPDMA1_Channel3;
+DMA_QListTypeDef List_GPDMA1_Channel3;
 DMA_HandleTypeDef handle_GPDMA1_Channel3;
 DMA_NodeTypeDef Node_GPDMA1_Channel1;
 DMA_QListTypeDef List_GPDMA1_Channel1;
@@ -154,7 +156,7 @@ static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USB_OTG_HS_PCD_Init(void);
 /* USER CODE BEGIN PFP */
-static float bitToFloat(uint16_t value);
+static float twelveBitTofloat(uint16_t value);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -212,14 +214,15 @@ int main(void)
   MX_I2C1_Init();
   MX_USB_OTG_HS_PCD_Init();
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcGroup1, DIM(adcGroup1)); //Begins DMA transfer for first ADC
-  HAL_ADC_Start_DMA(&hadc4, (uint32_t*)adcGroup4, DIM(adcGroup4)); //begins DMA transfer for fourth ADC
+  HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1)); //Begins DMA transfer for first ADC
+  HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4)); //begins DMA transfer for fourth ADC
 
-  HAL_Delay(10);
-  HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
-  HAL_Delay(10);
+//  HAL_Delay(10);
+  //HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
+  //HAL_Delay(10);
 
   //Transmits each instruction sequentially from pcm6260Config array
+  /*
   for(int i = 0; i < sizeof(pcm6260Config); i++)
   {
 	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
@@ -227,6 +230,7 @@ int main(void)
   }
 
   HAL_Delay(10);
+  */
   //HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
   HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
@@ -256,21 +260,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  dacData[1] = adcGroup1[0]<<8;
+	  dacData[0] = adcGroup1[0]<<8;
+	  //HAL_SAI_Transmit(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData), 100);
+	  /*
 	  //Reads and sets the position of each volume slider
-	  channels[0].volume = bitToFloat(adcGroup1[c1Vol]);
-	  channels[1].volume = bitToFloat(adcGroup1[c2Vol]);
-	  channels[2].volume = bitToFloat(adcGroup1[c3Vol]);
-	  channels[3].volume = bitToFloat(adcGroup1[c4Vol]);
-	  channels[4].volume = bitToFloat(adcGroup1[c5Vol]);
-	  channels[5].volume = bitToFloat(adcGroup1[c6Vol]);
+	  channels[0].volume = twelveBitTofloat(adcGroup1[c1Vol]);
+	  channels[1].volume = twelveBitTofloat(adcGroup1[c2Vol]);
+	  channels[2].volume = twelveBitTofloat(adcGroup1[c3Vol]);
+	  channels[3].volume = twelveBitTofloat(adcGroup1[c4Vol]);
+	  channels[4].volume = twelveBitTofloat(adcGroup1[c5Vol]);
+	  channels[5].volume = twelveBitTofloat(adcGroup1[c6Vol]);
 
 	  //Reads and sets the position of each LR Knob
-	  channels[0].LRPan = bitToFloat(adcGroup1[c1LR]);
-	  channels[1].LRPan = bitToFloat(adcGroup1[c2LR]);
-	  channels[2].LRPan = bitToFloat(adcGroup1[c3LR]);
-	  channels[3].LRPan = bitToFloat(adcGroup1[c4LR]);
-	  channels[4].LRPan = bitToFloat(adcGroup4[c5LR]);
-	  channels[5].LRPan = bitToFloat(adcGroup4[c6LR]);
+	  channels[0].LRPan = twelveBitTofloat(adcGroup1[c1LR]);
+	  channels[1].LRPan = twelveBitTofloat(adcGroup1[c2LR]);
+	  channels[2].LRPan = twelveBitTofloat(adcGroup1[c3LR]);
+	  channels[3].LRPan = twelveBitTofloat(adcGroup1[c4LR]);
+	  channels[4].LRPan = twelveBitTofloat(adcGroup4[c5LR]);
+	  channels[5].LRPan = twelveBitTofloat(adcGroup4[c6LR]);
+	  */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -354,12 +363,12 @@ void PeriphCommonClock_Config(void)
   PeriphClkInit.HspiClockSelection = RCC_HSPICLKSOURCE_PLL2;
   PeriphClkInit.PLL2.PLL2Source = RCC_PLLSOURCE_HSE;
   PeriphClkInit.PLL2.PLL2M = 1;
-  PeriphClkInit.PLL2.PLL2N = 9;
-  PeriphClkInit.PLL2.PLL2P = 3;
+  PeriphClkInit.PLL2.PLL2N = 12;
+  PeriphClkInit.PLL2.PLL2P = 2;
   PeriphClkInit.PLL2.PLL2Q = 3;
   PeriphClkInit.PLL2.PLL2R = 4;
   PeriphClkInit.PLL2.PLL2RGE = RCC_PLLVCIRANGE_1;
-  PeriphClkInit.PLL2.PLL2FRACN = 3072;
+  PeriphClkInit.PLL2.PLL2FRACN = 4096;
   PeriphClkInit.PLL2.PLL2ClockOut = RCC_PLL2_DIVP|RCC_PLL2_DIVQ;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -1260,49 +1269,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-static float twelveBitToFloat(uint16_t value)
-{
-	float convertedVal = (value / 4096.0);
-	return convertedVal;
-}
-
-static float fourteenBitToFloat(uint16_t value)
-{
-	float convertedVal = (value / 4096.0);
-	return convertedVal;
-}
-
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	float audioVals[sampleSize / 2] = {0};
-	for(int i = (sizeof(adcGroup1) / 2); i < sizeof(adcGroup1); i += 13)
-	{
-		float audioVal = fourteenBitToFloat(adcGroup1[i]);
-		audioVals[i / 13] = audioVal * fourteenBitToFloat(adcGroup1[c1Vol]);
-	}
-
-	for(int i = 0; i < (sampleSize / 2); i += 2)
-	{
-		dacData[i] = audioVals[i];
-		dacData[i] = audioVals[i+1];
-	}
-}
-
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	float audioVals[sampleSize / 2] = {0};
-	for(int i = 0; i < (sizeof(adcGroup1) / 2); i += 13)
-	{
-		float audioVal = fourteenBitToFloat(adcGroup1[i]);
-		audioVals[i / 13] = audioVal * fourteenBitToFloat(adcGroup1[c1Vol]);
-	}
-
-	for(int i = 0; i < (sampleSize / 2); i += 2)
-	{
-		dacData[i] = audioVals[i];
-		dacData[i] = audioVals[i+1];
-	}
-}
 /* USER CODE END 4 */
 
 /**

@@ -62,6 +62,8 @@ extern DMA_HandleTypeDef handle_GPDMA1_Channel2;
 extern ADC_HandleTypeDef hadc1;
 extern I2C_HandleTypeDef hi2c2;
 extern LTDC_HandleTypeDef hltdc;
+extern DMA_NodeTypeDef Node_GPDMA1_Channel3;
+extern DMA_QListTypeDef List_GPDMA1_Channel3;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel3;
 extern DMA_NodeTypeDef Node_GPDMA1_Channel1;
 extern DMA_QListTypeDef List_GPDMA1_Channel1;
