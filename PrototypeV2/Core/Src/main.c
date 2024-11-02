@@ -32,7 +32,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 32	//System will capture specificed number of samples per channel
+#define sampleSize 128	//System will capture specificed number of samples per channel
+#define denoiseSize 1
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 2
@@ -101,6 +102,7 @@ DMA_QListTypeDef List_GPDMA1_Channel1;
 DMA_HandleTypeDef handle_GPDMA1_Channel1;
 
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim15;
 
 UART_HandleTypeDef huart1;
 
@@ -111,7 +113,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_HS;
 uint16_t adcGroup1[13 *  sampleSize] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 uint32_t pcmData[sampleSize  * 8] = {0}; //Buffer for 8 channels of audio data
-int32_t dacData[sampleSize * 2] = {0};
+int32_t dacData[sampleSize] = {0};
 
 
 //contains all instructions for configuring PCM6260
@@ -155,8 +157,9 @@ static void MX_SAI2_Init(void);
 static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USB_OTG_HS_PCD_Init(void);
+static void MX_TIM15_Init(void);
 /* USER CODE BEGIN PFP */
-static float twelveBitTofloat(uint16_t value);
+static uint16_t getAverageADC(uint16_t);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -213,9 +216,11 @@ int main(void)
   MX_ADC4_Init();
   MX_I2C1_Init();
   MX_USB_OTG_HS_PCD_Init();
+  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
   HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1)); //Begins DMA transfer for first ADC
   HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4)); //begins DMA transfer for fourth ADC
+  HAL_TIM_Base_Start(&htim15);
 
 //  HAL_Delay(10);
   //HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
@@ -260,8 +265,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  dacData[1] = adcGroup1[0]<<8;
-	  dacData[0] = adcGroup1[0]<<8;
 	  //HAL_SAI_Transmit(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData), 100);
 	  /*
 	  //Reads and sets the position of each volume slider
@@ -426,8 +429,8 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.NbrOfConversion = 13;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T15_TRGO;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.DMAContinuousRequests = ENABLE;
   hadc1.Init.TriggerFrequencyMode = ADC_TRIGGER_FREQ_HIGH;
   hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
@@ -1009,13 +1012,13 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_8K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
   hsai_BlockA2.Init.TriState = SAI_OUTPUT_RELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_32BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1087,6 +1090,52 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 2 */
   HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
+  * @brief TIM15 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM15_Init(void)
+{
+
+  /* USER CODE BEGIN TIM15_Init 0 */
+
+  /* USER CODE END TIM15_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM15_Init 1 */
+
+  /* USER CODE END TIM15_Init 1 */
+  htim15.Instance = TIM15;
+  htim15.Init.Prescaler = 26;
+  htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim15.Init.Period = 49;
+  htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim15.Init.RepetitionCounter = 0;
+  htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim15) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim15, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM15_Init 2 */
+
+  /* USER CODE END TIM15_Init 2 */
 
 }
 
@@ -1269,6 +1318,44 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+uint16_t getAverageADC(uint16_t position)
+{
+	uint16_t temp = 0;
+	for(int i = 0; i < denoiseSize; i++)
+	{
+		temp += adcGroup1[position - (i * 13)];
+	}
+	temp = temp / denoiseSize;
+	return temp;
+}
+
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	uint16_t dacSlot = 0;
+	for(int i = 0; i < (sampleSize * 13) / 2; i += 13)
+	{
+		float convert = (((float)adcGroup1[i] / 16387.0f) - 0.5f) * 2.0f;
+		int32_t output = (int32_t)(convert * 8388607);
+
+		dacData[dacSlot] = output;
+		dacData[dacSlot + 1] = output;
+		dacSlot += 2;
+	}
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	uint16_t dacSlot = 0;
+	for(int i = (sampleSize * 13) / 2; i < sampleSize; i += 13)
+	{
+		float convert = (((float)adcGroup1[i] / 16387.0f) - 0.5f) * 2.0f;
+		int32_t output = (int32_t)(convert * 8388607);
+
+		dacData[dacSlot] = output;
+		dacData[dacSlot + 1] = output;
+		dacSlot += 2;
+	}
+}
 /* USER CODE END 4 */
 
 /**
