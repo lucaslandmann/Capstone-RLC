@@ -32,8 +32,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 128	//System will capture specificed number of samples per channel
+#define sampleSize 1024	//System will capture specificed number of samples per channel
 #define denoiseSize 1
+#define gain 1.3
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 2
@@ -1012,13 +1013,13 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_8K;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
   hsai_BlockA2.Init.TriState = SAI_OUTPUT_RELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_32BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_MSBJUSTIFIED, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1334,7 +1335,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
 	uint16_t dacSlot = 0;
 	for(int i = 0; i < (sampleSize * 13) / 2; i += 13)
 	{
-		float convert = (((float)adcGroup1[i] / 16387.0f) - 0.5f) * 2.0f;
+		float convert = ((((float)adcGroup1[i] * gain) / 65536.0f) - 0.5f) * 2.0f;
 		int32_t output = (int32_t)(convert * 8388607);
 
 		dacData[dacSlot] = output;
@@ -1348,7 +1349,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 	uint16_t dacSlot = 0;
 	for(int i = (sampleSize * 13) / 2; i < sampleSize; i += 13)
 	{
-		float convert = (((float)adcGroup1[i] / 16387.0f) - 0.5f) * 2.0f;
+		float convert = ((((float)adcGroup1[i] * gain) / 65536.0f) - 0.5f) * 2.0f;
 		int32_t output = (int32_t)(convert * 8388607);
 
 		dacData[dacSlot] = output;
