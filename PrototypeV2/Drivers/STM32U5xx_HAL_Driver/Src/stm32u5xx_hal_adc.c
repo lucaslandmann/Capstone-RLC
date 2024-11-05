@@ -4499,6 +4499,7 @@ void ADC_DMAConvCplt(DMA_HandleTypeDef *hdma)
     else
     {
       /* Call ADC DMA error callback */
+        HAL_ADC_ConvCpltCallback(hadc);
       hadc->DMA_Handle->XferErrorCallback(hdma);
     }
   }

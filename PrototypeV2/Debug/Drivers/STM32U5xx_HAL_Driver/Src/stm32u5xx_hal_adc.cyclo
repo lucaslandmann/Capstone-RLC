@@ -73,5 +73,5 @@
 ../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4287:19:ADC_Enable	14
 ../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4373:19:ADC_Disable	7
 ../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4434:6:ADC_DMAConvCplt	9
-../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4512:6:ADC_DMAHalfConvCplt	1
-../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4530:6:ADC_DMAError	1
+../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4513:6:ADC_DMAHalfConvCplt	1
+../Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:4531:6:ADC_DMAError	1

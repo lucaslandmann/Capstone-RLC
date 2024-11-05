@@ -1,0 +1,142 @@
+typedef unsigned char cfg_u8;
+typedef union {
+    struct {
+        cfg_u8 offset;
+        cfg_u8 value;
+    };
+    struct {
+        cfg_u8 command;
+        cfg_u8 param;
+    };
+} cfg_reg;
+
+#define CFG_META_SWITCH (255)
+#define CFG_META_DELAY  (254)
+#define CFG_META_BURST  (253)
+
+/* Example C code */
+/*
+    // Externally implemented function that can write n-bytes to the device
+    // Refer to the device data sheet for more information.
+    extern int i2c_write(unsigned char *data, int n);
+    // Externally implemented function that delays execution by n milliseconds
+    extern int delay(int n);
+    // Example implementation.  Call like:
+    //     transmit_registers(registers, sizeof(registers)/sizeof(registers[0]));
+    void transmit_registers(cfg_reg *r, int n)
+    {
+        int i = 0;
+        while (i < n) {
+            switch (r[i].command) {
+            case CFG_META_SWITCH:
+                // Used in legacy applications.  Ignored here.
+                break;
+            case CFG_META_DELAY:
+                delay(r[i].param);
+                break;
+            case CFG_META_BURST:
+                i2c_write((unsigned char *)&r[i+1], r[i].param);
+                i +=  (r[i].param / 2) + 1;
+                break;
+            default:
+                i2c_write((unsigned char *)&r[i], 2);
+                break;
+            }
+            i++;
+        }
+    }
+ */
+
+cfg_reg registers[] = {
+#define CHECKSUM (190)
+// -----------------------------------------------------------------------------
+// Reset
+// -----------------------------------------------------------------------------
+// Select Page 0
+    { 0x00, 0x00 },
+// Reset Device
+    { 0x01, 0x01 },
+// 1mS Delay
+// -----------------------------------------------------------------------------
+// Begin Device Memory
+// -----------------------------------------------------------------------------
+// Page 0 (0x00) Dump
+// Select Page 0
+    { 0x00, 0x00 },
+    { 0x02, 0x81 },
+// 2s Delay After Disabling Sleep
+    { 0x07, 0x60 },
+// ASI Output CH5
+    { 0x0f, 0x20 },
+// ASI Output CH6
+    { 0x10, 0x21 },
+// ASI Configuration
+    { 0x13, 0x07 },
+    { 0x14, 0x38 },
+    { 0x15, 0x58 },
+    { 0x17, 0x20 },
+    { 0x1a, 0x04 },
+    { 0x1b, 0x0c },
+    { 0x1c, 0xc0 },
+    { 0x1e, 0x82 },
+    { 0x1f, 0xb0 },
+// PDMDIN3_GPI3/PDMDIN4_GPI4
+    { 0x2c, 0xc8 },
+// Interupt Mask3 for Overvoltge/high current
+    { 0x37, 0x40 },
+// Diagnostics Micbias current threshold
+    { 0x3a, 0x10 },
+// CH1 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x3c, 0xb1 },
+// CH2 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x41, 0xa1 },
+// CH3 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x46, 0xa1 },
+// CH4 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x4b, 0xa1 },
+// CH5 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x50, 0xb1 },
+// CH6 CFG, Gain, Volume, Gain cal, phase cal
+    { 0x55, 0xb1 },
+// Enable Diagnostics
+    { 0x64, 0xfc },
+// Input Channel Enable
+    { 0x73, 0x80 },
+    { 0x74, 0x80 },
+    { 0x76, 0x80 },
+    { 0x77, 0xf8 },
+// Page 2 (0x02) Dump
+// Select page 2
+    { 0x00, 0x02 },
+// Biquad 3 coefficients
+    { CFG_META_BURST, 5 },
+    { 0x30, 0x80 },
+    { 0x00, 0x00 },
+    { 0x00, 0x00 },
+// Biquad 6 coefficients
+    { CFG_META_BURST, 4 },
+    { 0x71, 0x03 },
+    { 0x31, 0x40 },
+// Page 4 (0x04) Dump
+// Select page 4
+    { 0x00, 0x04 },
+// High pass filter coefficients
+    { CFG_META_BURST, 5 },
+    { 0x49, 0xe6 },
+    { 0x48, 0xc6 },
+    { 0x80, 0x00 },
+    { CFG_META_BURST, 5 },
+    { 0x4d, 0x19 },
+    { 0xb7, 0x3a },
+    { 0x7f, 0x00 },
+    { CFG_META_BURST, 4 },
+    { 0x51, 0xcc },
+    { 0x91, 0x8b },
+// Power up/down
+// Select page 0
+    { 0x00, 0x00 },
+    { 0x75, 0xe0 },
+
+};
+
+

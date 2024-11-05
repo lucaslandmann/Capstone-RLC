@@ -32,9 +32,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 1024	//System will capture specificed number of samples per channel
+#define sampleSize 256	//System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define gain 1.3
+#define gain 20
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 2
@@ -237,7 +237,7 @@ int main(void)
 
   HAL_Delay(10);
   */
-  //HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
+  HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
   HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
   //Populates each channel in the channels struct with initializer values
@@ -1333,10 +1333,10 @@ uint16_t getAverageADC(uint16_t position)
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	uint16_t dacSlot = 0;
-	for(int i = 0; i < (sampleSize * 13) / 2; i += 13)
+	for(int i = 0; i < (sampleSize * 8 ) / 2; i += 8)
 	{
-		float convert = ((((float)adcGroup1[i] * gain) / 65536.0f) - 0.5f) * 2.0f;
-		int32_t output = (int32_t)(convert * 8388607);
+		float convert = ((((float)pcmData[i] * gain) / 16777216.0f) - 0.5f) * 2.0f;
+		int32_t output = (int32_t)(convert * 8388608);
 
 		dacData[dacSlot] = output;
 		dacData[dacSlot + 1] = output;
@@ -1347,10 +1347,10 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	uint16_t dacSlot = 0;
-	for(int i = (sampleSize * 13) / 2; i < sampleSize; i += 13)
+	for(int i = ((sampleSize * 8)) / 2; i < sampleSize; i += 8)
 	{
-		float convert = ((((float)adcGroup1[i] * gain) / 65536.0f) - 0.5f) * 2.0f;
-		int32_t output = (int32_t)(convert * 8388607);
+		float convert = ((((float)pcmData[i] * gain) / 16777216.0f) - 0.5f) * 2.0f;
+		int32_t output = (int32_t)(convert * 8388608);
 
 		dacData[dacSlot] = output;
 		dacData[dacSlot + 1] = output;
