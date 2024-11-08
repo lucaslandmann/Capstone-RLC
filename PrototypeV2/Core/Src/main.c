@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 512	//System will capture specificed number of samples per channel
+#define sampleSize 1	//System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define gain 20
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
@@ -111,7 +111,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
 
-uint16_t adcGroup1[13 *  sampleSize] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 uint32_t pcmData[sampleSize  * 8] = {0}; //Buffer for 8 channels of audio data
 int32_t dacData[sampleSize * 2] = {0};
@@ -120,20 +120,46 @@ int32_t dacData[sampleSize * 2] = {0};
 //contains all instructions for configuring PCM6260
 static uint8_t pcm6260Config[][2] =
 {
-	{0x02, 0x01},	// Set to Awake
-	{0x28, 0x00},	// Power down mic bias and ADC channels on fault
-	{0x07, 0x60},	// Set to i2s signaling mode
-	{0x3B, 0x70},	// Set Micbias = 5V
-	{0x3C, 0xBC},	// Config channel 1
-	{0x41, 0xBC},	// Config channel 2
-	{0x46, 0xBC},	// Config channel 3
-	{0x4B, 0xBC},	// Config channel 4
-	{0x50, 0xBC},	// Config channel 5
-	{0x55, 0xBC},	// Config channel 6
-	{0x73, 0xFC},	// Enable input channel 1 to 2 I2C
-	{0x74, 0xFC},	// Enable output channel 1 to 2 ASI
-	{0x75, 0xE0},	// Enable power
-	//{0x64, 0xFE}	// Enable Diagnostics
+		// Select Page 0
+		    { 0x00, 0x00 },
+		    { 0x02, 0x81 },
+		// 2s Delay After Disabling Sleep
+		    { 0x07, 0x60 },
+		// ASI Output CH5
+		    { 0x0f, 0x20 },
+		// ASI Output CH6
+		    { 0x10, 0x21 },
+		// ASI Configuration
+		    { 0x13, 0x07 },
+		    { 0x14, 0x38 },
+		    { 0x17, 0x20 },
+		    { 0x1a, 0x04 },
+		    { 0x1b, 0x0c },
+		    { 0x1c, 0xc0 },
+		    { 0x1e, 0x82 },
+		    { 0x1f, 0xb0 },
+		// Micbias Configuration
+		    { 0x3b, 0x70 },
+		// CH1 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x3c, 0xa0 },
+		// CH2 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x41, 0xa0 },
+		// CH3 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x46, 0xa0 },
+		// CH4 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x4b, 0xa0 },
+		// CH5 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x50, 0xb0 },
+		// CH6 CFG, Gain, Volume, Gain cal, phase cal
+		    { 0x55, 0xb1 },
+		// Enable Diagnostics
+		    { 0x64, 0xfc },
+		// Input Channel Enable
+		    { 0x74, 0xfc },
+		// Power up/down
+		// Select page 0
+		    { 0x00, 0x00 },
+		    { 0x75, 0xa0 },
 };
 
 struct channelStruct channels[6] = {0}; //Creates a blank channelStruct array
@@ -223,22 +249,20 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4)); //begins DMA transfer for fourth ADC
   HAL_TIM_Base_Start(&htim15);
 
-//  HAL_Delay(10);
-  //HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
-  //HAL_Delay(10);
+  HAL_Delay(2000);
+  HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
+  HAL_Delay(2000);
 
   //Transmits each instruction sequentially from pcm6260Config array
-  /*
   for(int i = 0; i < sizeof(pcm6260Config); i++)
   {
 	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
-	  HAL_Delay(10);
+	  HAL_Delay(100);
   }
 
-  HAL_Delay(10);
-  */
+  HAL_Delay(2000);
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
-  HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
+  //HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
   //Populates each channel in the channels struct with initializer values
   for(int i = 0; i < sizeof(channels); i++)

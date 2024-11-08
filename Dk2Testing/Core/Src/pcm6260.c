@@ -27,26 +27,47 @@ typedef struct _trPcm6260Config
 // P R I V A T E  D A T A
 static trPcm6260Config grPcm6260Config[] =
 {
-	{0x02, 0x01},	// Set to Awake
-	{0x28, 0x00},	// Power down mic bias and ADC channels on fault
-	{0x07, 0x60},	// Set to i2s signaling mode
-	{0x3B, 0x70},	// Set Micbias = 5V
-	{0x3C, 0xBC},	// Config channel 1
-	{0x41, 0xBC},	// Config channel 2
-	{0x46, 0xBC},	// Config channel 3
-	{0x4B, 0xBC},	// Config channel 4
-	{0x50, 0xBC},	// Config channel 5
-	{0x55, 0xBC},	// Config channel 6
-	{0x73, 0xFC},	// Enable input channel 1 to 2 I2C
-	{0x74, 0xFC},	// Enable output channel 1 to 2 ASI
-	{0x75, 0xE0},	// Enable power
-	{0x64, 0xFE}
-	/*
-	{0x02, 0x01},
-		{0x73, 0xFC},
-		{0x74, 0xFC},
-		{0x75, 0x60}
-*/
+		// Select Page 0
+	    { 0x00, 0x00 },
+	    { 0x02, 0x81 },
+	// 2s Delay After Disabling Sleep
+	    { 0x07, 0x60 },
+	// ASI Output CH5
+	    { 0x0f, 0x20 },
+	// ASI Output CH6
+	    { 0x10, 0x21 },
+	// ASI Configuration
+	    { 0x13, 0x07 },
+	    { 0x14, 0x38 },
+	    { 0x17, 0x20 },
+	    { 0x1a, 0x04 },
+	    { 0x1b, 0x0c },
+	    { 0x1c, 0xc0 },
+	    { 0x1e, 0x82 },
+	    { 0x1f, 0xb0 },
+	// Micbias Configuration
+	    { 0x3b, 0x70 },
+	// CH1 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x3c, 0xa0 },
+	// CH2 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x41, 0xa0 },
+	// CH3 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x46, 0xa0 },
+	// CH4 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x4b, 0xa0 },
+	// CH5 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x50, 0xb0 },
+	// CH6 CFG, Gain, Volume, Gain cal, phase cal
+	    { 0x55, 0xb1 },
+	// Enable Diagnostics
+	    { 0x64, 0xfc },
+	// Input Channel Enable
+	    { 0x73, 0xf0 },
+	    { 0x74, 0xf0 },
+	// Power up/down
+	// Select page 0
+	    { 0x00, 0x00 },
+	    { 0x75, 0xa0 },
 };
 
 // P U B L I C   F U N C T I O N S
