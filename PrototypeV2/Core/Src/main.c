@@ -51,6 +51,8 @@
 #define c5LR 11
 #define c6LR 12
 
+#define channelSettings 0xA0
+
 
 //Struct defining a "Channel" object, which consists of a sample buffer, and various effect
 //control parameters
@@ -120,46 +122,17 @@ int32_t dacData[sampleSize * 2] = {0};
 //contains all instructions for configuring PCM6260
 static uint8_t pcm6260Config[][2] =
 {
-		// Select Page 0
-		    { 0x00, 0x00 },
-		    { 0x02, 0x81 },
-		// 2s Delay After Disabling Sleep
-		    { 0x07, 0x60 },
-		// ASI Output CH5
-		    { 0x0f, 0x20 },
-		// ASI Output CH6
-		    { 0x10, 0x21 },
-		// ASI Configuration
-		    { 0x13, 0x07 },
-		    { 0x14, 0x38 },
-		    { 0x17, 0x20 },
-		    { 0x1a, 0x04 },
-		    { 0x1b, 0x0c },
-		    { 0x1c, 0xc0 },
-		    { 0x1e, 0x82 },
-		    { 0x1f, 0xb0 },
-		// Micbias Configuration
-		    { 0x3b, 0x70 },
-		// CH1 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x3c, 0xa0 },
-		// CH2 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x41, 0xa0 },
-		// CH3 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x46, 0xa0 },
-		// CH4 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x4b, 0xa0 },
-		// CH5 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x50, 0xb0 },
-		// CH6 CFG, Gain, Volume, Gain cal, phase cal
-		    { 0x55, 0xb1 },
-		// Enable Diagnostics
-		    { 0x64, 0xfc },
-		// Input Channel Enable
-		    { 0x74, 0xfc },
-		// Power up/down
-		// Select page 0
-		    { 0x00, 0x00 },
-		    { 0x75, 0xa0 },
+		{0x00, 0x00},
+		{0x01, 0x01},
+		{0x02, 0x81},
+		{0x28,0x10},
+		{0x3C,channelSettings},
+		{0x41,channelSettings},
+		{0x46,channelSettings},
+		{0x4B, channelSettings},
+		{0x73,0xF0},
+		{0x74, 0xF0},
+		{0x75, 0xE0}
 };
 
 struct channelStruct channels[6] = {0}; //Creates a blank channelStruct array
@@ -260,7 +233,7 @@ int main(void)
 	  HAL_Delay(100);
   }
 
-  HAL_Delay(2000);
+  HAL_Delay(100);
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
   //HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 

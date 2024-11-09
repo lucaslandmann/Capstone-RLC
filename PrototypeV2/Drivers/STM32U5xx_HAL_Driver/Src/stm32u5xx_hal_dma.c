@@ -1067,7 +1067,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *const hdma)
       }
 
       /* Clear TC and HT transfer flags */
-      __HAL_DMA_CLEAR_FLAG(hdma, (DMA_FLAG_TC | DMA_FLAG_HT));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                __HAL_DMA_CLEAR_FLAG(hdma, (DMA_FLAG_TC | DMA_FLAG_HT));
 
       /* Process Unlocked */
       __HAL_UNLOCK(hdma);
