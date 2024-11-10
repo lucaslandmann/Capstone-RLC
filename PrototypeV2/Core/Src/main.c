@@ -32,9 +32,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 1	//System will capture specificed number of samples per channel
+#define sampleSize 512	//System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define gain 20
+#define gain 1
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 2
@@ -51,7 +51,16 @@
 #define c5LR 11
 #define c6LR 12
 
-#define channelSettings 0xA0
+#define channelSettings 0xA6
+/*
+ * 7 - 0 = Microphone 1 = Line
+ * 6-5 - 0d = analog differential 1d = analog single ended
+ * 4 - 0d = A/C coupled 1d = D/C coupled
+ * 3 - 0d low swing mode 1d high swing mode
+ * 2-1 - 0d high snr 2d high cmrr
+ * 0 0 - AGC disabled, 1 - AGC enabled
+ */
+
 
 
 //Struct defining a "Channel" object, which consists of a sample buffer, and various effect
@@ -122,7 +131,7 @@ int32_t dacData[sampleSize * 2] = {0};
 //contains all instructions for configuring PCM6260
 static uint8_t pcm6260Config[][2] =
 {
-		{0x00, 0x00},
+		/*{0x00, 0x00},
 		{0x01, 0x01},
 		{0x02, 0x81},
 		{0x28,0x10},
@@ -132,6 +141,19 @@ static uint8_t pcm6260Config[][2] =
 		{0x4B, channelSettings},
 		{0x73,0xF0},
 		{0x74, 0xF0},
+		{0x75, 0xE0}*/
+		{0x00, 0x00},
+		{0x02, 0x81},
+		{0x28,0x10},
+		{0x3C,channelSettings},
+		{0x41,channelSettings},
+		{0x46,channelSettings},
+		{0x4B,channelSettings},
+		{0x50,channelSettings},
+		{0x55,channelSettings},
+		{0x3B, 0x70},
+		{0x73,0xFE},
+		{0x74, 0xFE},
 		{0x75, 0xE0}
 };
 
@@ -235,7 +257,7 @@ int main(void)
 
   HAL_Delay(100);
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
-  //HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
+    HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
   //Populates each channel in the channels struct with initializer values
   for(int i = 0; i < sizeof(channels); i++)
@@ -1330,7 +1352,7 @@ uint16_t getAverageADC(uint16_t position)
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	uint16_t dacSlot = 0;
-	for(int i = 0; i < (sampleSize * 8 ) / 2; i += 8)
+	for(int i = 4; i < (sampleSize * 8 ) / 2; i += 8)
 	{
 		float convert = ((((float)pcmData[i] * (float)gain) / 16777216.0f) - 0.5f) * 2.0f;
 		int32_t output = (int32_t)(convert * 8388608);
@@ -1344,7 +1366,7 @@ void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	uint16_t dacSlot = sampleSize;
-	for(int i = ((sampleSize * 8)) / 2; i < sampleSize * 8; i += 8)
+	for(int i = ((sampleSize * 8) / 2) + 4; i < sampleSize * 8; i += 8)
 	{
 		float convert = ((((float)pcmData[i] * (float)gain) / 16777216.0f) - 0.5f) * 2.0f;
 		int32_t output = (int32_t)(convert * 8388608);
