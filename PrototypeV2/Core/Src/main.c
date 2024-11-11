@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 512	//System will capture specificed number of samples per channel
+#define sampleSize 256	//System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define gain 1
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
