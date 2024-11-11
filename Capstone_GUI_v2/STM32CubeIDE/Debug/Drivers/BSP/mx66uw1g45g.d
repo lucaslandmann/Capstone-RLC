@@ -1,6 +1,6 @@
 Drivers/BSP/mx66uw1g45g.o: \
- C:/TouchGFXProjects/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.c \
- C:/TouchGFXProjects/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.h \
+ C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.c \
+ C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.h \
  ../../Core/Inc/mx66uw1g45g_conf.h \
  ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h \
  ../../Core/Inc/stm32u5xx_hal_conf.h \
@@ -42,7 +42,7 @@ Drivers/BSP/mx66uw1g45g.o: \
  ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_gpu2d.h \
  ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_xspi.h \
  ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_dlyb.h
-C:/TouchGFXProjects/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.h:
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/BSP/Components/mx66uw1g45g/mx66uw1g45g.h:
 ../../Core/Inc/mx66uw1g45g_conf.h:
 ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h:
 ../../Core/Inc/stm32u5xx_hal_conf.h:

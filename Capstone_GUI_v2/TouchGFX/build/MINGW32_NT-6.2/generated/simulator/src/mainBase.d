@@ -85,11 +85,9 @@ build/MINGW32_NT-6.2/generated/simulator/src/mainBase.o: \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
- gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp \
- generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp \
- gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp \
- gui/include/gui/containers/CustomContainer1.hpp \
- generated/gui_generated/include/gui_generated/containers/CustomContainer1Base.hpp \
+ gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
+ generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
+ gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
@@ -295,15 +293,11 @@ gui/include/gui/model/ModelListener.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
 
-gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:
+gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 
-generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp:
+generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp:
 
-gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:
-
-gui/include/gui/containers/CustomContainer1.hpp:
-
-generated/gui_generated/include/gui_generated/containers/CustomContainer1Base.hpp:
+gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 

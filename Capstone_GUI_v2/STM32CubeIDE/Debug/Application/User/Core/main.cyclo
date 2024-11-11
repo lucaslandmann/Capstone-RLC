@@ -1,0 +1,5 @@
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:180:6:SystemClock_Config	4
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:101:5:main	16
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:733:6:leds	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:753:6:HAL_TIM_PeriodElapsedCallback	2
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:770:6:Error_Handler	1

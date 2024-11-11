@@ -1,0 +1,11 @@
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	1
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	1
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp:16:6:virtual void EffectsMatrixView::tearDownScreen()	1
+../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:17:13:EffectsMatrixView::~EffectsMatrixView()	1
+../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:17:13:virtual EffectsMatrixView::~EffectsMatrixView()	1
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Bitmap.hpp:146:14:touchgfx::BitmapId touchgfx::Bitmap::getId() const	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp:30:6:virtual void EffectsMatrixView::action1()	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp:7:1:EffectsMatrixView::EffectsMatrixView()	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp:11:6:virtual void EffectsMatrixView::setupScreen()	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp:21:6:void EffectsMatrixView::setButtonState(bool)	1

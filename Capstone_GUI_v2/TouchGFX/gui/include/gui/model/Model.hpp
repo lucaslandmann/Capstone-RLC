@@ -14,6 +14,9 @@ public:
     }
 
     void tick();
+    bool getButtonValue();
+
+    void toggleLed(char selection);
 protected:
     ModelListener* modelListener;
 };

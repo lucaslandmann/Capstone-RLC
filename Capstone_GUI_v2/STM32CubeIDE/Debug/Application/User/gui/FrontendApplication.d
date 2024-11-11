@@ -1,5 +1,5 @@
 Application/User/gui/FrontendApplication.o: \
- C:/TouchGFXProjects/Capstone_GUI_v2/TouchGFX/gui/src/common/FrontendApplication.cpp \
+ C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/common/FrontendApplication.cpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp \

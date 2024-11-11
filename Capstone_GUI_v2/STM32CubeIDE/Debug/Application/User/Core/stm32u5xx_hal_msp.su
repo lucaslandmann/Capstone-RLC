@@ -1,0 +1,17 @@
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:68:6:HAL_MspInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:92:6:HAL_CRC_MspInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:115:6:HAL_CRC_MspDeInit	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:137:6:HAL_DCACHE_MspInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:170:6:HAL_DCACHE_MspDeInit	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:203:6:HAL_DMA2D_MspInit	16	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:229:6:HAL_DMA2D_MspDeInit	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:254:6:HAL_GPU2D_MspInit	16	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:283:6:HAL_GPU2D_MspDeInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:310:6:HAL_XSPI_MspInit	280	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:388:6:HAL_XSPI_MspDeInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:431:6:HAL_I2C_MspInit	264	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:478:6:HAL_I2C_MspDeInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:509:6:HAL_JPEG_MspInit	32	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:599:6:HAL_JPEG_MspDeInit	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:628:6:HAL_LTDC_MspInit	288	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:758:6:HAL_LTDC_MspDeInit	8	static

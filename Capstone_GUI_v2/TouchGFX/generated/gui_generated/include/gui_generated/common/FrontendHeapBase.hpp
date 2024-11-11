@@ -16,8 +16,8 @@
 
 #include <gui/mainscreen_screen/MainScreenView.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
-#include <gui/effectsmatrix_screen/EffectsMatrixView.hpp>
-#include <gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp>
+#include <gui/effectsselect_screen/EffectsSelectView.hpp>
+#include <gui/effectsselect_screen/EffectsSelectPresenter.hpp>
 
 
 /**
@@ -41,7 +41,7 @@ public:
      * @note All view types used in the application MUST be added to this list!
      */
     typedef touchgfx::meta::TypeList< MainScreenView,
-            touchgfx::meta::TypeList< EffectsMatrixView,
+            touchgfx::meta::TypeList< EffectsSelectView,
             touchgfx::meta::Nil >
             > GeneratedViewTypes;
 
@@ -55,7 +55,7 @@ public:
      * @note All presenter types used in the application MUST be added to this list!
      */
     typedef touchgfx::meta::TypeList< MainScreenPresenter,
-            touchgfx::meta::TypeList< EffectsMatrixPresenter,
+            touchgfx::meta::TypeList< EffectsSelectPresenter,
             touchgfx::meta::Nil >
             > GeneratedPresenterTypes;
 

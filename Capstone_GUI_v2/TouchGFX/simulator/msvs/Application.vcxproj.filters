@@ -184,18 +184,6 @@
     <Filter Include="Source Files\gui\mainscreen_screen">
       <UniqueIdentifier>D856EE2A-F2CB-35A5-F8D3-BAF272A1E2E6</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\gui\effectsmatrix_screen">
-      <UniqueIdentifier>1F54D6C3-38D5-95E2-BAC9-9E4048856DDE</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\gui\effectsmatrix_screen">
-      <UniqueIdentifier>B4B32464-28B4-B513-402B-5B66265BCF5F</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\generated\gui_generated\effectsmatrix_screen">
-      <UniqueIdentifier>405BCFA9-4CF8-BA50-42C2-5E064940336C</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\generated\gui_generated\effectsmatrix_screen">
-      <UniqueIdentifier>3ADA7838-6273-5002-097A-541FDE58C78F</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\generated\gui_generated\mainscreen_screen">
       <UniqueIdentifier>1E156527-4585-D17A-21B9-C20C67C0FD32</UniqueIdentifier>
     </Filter>
@@ -207,6 +195,18 @@
     </Filter>
     <Filter Include="Header Files\gui\containers">
       <UniqueIdentifier>0689EB3A-609B-50B8-E348-FDE36EECDA54</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\effectsselect_screen">
+      <UniqueIdentifier>4413378C-E6F3-59EB-4A58-73FA734CDB71</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\effectsselect_screen">
+      <UniqueIdentifier>2D6F4BDB-4D52-B6CA-ED9A-8672F32BD9C9</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\effectsselect_screen">
+      <UniqueIdentifier>B61C13B5-9DDC-D8D9-B714-F6BB6D33DF58</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\effectsselect_screen">
+      <UniqueIdentifier>5F81F156-33DC-7362-270A-052404F1039A</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,15 +240,6 @@
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp">
       <Filter>Source Files\generated\simulator\video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\effectsmatrix_screen\EffectsMatrixPresenter.cpp">
-      <Filter>Source Files\gui\effectsmatrix_screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gui\src\effectsmatrix_screen\EffectsMatrixView.cpp">
-      <Filter>Source Files\gui\effectsmatrix_screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\effectsmatrix_screen\EffectsMatrixViewBase.cpp">
-      <Filter>Source Files\generated\gui_generated\effectsmatrix_screen</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gui\src\mainscreen_screen\MainScreenPresenter.cpp">
       <Filter>Source Files\gui\mainscreen_screen</Filter>
     </ClCompile>
@@ -263,6 +254,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CustomContainer1Base.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\effectsselect_screen\EffectsSelectPresenter.cpp">
+      <Filter>Source Files\gui\effectsselect_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\effectsselect_screen\EffectsSelectView.cpp">
+      <Filter>Source Files\gui\effectsselect_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\effectsselect_screen\EffectsSelectViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\effectsselect_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -706,15 +706,6 @@
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\effectsmatrix_screen\EffectsMatrixPresenter.hpp">
-      <Filter>Header Files\gui\effectsmatrix_screen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\effectsmatrix_screen\EffectsMatrixView.hpp">
-      <Filter>Header Files\gui\effectsmatrix_screen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\effectsmatrix_screen\EffectsMatrixViewBase.hpp">
-      <Filter>Header Files\generated\gui_generated\effectsmatrix_screen</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\mainscreen_screen\MainScreenPresenter.hpp">
       <Filter>Header Files\gui\mainscreen_screen</Filter>
     </ClInclude>
@@ -729,6 +720,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer1Base.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\effectsselect_screen\EffectsSelectPresenter.hpp">
+      <Filter>Header Files\gui\effectsselect_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\effectsselect_screen\EffectsSelectView.hpp">
+      <Filter>Header Files\gui\effectsselect_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\effectsselect_screen\EffectsSelectViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\effectsselect_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

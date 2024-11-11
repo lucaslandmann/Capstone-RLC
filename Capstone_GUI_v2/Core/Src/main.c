@@ -21,6 +21,7 @@
 #include "jpeg_utils_conf.h"
 #include "cmsis_os2.h"
 #include "app_touchgfx.h"
+#include "stdbool.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -64,7 +65,8 @@ DMA_HandleTypeDef handle_GPDMA1_Channel0;
 LTDC_HandleTypeDef hltdc;
 
 /* USER CODE BEGIN PV */
-
+bool fxButtonPressed = false;
+bool readPin = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,7 +86,7 @@ static void MX_HSPI1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_JPEG_Init(void);
 /* USER CODE BEGIN PFP */
-
+void leds(char opt);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -158,7 +160,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if (readPin == false)
+	  {
+		  fxButtonPressed = false;
+	  }
+	  else
+	  {
+		  fxButtonPressed = true;
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -721,7 +730,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void leds(char opt) {
+	if (opt == '1')
+	{
+		readPin = true;
+	}
+	else
+	{
+		readPin = false;
+	}
+}
 /* USER CODE END 4 */
 
 /**

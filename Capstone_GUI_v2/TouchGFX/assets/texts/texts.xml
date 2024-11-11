@@ -157,6 +157,111 @@
     </TextGroup>
     <TextGroup Id="TopbarContainer" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_WVBW" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Low</Translation>
+      </Text>
+      <Text Id="__SingleUse_OB1U" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Low Mid</Translation>
+      </Text>
+      <Text Id="__SingleUse_TPGG" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Mid</Translation>
+      </Text>
+      <Text Id="__SingleUse_70V9" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">High Mid</Translation>
+      </Text>
+      <Text Id="__SingleUse_M9K6" Alignment="Left" TypographyId="ShareTech_55">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_MEJF" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">High</Translation>
+      </Text>
+      <Text Id="__SingleUse_B8L1" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Decay</Translation>
+      </Text>
+      <Text Id="__SingleUse_DDNU" Alignment="Left" TypographyId="ShareTech_55">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_KN5B" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Mix</Translation>
+      </Text>
+      <Text Id="__SingleUse_K6MV" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Mix</Translation>
+      </Text>
+      <Text Id="__SingleUse_IZDW" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Time</Translation>
+      </Text>
+      <Text Id="__SingleUse_UAE8" Alignment="Left" TypographyId="ShareTech_55">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_V2UP" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 6&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_NA81" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 5&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_LKI3" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 4&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_GOPA" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 3&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_DSJZ" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 2&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZJQ6" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Channel 1&#10;Effects</Translation>
+      </Text>
+      <Text Id="__SingleUse_0N50" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_P6TE" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_40EF" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_2IVN" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_VS46" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_2XHF" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_L61R" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y3JF" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_HKXV" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_8VKE" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_QHAP" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_BTAZ" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_UVSS" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
+      <Text Id="__SingleUse_NG8X" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_DAGP" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
+      <Text Id="__SingleUse_S7KC" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">EQ</Translation>
+      </Text>
+      <Text Id="__SingleUse_N88D" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Delay</Translation>
+      </Text>
       <Text Id="__SingleUse_WIY6" Alignment="Center" TypographyId="ShareTech_26">
         <Translation Language="GB">EQ</Translation>
       </Text>
@@ -165,9 +270,6 @@
       </Text>
       <Text Id="__SingleUse_CRIX" Alignment="Center" TypographyId="ShareTech_26">
         <Translation Language="GB">Reverb</Translation>
-      </Text>
-      <Text Id="__SingleUse_3BZ7" Alignment="Center" TypographyId="ShareTech_26">
-        <Translation Language="GB">F&#10;X&#10;&#10;M&#10;A&#10;T&#10;R&#10;I&#10;X</Translation>
       </Text>
       <Text Id="__SingleUse_TDPA" Alignment="Left" TypographyId="SairaSemiBold_16">
         <Translation Language="GB">FX Send</Translation>

@@ -23,8 +23,8 @@ public:
     // MainScreen
     void gotoMainScreenScreenNoTransition();
 
-    // EffectsMatrix
-    void gotoEffectsMatrixScreenWipeTransitionSouth();
+    // EffectsSelect
+    void gotoEffectsSelectScreenWipeTransitionSouth();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -34,8 +34,8 @@ protected:
     // MainScreen
     void gotoMainScreenScreenNoTransitionImpl();
 
-    // EffectsMatrix
-    void gotoEffectsMatrixScreenWipeTransitionSouthImpl();
+    // EffectsSelect
+    void gotoEffectsSelectScreenWipeTransitionSouthImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

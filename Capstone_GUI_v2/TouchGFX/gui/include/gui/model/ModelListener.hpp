@@ -14,6 +14,10 @@ public:
     {
         model = m;
     }
+
+    virtual void newButtonValue(bool button){}
+
+    virtual void toggleLed(char selection){}
 protected:
     Model* model;
 };

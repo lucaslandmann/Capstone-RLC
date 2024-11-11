@@ -341,8 +341,8 @@ void MainScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& s
     if (&src == &EXSendButton1)
     {
         //Interaction2
-        //When EXSendButton1 clicked change screen to EffectsMatrix
-        //Go to EffectsMatrix with screen transition towards South
-        application().gotoEffectsMatrixScreenWipeTransitionSouth();
+        //When EXSendButton1 clicked change screen to EffectsSelect
+        //Go to EffectsSelect with screen transition towards South
+        application().gotoEffectsSelectScreenWipeTransitionSouth();
     }
 }

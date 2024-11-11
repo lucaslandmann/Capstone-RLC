@@ -345,14 +345,14 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/CustomContainer1.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/gui/EffectsMatrixPresenter.cpp</name>
+			<name>Application/User/gui/EffectsSelectPresenter.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixPresenter.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/gui/EffectsMatrixView.cpp</name>
+			<name>Application/User/gui/EffectsSelectView.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixView.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsselect_screen/EffectsSelectView.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/gui/MainScreenPresenter.cpp</name>
@@ -680,9 +680,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/EffectsMatrixViewBase.cpp</name>
+			<name>Application/User/generated/EffectsSelectViewBase.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/effectsmatrix_screen/EffectsMatrixViewBase.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/MainScreenViewBase.cpp</name>
@@ -1045,14 +1045,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_round_disabled.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_round_disabled.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_round_pressed.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_round_pressed.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_Ellipse.cpp</name>
@@ -1255,6 +1260,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/ebike-screen/image_standard_button_normal.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_EffectSelectOffV2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectSelectOffV2.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_EffectSendV3.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectSendV3.cpp</locationURI>
@@ -1285,6 +1295,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectsSendV4Pressed.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_EffectselectOff.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectselectOff.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_KnobSliderBackground.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_KnobSliderBackground.cpp</locationURI>
@@ -1310,6 +1325,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_MuteButtonV3.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_ReberbClickedV1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReberbClickedV1.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_RedKnob.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_RedKnob.cpp</locationURI>
@@ -1320,6 +1340,31 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_RedKnobV2.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_ReverbButtonClicked.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReverbButtonClicked.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ReverbButtonUnclickedV2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReverbButtonUnclickedV2.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ReverbButtonUnclickedV3.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReverbButtonUnclickedV3.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ReverbButtonUnclickedV4.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReverbButtonUnclickedV4.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ReverbUnclickedV1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ReverbUnclickedV1.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_betterSlider2.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_betterSlider2.cpp</locationURI>
@@ -1328,6 +1373,21 @@
 			<name>Application/User/generated/image_bitmap.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_bitmap.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_effectsSelectBackground.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_effectsSelectBackground.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_effectsSelectBackgroundV2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_effectsSelectBackgroundV2.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_effectsSelectOnv2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_effectsSelectOnv2.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_fullbackPlate.cpp</name>

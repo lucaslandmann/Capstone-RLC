@@ -13,8 +13,8 @@
 #endif
 #include <gui/mainscreen_screen/MainScreenView.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
-#include <gui/effectsmatrix_screen/EffectsMatrixView.hpp>
-#include <gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp>
+#include <gui/effectsselect_screen/EffectsSelectView.hpp>
+#include <gui/effectsselect_screen/EffectsSelectPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -50,15 +50,15 @@ void FrontendApplicationBase::gotoMainScreenScreenNoTransitionImpl()
     touchgfx::makeTransition<MainScreenView, MainScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
-// EffectsMatrix
+// EffectsSelect
 
-void FrontendApplicationBase::gotoEffectsMatrixScreenWipeTransitionSouth()
+void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouth()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoEffectsMatrixScreenWipeTransitionSouthImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouthImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoEffectsMatrixScreenWipeTransitionSouthImpl()
+void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouthImpl()
 {
-    touchgfx::makeTransition<EffectsMatrixView, EffectsMatrixPresenter, touchgfx::WipeTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<EffectsSelectView, EffectsSelectPresenter, touchgfx::WipeTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

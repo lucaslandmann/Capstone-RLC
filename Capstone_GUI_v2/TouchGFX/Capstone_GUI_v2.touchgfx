@@ -382,7 +382,7 @@
             "X": 62,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_F8U3",
             "TextRotation": "0",
             "AutoSize": true
@@ -393,7 +393,7 @@
             "X": 362,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_1E6D",
             "TextRotation": "0",
             "AutoSize": true
@@ -404,7 +404,7 @@
             "X": 162,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_M40N",
             "TextRotation": "0",
             "AutoSize": true
@@ -415,7 +415,7 @@
             "X": 562,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_O89H",
             "TextRotation": "0",
             "AutoSize": true
@@ -426,7 +426,7 @@
             "X": 662,
             "Y": 443,
             "Width": 84,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_D2RN",
             "TextRotation": "0",
             "AutoSize": true
@@ -488,7 +488,7 @@
             "X": 462,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_S8HP",
             "TextRotation": "0",
             "AutoSize": true
@@ -580,7 +580,7 @@
             "X": 262,
             "Y": 443,
             "Width": 14,
-            "Height": 26,
+            "Height": 30,
             "TextId": "__SingleUse_7MLS",
             "TextRotation": "0",
             "AutoSize": true
@@ -676,81 +676,960 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionWipe",
               "ScreenTransitionDirection": "South",
-              "ActionComponent": "EffectsMatrix"
+              "ActionComponent": "EffectsSelect"
             }
           }
         ]
       },
       {
-        "Name": "EffectsMatrix",
+        "Name": "EffectsSelect",
         "Components": [
           {
             "Type": "Image",
-            "Name": "EffectsMatrixBackground",
+            "Name": "image1",
             "Width": 800,
             "Height": 480,
-            "RelativeFilename": "EffectsMatrixBackground.png"
+            "LockPosition": true,
+            "RelativeFilename": "effectsSelectBackgroundV2.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1_2",
+            "X": 293,
+            "Y": 120,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_8VKE",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1_2",
+            "X": 305,
+            "Y": 167,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2_2",
+            "X": 293,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_QHAP",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2_2",
+            "X": 304,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_4",
+            "X": 293,
+            "Y": 18,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_BTAZ",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_4",
+            "X": 305,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1_3",
+            "X": 413,
+            "Y": 120,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_L61R",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1_3",
+            "X": 423,
+            "Y": 168,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2_3",
+            "X": 413,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_Y3JF",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2_3",
+            "X": 423,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_5",
+            "X": 413,
+            "Y": 18,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_HKXV",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_5",
+            "X": 423,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1_4",
+            "X": 533,
+            "Y": 120,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_2IVN",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1_4",
+            "X": 544,
+            "Y": 168,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2_4",
+            "X": 533,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_VS46",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2_4",
+            "X": 544,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_6",
+            "X": 533,
+            "Y": 18,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_2XHF",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_6",
+            "X": 544,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1_5",
+            "X": 653,
+            "Y": 120,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_0N50",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1_5",
+            "X": 664,
+            "Y": 168,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
           },
           {
             "Type": "TextArea",
-            "Name": "EffectsMatrixText",
-            "X": 8,
-            "Y": 6,
-            "Width": 28,
-            "Height": 270,
-            "TextId": "__SingleUse_3BZ7",
+            "Name": "CH1Text_1_1_1_2",
+            "X": 647,
+            "Y": 342,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_V2UP",
             "TextRotation": "0",
-            "Color": {
-              "Red": 78,
-              "Green": 130,
-              "Blue": 242
-            },
             "AutoSize": true
           },
           {
-            "Type": "CustomContainerInstance",
-            "Name": "customContainer11",
-            "X": 154,
-            "Width": 214,
-            "Height": 150,
-            "Visible": false,
-            "CustomContainerDefinitionName": "CustomContainer1"
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2_5",
+            "X": 653,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_P6TE",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_3",
+            "X": 173,
+            "Y": 18,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_DAGP",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2_5",
+            "X": 664,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_7",
+            "X": 653,
+            "Y": 18,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_40EF",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_7",
+            "X": 664,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1_1",
+            "X": 173,
+            "Y": 120,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_UVSS",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1_1",
+            "X": 188,
+            "Y": 168,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2_1",
+            "X": 173,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_NG8X",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2_1",
+            "X": 188,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1Text_1_1",
+            "X": 288,
+            "Y": 355,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_GOPA",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1Text_1_1_1",
+            "X": 413,
+            "Y": 355,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_LKI3",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1Text_1_1_1_1",
+            "X": 528,
+            "Y": 342,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_NA81",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_3",
+            "X": 188,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1Text_1",
+            "X": 168,
+            "Y": 355,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_DSJZ",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1",
+            "X": 52,
+            "Y": 121,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_N88D",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_1",
+            "X": 63,
+            "Y": 169,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_2",
+            "X": 53,
+            "Y": 224,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_action.png",
+            "TextId": "__SingleUse_S7KC",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "toggleButton1_2",
+            "X": 64,
+            "Y": 271,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
           },
           {
             "Type": "ToggleButton",
             "Name": "toggleButton1",
-            "X": 50,
-            "Y": 27,
-            "Width": 100,
-            "Height": 36,
-            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_disabled.png",
-            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_round_action.png"
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "Interaction1",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "toggleButton1"
-            },
-            "Action": {
-              "Type": "ActionShow",
-              "ActionComponent": "customContainer11"
-            }
+            "X": 63,
+            "Y": 65,
+            "Width": 78,
+            "Height": 22,
+            "Pressed": "effectsSelectOnv2.png",
+            "Released": "EffectselectOff.png"
           },
           {
-            "InteractionName": "Interaction2",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "toggleButton1"
-            },
-            "Action": {
-              "Type": "ActionHide",
-              "ActionComponent": "customContainer11"
-            }
+            "Type": "Button",
+            "Name": "button1",
+            "X": 53,
+            "Y": 18,
+            "Width": 99,
+            "Height": 34,
+            "Pressed": "ReverbButtonClicked.png",
+            "Released": "ReverbButtonUnclickedV2.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "CH1Text",
+            "X": 47,
+            "Y": 355,
+            "Width": 110,
+            "Height": 46,
+            "TextId": "__SingleUse_ZJQ6",
+            "TextRotation": "0",
+            "AutoSize": true
           }
-        ]
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Delay",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "CH1DelayBackground",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "EffectsBackgroundV1.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1",
+            "X": 655,
+            "Y": 431,
+            "Width": 42,
+            "Height": 30,
+            "TextId": "__SingleUse_K6MV",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1",
+            "X": 537,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1",
+            "X": 664,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 82,
+            "Y": 66,
+            "Width": 150,
+            "Height": 65,
+            "TextId": "__SingleUse_UAE8",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 521,
+            "Y": 431,
+            "Width": 56,
+            "Height": 30,
+            "TextId": "__SingleUse_IZDW",
+            "TextRotation": "0",
+            "AutoSize": true
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "EQ",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "CH1DelayBackground",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "EffectsBackgroundV1.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "EQ_3",
+            "X": 162,
+            "Y": 431,
+            "Width": 42,
+            "Height": 30,
+            "TextId": "__SingleUse_WVBW",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1_1",
+            "X": 415,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1_2",
+            "X": 298,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1_3",
+            "X": 185,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1",
+            "X": 648,
+            "Y": 431,
+            "Width": 56,
+            "Height": 30,
+            "TextId": "__SingleUse_MEJF",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1",
+            "X": 537,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1",
+            "X": 664,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 82,
+            "Y": 66,
+            "Width": 60,
+            "Height": 65,
+            "TextId": "__SingleUse_M9K6",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "EQ",
+            "X": 493,
+            "Y": 431,
+            "Width": 112,
+            "Height": 30,
+            "TextId": "__SingleUse_70V9",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "EQ_1",
+            "X": 406,
+            "Y": 431,
+            "Width": 42,
+            "Height": 30,
+            "TextId": "__SingleUse_TPGG",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "EQ_2",
+            "X": 261,
+            "Y": 431,
+            "Width": 98,
+            "Height": 30,
+            "TextId": "__SingleUse_OB1U",
+            "TextRotation": "0",
+            "AutoSize": true
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Reverb",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "CH1DelayBackground",
+            "Width": 800,
+            "Height": 480,
+            "RelativeFilename": "EffectsBackgroundV1.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1",
+            "X": 655,
+            "Y": 431,
+            "Width": 42,
+            "Height": 30,
+            "TextId": "__SingleUse_KN5B",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1_1",
+            "X": 537,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "Slider",
+            "Name": "slider1_1",
+            "X": 664,
+            "Y": 66,
+            "Width": 24,
+            "Height": 348,
+            "BackgroundUnselected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_filler_medium.png",
+            "BackgroundSelected": "__generated\\alternate_theme_images_widgets_slider_vertical_thin_track_medium.png",
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 9,
+            "BackgroundY": 12,
+            "IndicatorMax": 300,
+            "ValueMax": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 82,
+            "Y": 66,
+            "Width": 180,
+            "Height": 65,
+            "TextId": "__SingleUse_DDNU",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "ReverbDecay",
+            "X": 521,
+            "Y": 431,
+            "Width": 70,
+            "Height": 30,
+            "TextId": "__SingleUse_B8L1",
+            "TextRotation": "0",
+            "AutoSize": true
+          }
+        ],
+        "Interactions": []
       }
     ],
     "CustomContainerDefinitions": [

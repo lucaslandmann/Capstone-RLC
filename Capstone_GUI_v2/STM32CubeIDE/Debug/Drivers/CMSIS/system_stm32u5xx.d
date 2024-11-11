@@ -1,5 +1,5 @@
 Drivers/CMSIS/system_stm32u5xx.o: \
- C:/TouchGFXProjects/Capstone_GUI_v2/Core/Src/system_stm32u5xx.c \
+ C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/system_stm32u5xx.c \
  ../../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u5xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u5g9xx.h \
  ../../Drivers/CMSIS/Include/core_cm33.h \

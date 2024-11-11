@@ -1,0 +1,8 @@
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	0	static
+../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:28:13:EffectsMatrixPresenter::~EffectsMatrixPresenter()	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixPresenter.cpp:10:6:virtual void EffectsMatrixPresenter::activate()	0	static
+../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:28:13:virtual EffectsMatrixPresenter::~EffectsMatrixPresenter()	8	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixPresenter.cpp:20:6:virtual void EffectsMatrixPresenter::newButtonValue(bool)	0	static
+../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:28:13:virtual void* EffectsMatrixPresenter::_ZThn4_N22EffectsMatrixPresenterD1Ev()	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixPresenter.cpp:4:1:EffectsMatrixPresenter::EffectsMatrixPresenter(EffectsMatrixView&)	0	static
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsmatrix_screen/EffectsMatrixPresenter.cpp:25:6:void EffectsMatrixPresenter::matrixButtonClicked(char)	0	static
