@@ -34,7 +34,7 @@
 /* USER CODE BEGIN PD */
 #define sampleSize 256//System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define gain 1
+#define gain 6
 #define channelCount 8
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
@@ -287,8 +287,14 @@ int main(void)
 	  {
 		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
 		  {
-			  dacData[(sample * 2)] = channels[0].channelData[sample] * gain;
-			  dacData[(sample * 2) + 1] = channels[0].channelData[sample] * gain;
+			  int32_t mixedSignal = 0;
+			  for(uint16_t currChannel = 0; currChannel < channelCount - 2; currChannel ++)
+			  {
+				  mixedSignal += channels[currChannel].channelData[sample];
+			  }
+			  mixedSignal = mixedSignal / 6;
+			  dacData[(sample * 2)] = channels[0].channelData[sample];//mixedSignal * gain;
+			  dacData[(sample * 2) + 1] = channels[0].channelData[sample];//mixedSignal * gain;
 		  }
 		  dacReady = false;
 	  }
