@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 256//System will capture specificed number of samples per channel
+#define sampleSize 1024//System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define gain 6
 #define channelCount 8
@@ -118,7 +118,7 @@ struct channelStruct{
 	float distortionStrength;
 };
 
-uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup1[13 * 8] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 int32_t pcmData[sampleSize  * channelCount] = {0}; //Buffer for 8 channels of audio data
 int32_t dacDataBuffer[sampleSize * 2] = {0};
@@ -237,6 +237,7 @@ int main(void)
   //begins DMA transfer for fourth ADC
   HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
   HAL_TIM_Base_Start(&htim15);
+  //Config ADC/DAC
 
   HAL_Delay(2000);
   HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
@@ -265,8 +266,14 @@ int main(void)
 		 heartBeatTick = HAL_GetTick() + 1000;
 		 HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
 	  }
+	  //Slider/Pot Processing
+	  uint32_t temp = 0;
+	  for(uint16_t index = 0; index < sizeof(adcGroup1); index += 13)
+	  {
+		  temp += adcGroup1[index];
+	  }
 
-
+	  channels[0].volume = (float)((temp / (sizeof(adcGroup1) / 26)) >> 3) / 256.0f;
 	  if(adcReady)
 	  {
 		  //Loads sample data into Structs
@@ -288,13 +295,13 @@ int main(void)
 		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
 		  {
 			  int32_t mixedSignal = 0;
-			  for(uint16_t currChannel = 0; currChannel < channelCount - 2; currChannel ++)
+			  for(uint16_t currChannel = 0; currChannel < 3; currChannel ++)
 			  {
 				  mixedSignal += channels[currChannel].channelData[sample];
 			  }
-			  mixedSignal = mixedSignal / 6;
-			  dacData[(sample * 2)] = channels[0].channelData[sample];//mixedSignal * gain;
-			  dacData[(sample * 2) + 1] = channels[0].channelData[sample];//mixedSignal * gain;
+			  mixedSignal = mixedSignal / 2;
+			  dacData[(sample * 2)] =  mixedSignal;//channels[0].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignal;//channels[0].channelData[sample];
 		  }
 		  dacReady = false;
 	  }
