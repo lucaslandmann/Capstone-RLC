@@ -97,6 +97,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   DMA_NodeConfTypeDef NodeConfig;
+  DMA_TriggerConfTypeDef TriggerConfig;
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
   if(hadc->Instance==ADC1)
   {
@@ -259,6 +260,14 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     handle_GPDMA1_Channel2.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     handle_GPDMA1_Channel2.Init.Mode = DMA_NORMAL;
     if (HAL_DMA_Init(&handle_GPDMA1_Channel2) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    TriggerConfig.TriggerMode = DMA_TRIGM_BLOCK_TRANSFER;
+    TriggerConfig.TriggerPolarity = DMA_TRIG_POLARITY_RISING;
+    TriggerConfig.TriggerSelection = GPDMA1_TRIGGER_TIM15_TRGO;
+    if (HAL_DMAEx_ConfigTrigger(&handle_GPDMA1_Channel2, &TriggerConfig) != HAL_OK)
     {
       Error_Handler();
     }

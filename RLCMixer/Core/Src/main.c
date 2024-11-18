@@ -32,7 +32,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 1024//System will capture specificed number of samples per channel
+#define sampleSize 256
+//System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define gain 6
 #define channelCount 8
@@ -44,13 +45,13 @@
 #define c4Vol 3
 #define c5Vol 4
 #define c6Vol 5
-#define masterVol 6
-#define c1LR 7
-#define c2LR 8
-#define c3LR 9
-#define c4LR 10
-#define c5LR 11
-#define c6LR 12
+#define masterVol 7
+#define c1LR 8
+#define c2LR 9
+#define c3LR 10
+#define c4LR 11
+#define c5LR 0
+#define c6LR 1
 
 #define channelSettings 0xA0
 /*
@@ -108,8 +109,10 @@ struct channelStruct{
 	int32_t channelData[sampleSize / 2];
 	uint8_t channelNum;
 	bool masterMute;
-	float volume;
-	float LRPan;
+	uint16_t volumeBuffer[8];
+	uint16_t volumeRunner;
+	float lrBuffer[8];
+	uint16_t lrRunner;
 	bool reverbEnable;
 	bool EQEnable;
 	bool distortionEnable;
@@ -118,7 +121,7 @@ struct channelStruct{
 	float distortionStrength;
 };
 
-uint16_t adcGroup1[13 * 8] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 int32_t pcmData[sampleSize  * channelCount] = {0}; //Buffer for 8 channels of audio data
 int32_t dacDataBuffer[sampleSize * 2] = {0};
@@ -150,6 +153,8 @@ static volatile bool adcReady = false;
 static volatile bool dacReady = false;
 static volatile int32_t *adcData = 0;
 static volatile int32_t *dacData = 0;
+uint16_t test = 0;
+uint16_t test2 = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -174,6 +179,7 @@ static void MX_USB_OTG_HS_PCD_Init(void);
 static void MX_TIM15_Init(void);
 /* USER CODE BEGIN PFP */
 static inline int32_t signExtend24(uint32_t value);
+static void volumeLRPoll(uint16_t index);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -238,7 +244,7 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
   HAL_TIM_Base_Start(&htim15);
   //Config ADC/DAC
-
+/*
   HAL_Delay(2000);
   HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
   HAL_Delay(2000);
@@ -254,11 +260,13 @@ int main(void)
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData));
   //Begins DMA transfer for CS4334k-QZ
   HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
+  */
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   uint32_t heartBeatTick = HAL_GetTick() + 1000;
+  uint16_t index = 0;
   while (1)
   {
 	  if(HAL_GetTick() >= heartBeatTick)
@@ -266,14 +274,12 @@ int main(void)
 		 heartBeatTick = HAL_GetTick() + 1000;
 		 HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
 	  }
-	  //Slider/Pot Processing
-	  uint32_t temp = 0;
-	  for(uint16_t index = 0; index < sizeof(adcGroup1); index += 13)
-	  {
-		  temp += adcGroup1[index];
-	  }
 
-	  channels[0].volume = (float)((temp / (sizeof(adcGroup1) / 26)) >> 3) / 256.0f;
+	  //Slider/Pot Processing
+	  volumeLRPoll(index);
+	  index++;
+
+
 	  if(adcReady)
 	  {
 		  //Loads sample data into Structs
@@ -295,11 +301,11 @@ int main(void)
 		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
 		  {
 			  int32_t mixedSignal = 0;
-			  for(uint16_t currChannel = 0; currChannel < 3; currChannel ++)
+			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
 				  mixedSignal += channels[currChannel].channelData[sample];
 			  }
-			  mixedSignal = mixedSignal / 2;
+			  mixedSignal = mixedSignal / 6;
 			  dacData[(sample * 2)] =  mixedSignal;//channels[0].channelData[sample];
 			  dacData[(sample * 2) + 1] = mixedSignal;//channels[0].channelData[sample];
 		  }
@@ -1344,6 +1350,69 @@ static void MX_GPIO_Init(void)
 static inline int32_t signExtend24(uint32_t value)
 {
     return (int32_t)((value & (1 << 23)) ? value | 0xFF000000 : value & 0x007FFFFF);
+}
+
+static void volumeLRPoll(uint16_t index)
+{
+	  //Channel 1 Volume
+	  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
+	  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
+	  channels[0].volumeRunner -= channels[0].volumeBuffer[(index + 1) % (sizeof(channels[0].volumeBuffer) / 2)];
+
+	  //Channel 2 Volume
+	  channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)] = adcGroup1[c2Vol];
+	  channels[1].volumeRunner += channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)];
+	  channels[1].volumeRunner -= channels[1].volumeBuffer[(index + 1) % (sizeof(channels[1].volumeBuffer) / 2)];
+
+	  //Channel 3 Volume
+	  channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)] = adcGroup1[c3Vol];
+	  channels[2].volumeRunner += channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)];
+	  channels[2].volumeRunner -= channels[2].volumeBuffer[(index + 1) % (sizeof(channels[2].volumeBuffer) / 2)];
+
+	  //Channel 4 Volume
+	  channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)] = adcGroup1[c4Vol];
+	  channels[3].volumeRunner += channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)];
+	  channels[3].volumeRunner -= channels[3].volumeBuffer[(index + 1) % (sizeof(channels[3].volumeBuffer) / 2)];
+
+	  //Channel 5 Volume
+	  channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)] = adcGroup1[c5Vol];
+	  channels[4].volumeRunner += channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)];
+	  channels[4].volumeRunner -= channels[4].volumeBuffer[(index + 1) % (sizeof(channels[4].volumeBuffer) / 2)];
+
+	  //Channel 6 Volume
+	  channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)] = adcGroup1[c6Vol];
+	  channels[5].volumeRunner += channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)];
+	  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
+
+	  //Channel 1 LR
+	  channels[0].lrBuffer[index % (sizeof(channels[0].lrBuffer) / 2)] = adcGroup1[c1LR];
+	  channels[0].lrRunner += channels[0].lrBuffer[index % (sizeof(channels[0].lrBuffer) / 2)];
+	  channels[0].lrRunner -= channels[0].lrBuffer[(index + 1) % (sizeof(channels[0].lrBuffer) / 2)];
+
+	  //Channel 2 LR
+	  channels[1].lrBuffer[index % (sizeof(channels[1].lrBuffer) / 2)] = adcGroup1[c2LR];
+	  channels[1].lrRunner += channels[1].lrBuffer[index % (sizeof(channels[1].lrBuffer) / 2)];
+	  channels[1].lrRunner -= channels[1].lrBuffer[(index + 1) % (sizeof(channels[1].lrBuffer) / 2)];
+
+	  //Channel 3 LR
+	  channels[2].lrBuffer[index % (sizeof(channels[2].lrBuffer) / 2)] = adcGroup1[c3LR];
+	  channels[2].lrRunner += channels[2].lrBuffer[index % (sizeof(channels[2].lrBuffer) / 2)];
+	  channels[2].lrRunner -= channels[2].lrBuffer[(index + 1) % (sizeof(channels[2].lrBuffer) / 2)];
+
+	  //Channel 4 LR
+	  channels[3].lrBuffer[index % (sizeof(channels[3].lrBuffer) / 2)] = adcGroup1[c4LR];
+	  channels[3].lrRunner += channels[3].lrBuffer[index % (sizeof(channels[3].lrBuffer) / 2)];
+	  channels[3].lrRunner -= channels[3].lrBuffer[(index + 1) % (sizeof(channels[3].lrBuffer) / 2)];
+
+	  //Channel 5 LR
+	  channels[4].lrBuffer[index % (sizeof(channels[4].lrBuffer) / 2)] = adcGroup4[c5LR];
+	  channels[4].lrRunner += channels[4].lrBuffer[index % (sizeof(channels[4].lrBuffer) / 2)];
+	  channels[4].lrRunner -= channels[4].lrBuffer[(index + 1) % (sizeof(channels[4].lrBuffer) / 2)];
+
+	  //Channel 6 LR
+	  channels[5].lrBuffer[index % (sizeof(channels[5].lrBuffer) / 2)] = adcGroup4[c6LR];
+	  channels[5].lrRunner += channels[5].lrBuffer[index % (sizeof(channels[5].lrBuffer) / 2)];
+	  channels[5].lrRunner -= channels[5].lrBuffer[(index + 1) % (sizeof(channels[5].lrBuffer) / 2)];
 }
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
