@@ -32,12 +32,12 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 256	//System will capture specificed number of samples per channel
+#define sampleSize 32 //System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define gain 1
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
-#define c1Vol 2
+#define c1Vol 0
 #define c2Vol 1
 #define c3Vol 2
 #define c4Vol 3
@@ -126,35 +126,24 @@ uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volu
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 uint32_t pcmData[sampleSize  * 8] = {0}; //Buffer for 8 channels of audio data
 int32_t dacData[sampleSize * 2] = {0};
-
+float ch1Vol = 0;
 
 //contains all instructions for configuring PCM6260
 static uint8_t pcm6260Config[][2] =
 {
-		/*{0x00, 0x00},
-		{0x01, 0x01},
-		{0x02, 0x81},
-		{0x28,0x10},
-		{0x3C,channelSettings},
-		{0x41,channelSettings},
-		{0x46,channelSettings},
-		{0x4B, channelSettings},
-		{0x73,0xF0},
-		{0x74, 0xF0},
-		{0x75, 0xE0}*/
-		{0x00, 0x00},
-		{0x02, 0x81},
-		{0x28,0x10},
-		{0x3C,channelSettings},
-		{0x41,channelSettings},
+		{0x00, 0x00},//Set page to 0
+		{0x02, 0x81},//Set to awake
+		{0x28,0x10},//Settings reset
+		{0x3C,channelSettings}, //config channels
 		{0x46,channelSettings},
 		{0x4B,channelSettings},
 		{0x50,channelSettings},
 		{0x55,channelSettings},
-		{0x3B, 0x70},
-		{0x73,0xFE},
-		{0x74, 0xFE},
-		{0x75, 0xE0}
+		{0x3B, 0x70}, //
+		{0x73,0xFE}, //Enable Input Channels
+		{0x74, 0xFE}, //Enable ASI output
+		{0x3B, 0xF0}, //Config MicBias 9v
+		{0x75, 0xE0} //enable Micbias, PLL
 };
 
 struct channelStruct channels[6] = {0}; //Creates a blank channelStruct array
@@ -257,7 +246,7 @@ int main(void)
 
   HAL_Delay(100);
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData)); //Begins DMA transfer for PCM6260
-    HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
+  HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData));
 
   //Populates each channel in the channels struct with initializer values
   for(int i = 0; i < sizeof(channels); i++)
@@ -283,26 +272,24 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+while (1)
   {
-	  //HAL_SAI_Transmit(&hsai_BlockA2, (uint8_t*)dacData, DIM(dacData), 100);
-	  /*
+
 	  //Reads and sets the position of each volume slider
-	  channels[0].volume = twelveBitTofloat(adcGroup1[c1Vol]);
-	  channels[1].volume = twelveBitTofloat(adcGroup1[c2Vol]);
-	  channels[2].volume = twelveBitTofloat(adcGroup1[c3Vol]);
-	  channels[3].volume = twelveBitTofloat(adcGroup1[c4Vol]);
-	  channels[4].volume = twelveBitTofloat(adcGroup1[c5Vol]);
-	  channels[5].volume = twelveBitTofloat(adcGroup1[c6Vol]);
+	  channels[0].volume = (float)(adcGroup1[c1Vol]);
+	  channels[1].volume = (float)(adcGroup1[c2Vol]);
+	  channels[2].volume = (float)(adcGroup1[c3Vol]);
+	  channels[3].volume = (float)(adcGroup1[c4Vol]);
+	  channels[4].volume = (float)(adcGroup1[c5Vol]);
+	  channels[5].volume = (float)(adcGroup1[c6Vol]);
 
 	  //Reads and sets the position of each LR Knob
-	  channels[0].LRPan = twelveBitTofloat(adcGroup1[c1LR]);
-	  channels[1].LRPan = twelveBitTofloat(adcGroup1[c2LR]);
-	  channels[2].LRPan = twelveBitTofloat(adcGroup1[c3LR]);
-	  channels[3].LRPan = twelveBitTofloat(adcGroup1[c4LR]);
-	  channels[4].LRPan = twelveBitTofloat(adcGroup4[c5LR]);
-	  channels[5].LRPan = twelveBitTofloat(adcGroup4[c6LR]);
-	  */
+	  channels[0].LRPan = (float)(adcGroup1[c1LR]);
+	  channels[1].LRPan = (float)(adcGroup1[c2LR]);
+	  channels[2].LRPan = (float)(adcGroup1[c3LR]);
+	  channels[3].LRPan = (float)(adcGroup1[c4LR]);
+	  channels[4].LRPan = (float)(adcGroup4[c5LR]);
+	  channels[5].LRPan = (float)(adcGroup4[c6LR]);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1338,19 +1325,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-uint16_t getAverageADC(uint16_t position)
-{
-	uint16_t temp = 0;
-	for(int i = 0; i < denoiseSize; i++)
-	{
-		temp += adcGroup1[position - (i * 13)];
-	}
-	temp = temp / denoiseSize;
-	return temp;
-}
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
+	ch1Vol = floor((((float)(adcGroup1[0] >> 6)) / 128.0f) * 100.0f) / 100.0f;
 	uint16_t dacSlot = 0;
 	for(int i = 4; i < (sampleSize * 8 ) / 2; i += 8)
 	{
@@ -1365,6 +1343,7 @@ void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 
 void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 {
+	ch1Vol = floor((((float)(adcGroup1[0] >> 6)) / 128.0f) * 100.0f) / 100.0f;
 	uint16_t dacSlot = sampleSize;
 	for(int i = ((sampleSize * 8) / 2) + 4; i < sampleSize * 8; i += 8)
 	{
