@@ -157,6 +157,9 @@
     </TextGroup>
     <TextGroup Id="TopbarContainer" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_ZVD0" Alignment="Center" TypographyId="ShareTech_20">
+        <Translation Language="GB">Reverb</Translation>
+      </Text>
       <Text Id="__SingleUse_WVBW" Alignment="Left" TypographyId="ShareTech_26">
         <Translation Language="GB">Low</Translation>
       </Text>

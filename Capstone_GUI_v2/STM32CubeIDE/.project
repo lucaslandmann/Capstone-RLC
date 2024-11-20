@@ -345,6 +345,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/CustomContainer1.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/DelayPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/delay_screen/DelayPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DelayView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/delay_screen/DelayView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/EffectsSelectPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp</locationURI>
@@ -353,6 +363,16 @@
 			<name>Application/User/gui/EffectsSelectView.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/effectsselect_screen/EffectsSelectView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/EQPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/eq_screen/EQPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/EQView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/eq_screen/EQView.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/gui/MainScreenPresenter.cpp</name>
@@ -368,6 +388,16 @@
 			<name>Application/User/gui/Model.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/model/Model.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/ReverbPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/reverb_screen/ReverbPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/ReverbView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/reverb_screen/ReverbView.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>
@@ -680,14 +710,29 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/DelayViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/delay_screen/DelayViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/EffectsSelectViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/EQViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/MainScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/mainscreen_screen/MainScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/ReverbViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/reverb_screen/ReverbViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/BitmapDatabase.cpp</name>
@@ -1060,6 +1105,21 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_inactive.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_pressed.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_pressed.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_slider_vertical_thin_filler_medium.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_slider_vertical_thin_filler_medium.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_alternate_theme_images_widgets_slider_vertical_thin_track_medium.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_slider_vertical_thin_track_medium.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_Ellipse.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/compass-screen/image_Ellipse.cpp</locationURI>
@@ -1268,6 +1328,11 @@
 			<name>Application/User/generated/image_EffectSendV3.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectSendV3.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_EffectsBackgroundV1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_EffectsBackgroundV1.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_EffectsMatrixBackground.cpp</name>

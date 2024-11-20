@@ -89,6 +89,15 @@ build/MINGW32_NT-6.2/simulator/main.o: simulator/main.cpp \
  gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ gui/include/gui/delay_screen/DelayView.hpp \
+ generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
+ gui/include/gui/delay_screen/DelayPresenter.hpp \
+ gui/include/gui/eq_screen/EQView.hpp \
+ generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
+ gui/include/gui/eq_screen/EQPresenter.hpp \
+ gui/include/gui/reverb_screen/ReverbView.hpp \
+ generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp \
+ gui/include/gui/reverb_screen/ReverbPresenter.hpp \
  generated/gui_generated/include/gui_generated/common/SimConstants.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/touch/SDL2TouchController.hpp \
  generated/simulator/include/simulator/mainBase.hpp
@@ -272,6 +281,24 @@ gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+
+gui/include/gui/delay_screen/DelayView.hpp:
+
+generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp:
+
+gui/include/gui/delay_screen/DelayPresenter.hpp:
+
+gui/include/gui/eq_screen/EQView.hpp:
+
+generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp:
+
+gui/include/gui/eq_screen/EQPresenter.hpp:
+
+gui/include/gui/reverb_screen/ReverbView.hpp:
+
+generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp:
+
+gui/include/gui/reverb_screen/ReverbPresenter.hpp:
 
 generated/gui_generated/include/gui_generated/common/SimConstants.hpp:
 

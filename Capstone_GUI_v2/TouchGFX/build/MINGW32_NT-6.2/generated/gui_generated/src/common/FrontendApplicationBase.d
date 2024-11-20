@@ -66,6 +66,15 @@ build/MINGW32_NT-6.2/generated/gui_generated/src/common/FrontendApplicationBase.
  gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ gui/include/gui/delay_screen/DelayView.hpp \
+ generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
+ gui/include/gui/delay_screen/DelayPresenter.hpp \
+ gui/include/gui/eq_screen/EQView.hpp \
+ generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
+ gui/include/gui/eq_screen/EQPresenter.hpp \
+ gui/include/gui/reverb_screen/ReverbView.hpp \
+ generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp \
+ gui/include/gui/reverb_screen/ReverbPresenter.hpp \
  generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -203,6 +212,24 @@ gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+
+gui/include/gui/delay_screen/DelayView.hpp:
+
+generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp:
+
+gui/include/gui/delay_screen/DelayPresenter.hpp:
+
+gui/include/gui/eq_screen/EQView.hpp:
+
+generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp:
+
+gui/include/gui/eq_screen/EQPresenter.hpp:
+
+gui/include/gui/reverb_screen/ReverbView.hpp:
+
+generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp:
+
+gui/include/gui/reverb_screen/ReverbPresenter.hpp:
 
 generated/texts/include/texts/TextKeysAndLanguages.hpp:
 

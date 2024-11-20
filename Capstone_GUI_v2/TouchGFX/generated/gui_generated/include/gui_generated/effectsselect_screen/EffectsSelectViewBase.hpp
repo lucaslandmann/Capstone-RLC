@@ -12,7 +12,6 @@
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/widgets/Button.hpp>
 
 class EffectsSelectViewBase : public touchgfx::View<EffectsSelectPresenter>
 {
@@ -53,6 +52,7 @@ protected:
     touchgfx::ToggleButton toggleButton1_1_5;
     touchgfx::TextArea CH1Text_1_1_1_2;
     touchgfx::ButtonWithLabel buttonWithLabel1_2_5;
+    touchgfx::ButtonWithLabel buttonWithLabel1_3;
     touchgfx::ToggleButton toggleButton1_2_5;
     touchgfx::ButtonWithLabel buttonWithLabel1_7;
     touchgfx::ToggleButton toggleButton1_7;
@@ -63,7 +63,6 @@ protected:
     touchgfx::TextArea CH1Text_1_1;
     touchgfx::TextArea CH1Text_1_1_1;
     touchgfx::TextArea CH1Text_1_1_1_1;
-    touchgfx::ButtonWithLabel buttonWithLabel1_3;
     touchgfx::ToggleButton toggleButton1_3;
     touchgfx::TextArea CH1Text_1;
     touchgfx::ButtonWithLabel buttonWithLabel1_1;
@@ -71,8 +70,8 @@ protected:
     touchgfx::ButtonWithLabel buttonWithLabel1_2;
     touchgfx::ToggleButton toggleButton1_2;
     touchgfx::ToggleButton toggleButton1;
-    touchgfx::Button button1;
     touchgfx::TextArea CH1Text;
+    touchgfx::ButtonWithLabel buttonWithLabel1;
 
 private:
 

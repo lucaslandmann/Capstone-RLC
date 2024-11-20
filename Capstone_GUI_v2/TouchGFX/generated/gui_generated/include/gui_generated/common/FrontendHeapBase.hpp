@@ -18,6 +18,12 @@
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/effectsselect_screen/EffectsSelectView.hpp>
 #include <gui/effectsselect_screen/EffectsSelectPresenter.hpp>
+#include <gui/delay_screen/DelayView.hpp>
+#include <gui/delay_screen/DelayPresenter.hpp>
+#include <gui/eq_screen/EQView.hpp>
+#include <gui/eq_screen/EQPresenter.hpp>
+#include <gui/reverb_screen/ReverbView.hpp>
+#include <gui/reverb_screen/ReverbPresenter.hpp>
 
 
 /**
@@ -42,7 +48,10 @@ public:
      */
     typedef touchgfx::meta::TypeList< MainScreenView,
             touchgfx::meta::TypeList< EffectsSelectView,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< DelayView,
+            touchgfx::meta::TypeList< EQView,
+            touchgfx::meta::TypeList< ReverbView,
+            touchgfx::meta::Nil > > > >
             > GeneratedViewTypes;
 
     /**
@@ -56,7 +65,10 @@ public:
      */
     typedef touchgfx::meta::TypeList< MainScreenPresenter,
             touchgfx::meta::TypeList< EffectsSelectPresenter,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< DelayPresenter,
+            touchgfx::meta::TypeList< EQPresenter,
+            touchgfx::meta::TypeList< ReverbPresenter,
+            touchgfx::meta::Nil > > > >
             > GeneratedPresenterTypes;
 
     /**

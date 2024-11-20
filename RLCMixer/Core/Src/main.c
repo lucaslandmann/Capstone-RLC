@@ -105,6 +105,92 @@ UART_HandleTypeDef huart1;
 PCD_HandleTypeDef hpcd_USB_OTG_HS;
 
 /* USER CODE BEGIN PV */
+
+//code start credits 'yetanotherelectronicschannel'
+
+//delays form samples
+#define CB 3250*2
+#define AP 480*2
+
+
+//define wet 0.0 - 1.0
+float wet = 0.5f;
+//define time delay 0.0 - 1.0
+float time = 1.0f;
+
+//define pointer limits = delay time
+int cf0_lim, ap0_lim;
+
+//define buffer for comb- and allpassfilters
+float cfbuf0[CB];
+float apbuf0[AP];
+//feedback controll
+float cf0_g = 0.7f;
+float ap0_g = 0.8f;
+//buffer-pointer
+int cf0_p=0, ap0_p=0;
+
+struct delayInit{
+
+	int cf_lim, ap_lim; //define pointer limits
+	float cfbuf[CB]; //define buffer for comb filter
+	float apbuf[AP]; //define buffer for allpass filter
+	float cf_g; //comb gain
+	float ap_g; //allpass gain
+	int cf_p;
+	int ap_p;
+};
+
+struct delayInit delayChannel[6] = {0};
+
+
+float Do_Comb0(float inSample, int channelNum)
+{
+	delayChannel[0].cf_g = 0.8;
+	delayChannel[0].cf_p = 0;
+
+	switch(channelNum) {
+	case 1:
+		float readback = delayChannel[0].cfbuf[delayChannel[0].cf_p];
+		float new = readback*(delayChannel[0].cf_g) + inSample;
+		cfbuf0[delayChannel[0].cf_p] = new;
+		delayChannel[0].cf_p++;
+		if (delayChannel[0].cf_p==cf0_lim)
+		{
+			delayChannel[0].cf_p = 0;
+		}
+		return readback;
+	break;
+	}
+}
+float Do_Allpass0(float inSample, int channelNum)
+{
+	delayChannel[0].cf_g = 0.7;
+	delayChannel[0].cf_p = 0;
+
+	switch(channelNum) {
+	case 1:
+		float readback = delayChannel[0].apbuf[delayChannel[0].ap_p];
+		readback += (-delayChannel[0].cf_g) * inSample;
+		float new = readback*delayChannel[0].cf_g + inSample;
+		apbuf0[ap0_p] = new;
+		ap0_p++;
+		if (ap0_p == ap0_lim)
+		{
+			ap0_p = 0;
+		}
+		return readback;
+	break;
+	}
+}
+float Do_Delay(float inSample, int channelNum) {
+	float newsample = (Do_Comb0(inSample, channelNum));
+	newsample = Do_Allpass0(newsample, channelNum);
+	return newsample;
+}
+
+// end credits
+
 struct channelStruct{
 	int32_t channelData[sampleSize / 2];
 	uint8_t channelNum;
@@ -196,6 +282,13 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
 
+  //code credits start 'yetanotherelectronicschannel'
+  delayChannel[0].cf_lim = (int)(time*CB);
+  delayChannel[0].ap_lim = (int)(time*AP);
+
+
+  //code credits end
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -244,7 +337,7 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
   HAL_TIM_Base_Start(&htim15);
   //Config ADC/DAC
-/*
+
   HAL_Delay(2000);
   HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
   HAL_Delay(2000);
@@ -260,13 +353,14 @@ int main(void)
   HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData));
   //Begins DMA transfer for CS4334k-QZ
   HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
-  */
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   uint32_t heartBeatTick = HAL_GetTick() + 1000;
   uint16_t index = 0;
+  int channelNumber = 1;
   while (1)
   {
 	  if(HAL_GetTick() >= heartBeatTick)
@@ -290,6 +384,11 @@ int main(void)
 		        	//int32_t raw = adcData[channelCount*sample + channel] >> 1;
 		        	//float convert = (float)raw / 16777216.0f;
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
+
+		            if(channel == 1){
+		            channels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+							    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+		            }
 		        }
 		  }
 		  //TODO: apply effects

@@ -29,6 +29,15 @@
     <ClCompile Include="..\..\gui\src\effectsselect_screen\EffectsSelectPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\effectsselect_screen\EffectsSelectView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\effectsselect_screen\EffectsSelectViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\delay_screen\DelayPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\delay_screen\DelayView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\delay_screen\DelayViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\eq_screen\EQPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\eq_screen\EQView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\eq_screen\EQViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\reverb_screen\ReverbPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\reverb_screen\ReverbView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\reverb_screen\ReverbViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -187,6 +196,15 @@
     <ClInclude Include="..\..\gui\include\gui\effectsselect_screen\EffectsSelectPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\effectsselect_screen\EffectsSelectView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\effectsselect_screen\EffectsSelectViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\delay_screen\DelayPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\delay_screen\DelayView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\delay_screen\DelayViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\eq_screen\EQPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\eq_screen\EQView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\eq_screen\EQViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\reverb_screen\ReverbViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

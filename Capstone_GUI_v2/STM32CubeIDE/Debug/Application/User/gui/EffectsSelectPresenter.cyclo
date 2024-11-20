@@ -1,0 +1,7 @@
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:18:18:virtual void ModelListener::newButtonValue(bool)	1
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	1
+../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:EffectsSelectPresenter::~EffectsSelectPresenter()	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp:10:6:virtual void EffectsSelectPresenter::activate()	1
+../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:virtual EffectsSelectPresenter::~EffectsSelectPresenter()	1
+../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:virtual void* EffectsSelectPresenter::_ZThn4_N22EffectsSelectPresenterD1Ev()	1
+C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp:4:1:EffectsSelectPresenter::EffectsSelectPresenter(EffectsSelectView&)	1

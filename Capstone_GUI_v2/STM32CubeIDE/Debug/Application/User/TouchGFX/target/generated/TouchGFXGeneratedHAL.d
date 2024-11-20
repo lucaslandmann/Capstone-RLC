@@ -68,13 +68,20 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
- ../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp \
- ../../TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp \
- ../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp \
- ../../TouchGFX/gui/include/gui/containers/CustomContainer1.hpp \
- ../../TouchGFX/generated/gui_generated/include/gui_generated/containers/CustomContainer1Base.hpp \
+ ../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ ../../TouchGFX/gui/include/gui/delay_screen/DelayView.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp \
+ ../../TouchGFX/gui/include/gui/eq_screen/EQView.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp \
+ ../../TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
  ../../Middlewares/ST/touchgfx_components/gpu2d/TouchGFXNema/include/touchgfx_nema/GPU2DVectorRenderer.hpp \
  ../../TouchGFX/target/generated/HardwareMJPEGDecoder.hpp \
@@ -192,13 +199,20 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
-../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:
-../../TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp:
-../../TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:
-../../TouchGFX/gui/include/gui/containers/CustomContainer1.hpp:
-../../TouchGFX/generated/gui_generated/include/gui_generated/containers/CustomContainer1Base.hpp:
+../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp:
+../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+../../TouchGFX/gui/include/gui/delay_screen/DelayView.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp:
+../../TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp:
+../../TouchGFX/gui/include/gui/eq_screen/EQView.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp:
+../../TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp:
+../../TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp:
+../../TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
 ../../Middlewares/ST/touchgfx_components/gpu2d/TouchGFXNema/include/touchgfx_nema/GPU2DVectorRenderer.hpp:
 ../../TouchGFX/target/generated/HardwareMJPEGDecoder.hpp:

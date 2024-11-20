@@ -208,6 +208,42 @@
     <Filter Include="Source Files\generated\gui_generated\effectsselect_screen">
       <UniqueIdentifier>5F81F156-33DC-7362-270A-052404F1039A</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\delay_screen">
+      <UniqueIdentifier>97261F64-7CAA-4654-9C7F-69EC4366566B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\delay_screen">
+      <UniqueIdentifier>CBBE139C-935E-8FCB-3AC9-8F018A220A6E</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\eq_screen">
+      <UniqueIdentifier>54824965-383C-BA4A-DCFF-2B054C1D4CD7</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\reverb_screen">
+      <UniqueIdentifier>B0A4154A-45D1-A558-CB03-D985662AD5F3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\eq_screen">
+      <UniqueIdentifier>1D33E831-0EF5-3AA9-EE0F-E0DF271EA191</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\reverb_screen">
+      <UniqueIdentifier>9E174AEE-99A6-5325-F9F0-B9D6B5DE8647</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\reverb_screen">
+      <UniqueIdentifier>EFCD7C4A-BA6C-55F9-60C7-F470F3DD1A75</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\eq_screen">
+      <UniqueIdentifier>6EF082A9-5DA0-F158-FDD6-984D37B3E870</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\eq_screen">
+      <UniqueIdentifier>FAEDB21D-7585-EFA4-6600-8E319CE2A17C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\reverb_screen">
+      <UniqueIdentifier>DD1482F9-9473-E81B-F925-4E75933855C9</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\delay_screen">
+      <UniqueIdentifier>248EF96C-36F2-1CF3-223B-BC974DCC1956</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\delay_screen">
+      <UniqueIdentifier>20391342-2BF1-23CA-27FD-7968ECD5F458</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -263,6 +299,33 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\effectsselect_screen\EffectsSelectViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\effectsselect_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\delay_screen\DelayPresenter.cpp">
+      <Filter>Source Files\gui\delay_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\delay_screen\DelayView.cpp">
+      <Filter>Source Files\gui\delay_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\delay_screen\DelayViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\delay_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\eq_screen\EQPresenter.cpp">
+      <Filter>Source Files\gui\eq_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\eq_screen\EQView.cpp">
+      <Filter>Source Files\gui\eq_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\eq_screen\EQViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\eq_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\reverb_screen\ReverbPresenter.cpp">
+      <Filter>Source Files\gui\reverb_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\reverb_screen\ReverbView.cpp">
+      <Filter>Source Files\gui\reverb_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\reverb_screen\ReverbViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\reverb_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -729,6 +792,33 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\effectsselect_screen\EffectsSelectViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\effectsselect_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\delay_screen\DelayPresenter.hpp">
+      <Filter>Header Files\gui\delay_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\delay_screen\DelayView.hpp">
+      <Filter>Header Files\gui\delay_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\delay_screen\DelayViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\delay_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\eq_screen\EQPresenter.hpp">
+      <Filter>Header Files\gui\eq_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\eq_screen\EQView.hpp">
+      <Filter>Header Files\gui\eq_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\eq_screen\EQViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\eq_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbPresenter.hpp">
+      <Filter>Header Files\gui\reverb_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbView.hpp">
+      <Filter>Header Files\gui\reverb_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\reverb_screen\ReverbViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\reverb_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

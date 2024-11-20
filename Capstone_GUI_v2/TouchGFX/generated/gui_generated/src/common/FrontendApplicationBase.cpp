@@ -15,6 +15,12 @@
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/effectsselect_screen/EffectsSelectView.hpp>
 #include <gui/effectsselect_screen/EffectsSelectPresenter.hpp>
+#include <gui/delay_screen/DelayView.hpp>
+#include <gui/delay_screen/DelayPresenter.hpp>
+#include <gui/eq_screen/EQView.hpp>
+#include <gui/eq_screen/EQPresenter.hpp>
+#include <gui/reverb_screen/ReverbView.hpp>
+#include <gui/reverb_screen/ReverbPresenter.hpp>
 
 using namespace touchgfx;
 

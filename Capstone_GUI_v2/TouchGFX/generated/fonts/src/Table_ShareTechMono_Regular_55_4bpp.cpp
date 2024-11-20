@@ -17,8 +17,18 @@ KEEP extern const touchgfx::GlyphNode glyphs_ShareTechMono_Regular_55_4bpp[] FON
     {  4095, 0x0039,  20,  39,  39,   5,  30,   0,   0, 0x00 }, // nine
     {  4485, 0x003F,  17,  39,  39,   6,  30,   0,   0, 0x00 }, // question
     {  4836, 0x0043,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // C
-    {  5187, 0x004C,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // L
-    {  5538, 0x0052,  24,  39,  39,   3,  30,   0,   0, 0x00 }  // R
+    {  5187, 0x0044,  22,  39,  39,   4,  30,   0,   0, 0x00 }, // D
+    {  5616, 0x0045,  19,  39,  39,   5,  30,   0,   0, 0x00 }, // E
+    {  6006, 0x004C,  18,  39,  39,   6,  30,   0,   0, 0x00 }, // L
+    {  6357, 0x0051,  26,  43,  39,   3,  30,   0,   0, 0x00 }, // Q
+    {  6916, 0x0052,  24,  39,  39,   3,  30,   0,   0, 0x00 }, // R
+    {  7384, 0x0061,  23,  28,  28,   3,  30,   0,   0, 0x00 }, // a
+    {  7720, 0x0062,  21,  39,  39,   4,  30,   0,   0, 0x00 }, // b
+    {  8149, 0x0065,  20,  28,  28,   5,  30,   0,   0, 0x00 }, // e
+    {  8429, 0x006C,  23,  39,  39,   3,  30,   0,   0, 0x00 }, // l
+    {  8897, 0x0072,  19,  28,  28,   5,  30,   0,   0, 0x00 }, // r
+    {  9177, 0x0076,  24,  28,  28,   3,  30,   0,   0, 0x00 }, // v
+    {  9513, 0x0079,  24,  38,  28,   3,  30,   0,   0, 0x00 }  // y
 };
 
 // ShareTechMono_Regular_55_4bpp
@@ -36,6 +46,6 @@ touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_55_4bpp();
 
 touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_55_4bpp()
 {
-    static touchgfx::GeneratedFont ShareTechMono_Regular_55_4bpp(glyphs_ShareTechMono_Regular_55_4bpp, 15, 55, 55, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_55_4bpp, kerning_ShareTechMono_Regular_55_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont ShareTechMono_Regular_55_4bpp(glyphs_ShareTechMono_Regular_55_4bpp, 25, 65, 55, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_55_4bpp, kerning_ShareTechMono_Regular_55_4bpp, 63, 0, 0, 0);
     return ShareTechMono_Regular_55_4bpp;
 }
