@@ -32,10 +32,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 256
+#define sampleSize 512
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define gain 6
+#define gain 1
 #define channelCount 8
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
@@ -129,6 +129,11 @@ float cf0_g = 0.7f;
 float ap0_g = 0.8f;
 //buffer-pointer
 int cf0_p=0, ap0_p=0;
+int cf1_p=0, ap1_p=0;
+int cf2_p=0, ap2_p=0;
+int cf3_p=0, ap3_p=0;
+int cf4_p=0, ap4_p=0;
+int cf5_p=0, ap5_p=0;
 
 struct delayInit{
 
@@ -146,42 +151,34 @@ struct delayInit delayChannel[6] = {0};
 
 float Do_Comb0(float inSample, int channelNum)
 {
-	delayChannel[0].cf_g = 0.8;
-	delayChannel[0].cf_p = 0;
+	delayChannel[2].cf_g = 0.8;
 
-	switch(channelNum) {
-	case 1:
-		float readback = delayChannel[0].cfbuf[delayChannel[0].cf_p];
-		float new = readback*(delayChannel[0].cf_g) + inSample;
-		cfbuf0[delayChannel[0].cf_p] = new;
-		delayChannel[0].cf_p++;
-		if (delayChannel[0].cf_p==cf0_lim)
-		{
-			delayChannel[0].cf_p = 0;
-		}
-		return readback;
-	break;
+	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
+	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
+	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new;
+	delayChannel[channelNum].cf_p++;
+	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim)
+	{
+		delayChannel[channelNum].cf_p = 0;
 	}
+	return readback;
+
 }
 float Do_Allpass0(float inSample, int channelNum)
 {
-	delayChannel[0].cf_g = 0.7;
-	delayChannel[0].cf_p = 0;
+	delayChannel[2].ap_g = 0.7;
 
-	switch(channelNum) {
-	case 1:
-		float readback = delayChannel[0].apbuf[delayChannel[0].ap_p];
-		readback += (-delayChannel[0].cf_g) * inSample;
-		float new = readback*delayChannel[0].cf_g + inSample;
-		apbuf0[ap0_p] = new;
-		ap0_p++;
-		if (ap0_p == ap0_lim)
-		{
-			ap0_p = 0;
-		}
-		return readback;
-	break;
+	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
+	readback += (-delayChannel[channelNum].ap_g) * inSample;
+	float new = readback*delayChannel[0].ap_g + inSample;
+	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new;
+	delayChannel[channelNum].ap_p++;
+	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim)
+	{
+		delayChannel[channelNum].ap_p = 0;
 	}
+	return readback;
+
 }
 float Do_Delay(float inSample, int channelNum) {
 	float newsample = (Do_Comb0(inSample, channelNum));
@@ -286,7 +283,34 @@ int main(void)
   delayChannel[0].cf_lim = (int)(time*CB);
   delayChannel[0].ap_lim = (int)(time*AP);
 
+  delayChannel[1].cf_lim = (int)(time*CB);
+  delayChannel[1].ap_lim = (int)(time*AP);
 
+  delayChannel[2].cf_lim = (int)(time*CB);
+  delayChannel[2].ap_lim = (int)(time*AP);
+
+  delayChannel[3].cf_lim = (int)(time*CB);
+  delayChannel[3].ap_lim = (int)(time*AP);
+
+  delayChannel[4].cf_lim = (int)(time*CB);
+  delayChannel[4].ap_lim = (int)(time*AP);
+
+  delayChannel[5].cf_lim = (int)(time*CB);
+  delayChannel[5].ap_lim = (int)(time*AP);
+
+  delayChannel[0].cf_p = 0;
+  delayChannel[1].cf_p = 0;
+  delayChannel[2].cf_p = 0;
+  delayChannel[3].cf_p = 0;
+  delayChannel[4].cf_p = 0;
+  delayChannel[5].cf_p = 0;
+
+  delayChannel[0].ap_p = 0;
+  delayChannel[1].ap_p = 0;
+  delayChannel[2].ap_p = 0;
+  delayChannel[3].ap_p = 0;
+  delayChannel[4].ap_p = 0;
+  delayChannel[5].ap_p = 0;
   //code credits end
 
   /* USER CODE END 1 */
@@ -368,7 +392,6 @@ int main(void)
 		 heartBeatTick = HAL_GetTick() + 1000;
 		 HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
 	  }
-
 	  //Slider/Pot Processing
 	  volumeLRPoll(index);
 	  index++;
@@ -381,8 +404,6 @@ int main(void)
 		  {
 		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
 		        {
-		        	//int32_t raw = adcData[channelCount*sample + channel] >> 1;
-		        	//float convert = (float)raw / 16777216.0f;
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
 		            if(channel == 1){
@@ -405,8 +426,8 @@ int main(void)
 				  mixedSignal += channels[currChannel].channelData[sample];
 			  }
 			  mixedSignal = mixedSignal / 6;
-			  dacData[(sample * 2)] =  mixedSignal;//channels[0].channelData[sample];
-			  dacData[(sample * 2) + 1] = mixedSignal;//channels[0].channelData[sample];
+			  dacData[(sample * 2)] =  mixedSignal * gain;//channels[2].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignal * gain;//channels[2].channelData[sample];
 		  }
 		  dacReady = false;
 	  }
