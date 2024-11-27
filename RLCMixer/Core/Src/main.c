@@ -35,7 +35,7 @@
 #define sampleSize 512
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define gain 1
+#define maxGain 10.0f
 #define channelCount 8
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
@@ -204,7 +204,7 @@ struct channelStruct{
 	float distortionStrength;
 };
 
-uint16_t adcGroup1[13] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup1[12] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
 uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
 int32_t pcmData[sampleSize  * channelCount] = {0}; //Buffer for 8 channels of audio data
 int32_t dacDataBuffer[sampleSize * 2] = {0};
@@ -423,11 +423,13 @@ int main(void)
 			  int32_t mixedSignal = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
-				  mixedSignal += channels[currChannel].channelData[sample];
+				  float digGain = (float)((channels[currChannel].volumeRunner / 8) >>2) / 512.0f;
+				  digGain = digGain * maxGain;
+				  mixedSignal += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
 			  }
 			  mixedSignal = mixedSignal / 6;
-			  dacData[(sample * 2)] =  mixedSignal * gain;//channels[2].channelData[sample];
-			  dacData[(sample * 2) + 1] = mixedSignal * gain;//channels[2].channelData[sample];
+			  dacData[(sample * 2)] =  mixedSignal;//channels[2].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignal;//channels[2].channelData[sample];
 		  }
 		  dacReady = false;
 	  }
@@ -575,7 +577,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc1.Init.LowPowerAutoWait = ENABLE;
   hadc1.Init.ContinuousConvMode = ENABLE;
-  hadc1.Init.NbrOfConversion = 13;
+  hadc1.Init.NbrOfConversion = 12;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T15_TRGO;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
@@ -697,15 +699,6 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_16;
   sConfig.Rank = ADC_REGULAR_RANK_12;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
-  sConfig.Rank = ADC_REGULAR_RANK_13;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
