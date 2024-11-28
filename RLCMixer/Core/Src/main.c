@@ -194,8 +194,7 @@ struct channelStruct{
 	bool masterMute;
 	uint16_t volumeBuffer[8];
 	uint16_t volumeRunner;
-	float lrBuffer[8];
-	uint16_t lrRunner;
+	uint16_t lr;
 	bool reverbEnable;
 	bool EQEnable;
 	bool distortionEnable;
@@ -369,7 +368,7 @@ int main(void)
   for(int i = 0; i < sizeof(pcm6260Config); i++)
   {
 	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
-	  HAL_Delay(100);
+	  HAL_Delay(10);
   }
 
   HAL_Delay(100);
@@ -420,16 +419,29 @@ int main(void)
 	  {
 		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
 		  {
-			  int32_t mixedSignal = 0;
+			  int32_t mixedSignalLeft = 0;
+			  int32_t mixedSignalRight = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
 				  float digGain = (float)((channels[currChannel].volumeRunner / 8) >>2) / 512.0f;
 				  digGain = digGain * maxGain;
-				  mixedSignal += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
+
+				  uint16_t pan = channels[0].lr >> 2;
+				  if(pan >= 512)
+				  {
+					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
+					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain) * (1.0f - ((float)(pan - 512) / 512.0f));
+				  }
+				  else
+				  {
+					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain) * ((float)pan / 512.0f);
+					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
+				  }
 			  }
-			  mixedSignal = mixedSignal / 6;
-			  dacData[(sample * 2)] =  mixedSignal;//channels[2].channelData[sample];
-			  dacData[(sample * 2) + 1] = mixedSignal;//channels[2].channelData[sample];
+			  mixedSignalLeft = mixedSignalLeft / 6;
+			  mixedSignalRight = mixedSignalRight / 6;
+			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
 		  }
 		  dacReady = false;
 	  }
@@ -1498,34 +1510,22 @@ static void volumeLRPoll(uint16_t index)
 	  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
 
 	  //Channel 1 LR
-	  channels[0].lrBuffer[index % (sizeof(channels[0].lrBuffer) / 2)] = adcGroup1[c1LR];
-	  channels[0].lrRunner += channels[0].lrBuffer[index % (sizeof(channels[0].lrBuffer) / 2)];
-	  channels[0].lrRunner -= channels[0].lrBuffer[(index + 1) % (sizeof(channels[0].lrBuffer) / 2)];
+	  channels[0].lr = adcGroup1[c1LR];
 
 	  //Channel 2 LR
-	  channels[1].lrBuffer[index % (sizeof(channels[1].lrBuffer) / 2)] = adcGroup1[c2LR];
-	  channels[1].lrRunner += channels[1].lrBuffer[index % (sizeof(channels[1].lrBuffer) / 2)];
-	  channels[1].lrRunner -= channels[1].lrBuffer[(index + 1) % (sizeof(channels[1].lrBuffer) / 2)];
+	  channels[1].lr = adcGroup1[c2LR];
 
 	  //Channel 3 LR
-	  channels[2].lrBuffer[index % (sizeof(channels[2].lrBuffer) / 2)] = adcGroup1[c3LR];
-	  channels[2].lrRunner += channels[2].lrBuffer[index % (sizeof(channels[2].lrBuffer) / 2)];
-	  channels[2].lrRunner -= channels[2].lrBuffer[(index + 1) % (sizeof(channels[2].lrBuffer) / 2)];
+	  channels[2].lr = adcGroup1[c3LR];
 
 	  //Channel 4 LR
-	  channels[3].lrBuffer[index % (sizeof(channels[3].lrBuffer) / 2)] = adcGroup1[c4LR];
-	  channels[3].lrRunner += channels[3].lrBuffer[index % (sizeof(channels[3].lrBuffer) / 2)];
-	  channels[3].lrRunner -= channels[3].lrBuffer[(index + 1) % (sizeof(channels[3].lrBuffer) / 2)];
+	  channels[3].lr = adcGroup1[c4LR];
 
 	  //Channel 5 LR
-	  channels[4].lrBuffer[index % (sizeof(channels[4].lrBuffer) / 2)] = adcGroup4[c5LR];
-	  channels[4].lrRunner += channels[4].lrBuffer[index % (sizeof(channels[4].lrBuffer) / 2)];
-	  channels[4].lrRunner -= channels[4].lrBuffer[(index + 1) % (sizeof(channels[4].lrBuffer) / 2)];
+	  channels[4].lr = adcGroup4[c5LR];
 
 	  //Channel 6 LR
-	  channels[5].lrBuffer[index % (sizeof(channels[5].lrBuffer) / 2)] = adcGroup4[c6LR];
-	  channels[5].lrRunner += channels[5].lrBuffer[index % (sizeof(channels[5].lrBuffer) / 2)];
-	  channels[5].lrRunner -= channels[5].lrBuffer[(index + 1) % (sizeof(channels[5].lrBuffer) / 2)];
+	  channels[5].lr = adcGroup4[c6LR];
 }
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
