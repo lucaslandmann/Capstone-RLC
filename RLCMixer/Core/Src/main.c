@@ -195,6 +195,8 @@ struct channelStruct{
 	uint16_t volumeBuffer[8];
 	uint16_t volumeRunner;
 	uint16_t lr;
+	float lFloat;
+	float rFloat;
 	bool reverbEnable;
 	bool EQEnable;
 	bool distortionEnable;
@@ -395,6 +397,17 @@ int main(void)
 	  volumeLRPoll(index);
 	  index++;
 
+	  uint16_t currChannelLR = channels[index % 6].lr >> 2;
+	  if(currChannelLR >= 512)
+	  {
+		  channels[index % 6].lFloat = 1;
+		  channels[index % 6].rFloat = 1.0f - ((float)(pan - 512) / 512.0f);
+	  }
+	  else
+	  {
+		  channels[index % 6].lFloat = (float)pan / 512.0f;
+		  channels[index %6].rFloat = 1;
+	  }
 
 	  if(adcReady)
 	  {
@@ -423,20 +436,11 @@ int main(void)
 			  int32_t mixedSignalRight = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
-				  float digGain = (float)((channels[currChannel].volumeRunner / 8) >>2) / 512.0f;
+				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
 				  digGain = digGain * maxGain;
 
-				  uint16_t pan = channels[0].lr >> 2;
-				  if(pan >= 512)
-				  {
-					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
-					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain) * (1.0f - ((float)(pan - 512) / 512.0f));
-				  }
-				  else
-				  {
-					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain) * ((float)pan / 512.0f);
-					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain);
-				  }
+				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
+				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
 			  }
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;
