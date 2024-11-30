@@ -104,6 +104,8 @@ DMA_NodeTypeDef Node_GPDMA1_Channel4;
 DMA_QListTypeDef List_GPDMA1_Channel4;
 DMA_HandleTypeDef handle_GPDMA1_Channel4;
 
+TIM_HandleTypeDef htim15;
+
 /* USER CODE BEGIN PV */
 struct channelStruct{
 	int32_t channelData[sampleSize / 2];
@@ -180,8 +182,11 @@ static void MX_SAI2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_TIM15_Init(void);
 /* USER CODE BEGIN PFP */
 void leds(char opt);
+static inline int32_t signExtend24(uint32_t value);
+void Audio_Function(void* argument);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -239,6 +244,7 @@ int main(void)
   MX_ADC1_Init();
   MX_ADC4_Init();
   MX_I2C1_Init();
+  MX_TIM15_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -1033,6 +1039,52 @@ static void MX_SAI2_Init(void)
 }
 
 /**
+  * @brief TIM15 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM15_Init(void)
+{
+
+  /* USER CODE BEGIN TIM15_Init 0 */
+
+  /* USER CODE END TIM15_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM15_Init 1 */
+
+  /* USER CODE END TIM15_Init 1 */
+  htim15.Instance = TIM15;
+  htim15.Init.Prescaler = 26;
+  htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim15.Init.Period = 49;
+  htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim15.Init.RepetitionCounter = 0;
+  htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim15) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim15, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM15_Init 2 */
+
+  /* USER CODE END TIM15_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -1055,17 +1107,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOI_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, LCD_DISP_EN_Pin|LCD_BL_CTRL_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, USER_LD2_RED_Pin|USER_LD3_GREEN_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pin : LCD_DISP_EN_Pin */
-  GPIO_InitStruct.Pin = LCD_DISP_EN_Pin;
+  /*Configure GPIO pins : ADC_Power_On_Pin LCD_DISP_EN_Pin */
+  GPIO_InitStruct.Pin = ADC_Power_On_Pin|LCD_DISP_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LCD_DISP_EN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TP_IRQ_Pin */
   GPIO_InitStruct.Pin = TP_IRQ_Pin;
@@ -1102,16 +1157,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-//void leds(char opt) {
-//	if (opt == '1')
-//	{
-////		readPin = true;
-//	}
-//	else
-//	{
-////		readPin = false;
-//	}
-//}
+
+static inline int32_t signExtend24(uint32_t value)
+{
+    return (int32_t)((value & (1 << 23)) ? value | 0xFF000000 : value & 0x007FFFFF);
+}
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
@@ -1135,6 +1185,53 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	dacReady = true;
 	dacData = &dacDataBuffer[sampleSize];
+}
+
+void Audio_Function(void* argument)
+{
+	for(;;)
+	{
+	  if(adcReady)
+	  {
+		  //Loads sample data into Structs
+		  for (uint16_t channel = 0; channel < channelCount; channel++)
+		  {
+		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
+		        {
+		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
+
+		            if(channel == 1){
+		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+		            }
+		        }
+		  }
+		  //TODO: apply effects
+		  //TODO: mix
+		  adcReady = false;
+	  }
+	  if(dacReady)
+	  {
+		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
+		  {
+			  int32_t mixedSignalLeft = 0;
+			  int32_t mixedSignalRight = 0;
+			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
+			  {
+				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
+				  digGain = digGain * maxGain;
+
+				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
+				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+			  }
+			  mixedSignalLeft = mixedSignalLeft / 6;
+			  mixedSignalRight = mixedSignalRight / 6;
+			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
+		  }
+		  dacReady = false;
+	  }
+   }
 }
 /* USER CODE END 4 */
 

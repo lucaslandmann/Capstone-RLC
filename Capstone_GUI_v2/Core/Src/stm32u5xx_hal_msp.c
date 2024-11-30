@@ -1136,6 +1136,51 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef* hltdc)
 
 }
 
+/**
+* @brief TIM_Base MSP Initialization
+* This function configures the hardware resources used in this example
+* @param htim_base: TIM_Base handle pointer
+* @retval None
+*/
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM15)
+  {
+  /* USER CODE BEGIN TIM15_MspInit 0 */
+
+  /* USER CODE END TIM15_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_TIM15_CLK_ENABLE();
+  /* USER CODE BEGIN TIM15_MspInit 1 */
+
+  /* USER CODE END TIM15_MspInit 1 */
+
+  }
+
+}
+
+/**
+* @brief TIM_Base MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param htim_base: TIM_Base handle pointer
+* @retval None
+*/
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM15)
+  {
+  /* USER CODE BEGIN TIM15_MspDeInit 0 */
+
+  /* USER CODE END TIM15_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_TIM15_CLK_DISABLE();
+  /* USER CODE BEGIN TIM15_MspDeInit 1 */
+
+  /* USER CODE END TIM15_MspDeInit 1 */
+  }
+
+}
+
 extern DMA_NodeTypeDef Node_GPDMA1_Channel5;
 
 extern DMA_QListTypeDef List_GPDMA1_Channel5;
@@ -1234,7 +1279,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
       Error_Handler();
     }
 
-    __HAL_LINKDMA(hsai, hdmarx, handle_GPDMA1_Channel5);
+    __HAL_LINKDMA(hsai, hdmatx, handle_GPDMA1_Channel5);
 
     if (HAL_DMA_ConfigChannelAttributes(&handle_GPDMA1_Channel5, DMA_CHANNEL_NPRIV) != HAL_OK)
     {
@@ -1353,7 +1398,7 @@ void HAL_SAI_MspDeInit(SAI_HandleTypeDef* hsai)
     HAL_GPIO_DeInit(GPIOG, GPIO_PIN_10);
 
     /* SAI2 DMA Deinit */
-    HAL_DMA_DeInit(hsai->hdmarx);
+    HAL_DMA_DeInit(hsai->hdmatx);
     }
     if(hsai->Instance==SAI2_Block_B)
     {
