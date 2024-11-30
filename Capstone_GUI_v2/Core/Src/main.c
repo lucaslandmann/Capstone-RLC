@@ -25,6 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Components/mx66uw1g45g/mx66uw1g45g.h"
+#include "math.h"
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,12 +36,33 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define sampleSize 512
+//System will capture specificed number of samples per channel
+#define denoiseSize 1
+#define maxGain 10.0f
+#define channelCount 8
+#define devAddress 0x90 //Device address of PCM6260, pre-shift
+//TODO: Determine the actual array position of these values
+#define c1Vol 0
+#define c2Vol 1
+#define c3Vol 2
+#define c4Vol 3
+#define c5Vol 4
+#define c6Vol 5
+#define masterVol 7
+#define c1LR 8
+#define c2LR 9
+#define c3LR 10
+#define c4LR 11
+#define c5LR 0
+#define c6LR 1
 
+#define channelSettings 0xA0
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define DIM(a)	(sizeof(a)/sizeof(*a)) //Macro for determining correct TX/RX size
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -48,6 +71,9 @@ ADC_HandleTypeDef hadc4;
 DMA_NodeTypeDef Node_GPDMA1_Channel2;
 DMA_QListTypeDef List_GPDMA1_Channel2;
 DMA_HandleTypeDef handle_GPDMA1_Channel2;
+DMA_NodeTypeDef Node_GPDMA1_Channel3;
+DMA_QListTypeDef List_GPDMA1_Channel3;
+DMA_HandleTypeDef handle_GPDMA1_Channel3;
 
 CRC_HandleTypeDef hcrc;
 
@@ -55,10 +81,6 @@ DCACHE_HandleTypeDef hdcache1;
 DCACHE_HandleTypeDef hdcache2;
 
 DMA2D_HandleTypeDef hdma2d;
-
-DMA_HandleTypeDef handle_GPDMA1_Channel5;
-DMA_HandleTypeDef handle_GPDMA1_Channel4;
-DMA_HandleTypeDef handle_GPDMA1_Channel3;
 
 GPU2D_HandleTypeDef hgpu2d;
 
@@ -75,10 +97,66 @@ LTDC_HandleTypeDef hltdc;
 
 SAI_HandleTypeDef hsai_BlockA2;
 SAI_HandleTypeDef hsai_BlockB2;
+DMA_NodeTypeDef Node_GPDMA1_Channel5;
+DMA_QListTypeDef List_GPDMA1_Channel5;
+DMA_HandleTypeDef handle_GPDMA1_Channel5;
+DMA_NodeTypeDef Node_GPDMA1_Channel4;
+DMA_QListTypeDef List_GPDMA1_Channel4;
+DMA_HandleTypeDef handle_GPDMA1_Channel4;
 
 /* USER CODE BEGIN PV */
-//bool fxButtonPressed = false;
-//bool readPin = false;
+struct channelStruct{
+	int32_t channelData[sampleSize / 2];
+	uint8_t channelNum;
+	bool masterMute;
+	uint16_t volumeBuffer[8];
+	uint16_t volumeRunner;
+	uint16_t lr;
+	float lFloat;
+	float rFloat;
+	bool reverbEnable;
+	bool EQEnable;
+	bool distortionEnable;
+	float reverbStrength;
+	float eqLevels[5];
+	float distortionStrength;
+};
+
+uint16_t adcGroup1[12] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
+uint16_t adcGroup4[2] = {0}; //buffer for all ADC Values connected to ADC4(volume and LR pots)
+int32_t pcmData[sampleSize  * channelCount] = {0}; //Buffer for 8 channels of audio data
+int32_t dacDataBuffer[sampleSize * 2] = {0};
+
+
+
+static uint8_t pcm6260Config[][2] =
+{
+		{0x00, 0x00},//Set page to 0
+		{0x02, 0x81},//Set to awake
+		{0x28,0x10},//Settings reset
+		{0x07, 0x38}, //Sets FSYNC polarity
+		{0x3C,channelSettings}, //config channels
+		{0x41,channelSettings},
+		{0x46,channelSettings},
+		{0x4B,channelSettings},
+		{0x50,channelSettings},
+		{0x55,channelSettings},
+		{0x3B, 0x70}, //
+		{0x73,0xFE}, //Enable Input Channels
+		{0x74, 0xFE}, //Enable ASI output
+		{0x3B, 0xF0}, //Config MicBias 9v
+		{0x75, 0xE0} //enable Micbias, PLL
+};
+
+struct channelStruct channels[channelCount] = {0}; //Creates a blank channelStruct array
+
+static volatile bool adcReady = false;
+static volatile bool dacReady = false;
+static volatile int32_t *adcData = 0;
+static volatile int32_t *dacData = 0;
+uint16_t test = 0;
+uint16_t test2 = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -165,6 +243,28 @@ int main(void)
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
+  //Begins DMA transfer for first ADC
+    HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1));
+    //begins DMA transfer for fourth ADC
+    HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
+    HAL_TIM_Base_Start(&htim15);
+    //Config ADC/DAC
+
+    HAL_Delay(2000);
+    HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
+    HAL_Delay(2000);
+
+    for(int i = 0; i < sizeof(pcm6260Config); i++)
+    {
+  	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
+  	  HAL_Delay(10);
+    }
+
+    HAL_Delay(100);
+    //Begins DMA transfer for PCM6260
+    HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData));
+    //Begins DMA transfer for CS4334k-QZ
+    HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
 
   /* USER CODE END 2 */
 
@@ -559,76 +659,16 @@ static void MX_GPDMA1_Init(void)
     HAL_NVIC_EnableIRQ(GPDMA1_Channel1_IRQn);
     HAL_NVIC_SetPriority(GPDMA1_Channel2_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel2_IRQn);
+    HAL_NVIC_SetPriority(GPDMA1_Channel3_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel3_IRQn);
+    HAL_NVIC_SetPriority(GPDMA1_Channel4_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel4_IRQn);
+    HAL_NVIC_SetPriority(GPDMA1_Channel5_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel5_IRQn);
 
   /* USER CODE BEGIN GPDMA1_Init 1 */
 
   /* USER CODE END GPDMA1_Init 1 */
-  handle_GPDMA1_Channel5.Instance = GPDMA1_Channel5;
-  handle_GPDMA1_Channel5.Init.Request = DMA_REQUEST_SW;
-  handle_GPDMA1_Channel5.Init.BlkHWRequest = DMA_BREQ_SINGLE_BURST;
-  handle_GPDMA1_Channel5.Init.Direction = DMA_MEMORY_TO_MEMORY;
-  handle_GPDMA1_Channel5.Init.SrcInc = DMA_SINC_FIXED;
-  handle_GPDMA1_Channel5.Init.DestInc = DMA_DINC_FIXED;
-  handle_GPDMA1_Channel5.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel5.Init.DestDataWidth = DMA_DEST_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel5.Init.Priority = DMA_LOW_PRIORITY_LOW_WEIGHT;
-  handle_GPDMA1_Channel5.Init.SrcBurstLength = 1;
-  handle_GPDMA1_Channel5.Init.DestBurstLength = 1;
-  handle_GPDMA1_Channel5.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
-  handle_GPDMA1_Channel5.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
-  handle_GPDMA1_Channel5.Init.Mode = DMA_NORMAL;
-  if (HAL_DMA_Init(&handle_GPDMA1_Channel5) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_DMA_ConfigChannelAttributes(&handle_GPDMA1_Channel5, DMA_CHANNEL_NPRIV) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  handle_GPDMA1_Channel4.Instance = GPDMA1_Channel4;
-  handle_GPDMA1_Channel4.Init.Request = DMA_REQUEST_SW;
-  handle_GPDMA1_Channel4.Init.BlkHWRequest = DMA_BREQ_SINGLE_BURST;
-  handle_GPDMA1_Channel4.Init.Direction = DMA_MEMORY_TO_MEMORY;
-  handle_GPDMA1_Channel4.Init.SrcInc = DMA_SINC_FIXED;
-  handle_GPDMA1_Channel4.Init.DestInc = DMA_DINC_FIXED;
-  handle_GPDMA1_Channel4.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel4.Init.DestDataWidth = DMA_DEST_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel4.Init.Priority = DMA_LOW_PRIORITY_LOW_WEIGHT;
-  handle_GPDMA1_Channel4.Init.SrcBurstLength = 1;
-  handle_GPDMA1_Channel4.Init.DestBurstLength = 1;
-  handle_GPDMA1_Channel4.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
-  handle_GPDMA1_Channel4.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
-  handle_GPDMA1_Channel4.Init.Mode = DMA_NORMAL;
-  if (HAL_DMA_Init(&handle_GPDMA1_Channel4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_DMA_ConfigChannelAttributes(&handle_GPDMA1_Channel4, DMA_CHANNEL_NPRIV) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  handle_GPDMA1_Channel3.Instance = GPDMA1_Channel3;
-  handle_GPDMA1_Channel3.Init.Request = DMA_REQUEST_SW;
-  handle_GPDMA1_Channel3.Init.BlkHWRequest = DMA_BREQ_SINGLE_BURST;
-  handle_GPDMA1_Channel3.Init.Direction = DMA_MEMORY_TO_MEMORY;
-  handle_GPDMA1_Channel3.Init.SrcInc = DMA_SINC_FIXED;
-  handle_GPDMA1_Channel3.Init.DestInc = DMA_DINC_FIXED;
-  handle_GPDMA1_Channel3.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel3.Init.DestDataWidth = DMA_DEST_DATAWIDTH_BYTE;
-  handle_GPDMA1_Channel3.Init.Priority = DMA_LOW_PRIORITY_LOW_WEIGHT;
-  handle_GPDMA1_Channel3.Init.SrcBurstLength = 1;
-  handle_GPDMA1_Channel3.Init.DestBurstLength = 1;
-  handle_GPDMA1_Channel3.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
-  handle_GPDMA1_Channel3.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
-  handle_GPDMA1_Channel3.Init.Mode = DMA_NORMAL;
-  if (HAL_DMA_Init(&handle_GPDMA1_Channel3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_DMA_ConfigChannelAttributes(&handle_GPDMA1_Channel3, DMA_CHANNEL_NPRIV) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN GPDMA1_Init 2 */
 
   /* USER CODE END GPDMA1_Init 2 */
@@ -1072,6 +1112,30 @@ static void MX_GPIO_Init(void)
 ////		readPin = false;
 //	}
 //}
+
+void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	adcReady = true;
+	adcData = &pcmData[0];
+}
+
+void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	adcReady = true;
+	adcData = &pcmData[sampleSize * (channelCount / 2)];
+}
+
+void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	dacReady = true;
+	dacData = &dacDataBuffer[0];
+}
+
+void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	dacReady = true;
+	dacData = &dacDataBuffer[sampleSize];
+}
 /* USER CODE END 4 */
 
 /**
