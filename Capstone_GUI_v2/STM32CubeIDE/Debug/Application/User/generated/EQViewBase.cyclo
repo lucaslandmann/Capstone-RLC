@@ -17,14 +17,14 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:65:13:touchgfx::TypedText::~TypedText()	1
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:touchgfx::View<EQPresenter>::~View()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:91:1:EQViewBase::~EQViewBase()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:96:6:virtual void EQViewBase::setupScreen()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:91:1:EQViewBase::~EQViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:96:6:virtual void EQViewBase::setupScreen()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:65:13:virtual touchgfx::TypedText::~TypedText()	1
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:virtual touchgfx::View<EQPresenter>::~View()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:91:1:virtual EQViewBase::~EQViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:91:1:virtual EQViewBase::~EQViewBase()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:121:18:virtual void touchgfx::Drawable::invalidateContent() const	2
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:45:18:virtual void touchgfx::Widget::getLastChild(int16_t, int16_t, touchgfx::Drawable**)	3
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:36:7:touchgfx::Widget::Widget()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:43:5:touchgfx::TextArea::TextArea()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:9:1:EQViewBase::EQViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp:9:1:EQViewBase::EQViewBase()	1

@@ -1,5 +1,5 @@
 Application/User/gui/EQView.o: \
- C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/eq_screen/EQView.cpp \
+ C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/eq_screen/EQView.cpp \
  ../../TouchGFX/gui/include/gui/eq_screen/EQView.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

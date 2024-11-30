@@ -1,5 +1,5 @@
 Application/User/gui/DelayView.o: \
- C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/delay_screen/DelayView.cpp \
+ C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/delay_screen/DelayView.cpp \
  ../../TouchGFX/gui/include/gui/delay_screen/DelayView.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

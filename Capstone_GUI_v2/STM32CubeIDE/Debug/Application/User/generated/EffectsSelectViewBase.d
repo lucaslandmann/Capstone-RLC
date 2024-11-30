@@ -1,5 +1,5 @@
 Application/User/generated/EffectsSelectViewBase.o: \
- C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp \
+ C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \

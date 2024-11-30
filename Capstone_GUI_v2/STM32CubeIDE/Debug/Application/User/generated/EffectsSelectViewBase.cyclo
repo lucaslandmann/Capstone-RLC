@@ -17,11 +17,11 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:65:13:touchgfx::TypedText::~TypedText()	1
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:touchgfx::View<EffectsSelectPresenter>::~View()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:254:1:EffectsSelectViewBase::~EffectsSelectViewBase()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:259:6:virtual void EffectsSelectViewBase::setupScreen()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:254:1:EffectsSelectViewBase::~EffectsSelectViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:259:6:virtual void EffectsSelectViewBase::setupScreen()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:65:13:virtual touchgfx::TypedText::~TypedText()	1
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:virtual touchgfx::View<EffectsSelectPresenter>::~View()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:254:1:virtual EffectsSelectViewBase::~EffectsSelectViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:254:1:virtual EffectsSelectViewBase::~EffectsSelectViewBase()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:121:18:virtual void touchgfx::Drawable::invalidateContent() const	2
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:45:18:virtual void touchgfx::Widget::getLastChild(int16_t, int16_t, touchgfx::Drawable**)	3
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	1
@@ -30,4 +30,4 @@ C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/g
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:35:18:virtual void touchgfx::ToggleButton::setBitmaps(const touchgfx::Bitmap&, const touchgfx::Bitmap&)	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:43:5:touchgfx::TextArea::TextArea()	1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:32:7:touchgfx::ToggleButton::ToggleButton()	1
-C:/Users/reube/OneDrive/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:9:1:EffectsSelectViewBase::EffectsSelectViewBase()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/generated/gui_generated/src/effectsselect_screen/EffectsSelectViewBase.cpp:9:1:EffectsSelectViewBase::EffectsSelectViewBase()	1

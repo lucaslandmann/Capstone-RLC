@@ -93,8 +93,8 @@ all: main-build
 main-build: STM32U5G9J-DK2.elf secondary-outputs
 
 # Tool invocations
-STM32U5G9J-DK2.elf STM32U5G9J-DK2.map: $(OBJS) $(USER_OBJS) C:\Users\reube\OneDrive\Documents\GitHub\Capstone-RLC\Capstone_GUI_v2\STM32CubeIDE\STM32U5G9ZJTXQ_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "STM32U5G9J-DK2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"C:\Users\reube\OneDrive\Documents\GitHub\Capstone-RLC\Capstone_GUI_v2\STM32CubeIDE\STM32U5G9ZJTXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32U5G9J-DK2.map" -Wl,--gc-sections -static -L../../Middlewares/ST/touchgfx/lib/core/cortex_m33/gcc -L../../Middlewares/ST/touchgfx_components/gpu2d/NemaGFX/lib/core/cortex_m33/gcc -L../../Middlewares/ST/touchgfx_components/gpu2d/TouchGFXNema/lib/cortex_m33/gcc --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+STM32U5G9J-DK2.elf STM32U5G9J-DK2.map: $(OBJS) $(USER_OBJS) C:\Users\c0524083\Documents\GitHub\Capstone-RLC\Capstone_GUI_v2\STM32CubeIDE\STM32U5G9ZJTXQ_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "STM32U5G9J-DK2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"C:\Users\c0524083\Documents\GitHub\Capstone-RLC\Capstone_GUI_v2\STM32CubeIDE\STM32U5G9ZJTXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32U5G9J-DK2.map" -Wl,--gc-sections -static -L../../Middlewares/ST/touchgfx/lib/core/cortex_m33/gcc -L../../Middlewares/ST/touchgfx_components/gpu2d/NemaGFX/lib/core/cortex_m33/gcc -L../../Middlewares/ST/touchgfx_components/gpu2d/TouchGFXNema/lib/cortex_m33/gcc --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
