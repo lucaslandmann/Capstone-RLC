@@ -57,15 +57,22 @@ const osThreadAttr_t defaultTask_attributes = {
 osThreadId_t GUI_TaskHandle;
 const osThreadAttr_t GUI_Task_attributes = {
   .name = "GUI_Task",
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityNormal1,
   .stack_size = 8192 * 4
 };
 /* Definitions for Audio_Task */
 osThreadId_t Audio_TaskHandle;
 const osThreadAttr_t Audio_Task_attributes = {
   .name = "Audio_Task",
-  .priority = (osPriority_t) osPriorityAboveNormal,
-  .stack_size = 12000 * 4
+  .priority = (osPriority_t) osPriorityNormal2,
+  .stack_size = 131072 * 4
+};
+/* Definitions for myTask04 */
+osThreadId_t myTask04Handle;
+const osThreadAttr_t myTask04_attributes = {
+  .name = "myTask04",
+  .priority = (osPriority_t) osPriorityBelowNormal,
+  .stack_size = 128 * 4
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -76,6 +83,7 @@ extern portBASE_TYPE IdleTaskHook(void* p);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 extern void Audio_Function(void *argument);
+extern void StartTask04(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -132,6 +140,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Audio_Task */
   Audio_TaskHandle = osThreadNew(Audio_Function, NULL, &Audio_Task_attributes);
+
+  /* creation of myTask04 */
+  myTask04Handle = osThreadNew(StartTask04, NULL, &myTask04_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

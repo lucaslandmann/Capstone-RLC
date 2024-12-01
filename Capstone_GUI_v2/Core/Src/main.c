@@ -187,6 +187,7 @@ static void MX_TIM15_Init(void);
 void leds(char opt);
 static inline int32_t signExtend24(uint32_t value);
 void Audio_Function(void* argument);
+void StartTask04(void* argument);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -833,7 +834,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x00F07BFF;
+  hi2c2.Init.Timing = 0x30909DEC;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -1006,29 +1007,28 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_48K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
-  hsai_BlockA2.Init.TriState = SAI_OUTPUT_NOTRELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_16BIT, 2) != HAL_OK)
+  hsai_BlockA2.Init.TriState = SAI_OUTPUT_RELEASED;
+  if (HAL_SAI_InitProtocol(&hsai_BlockA2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
   hsai_BlockB2.Instance = SAI2_Block_B;
-  hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_TX;
+  hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_RX;
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
   hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_HF;
+  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_48K;
   hsai_BlockB2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  hsai_BlockB2.Init.TriState = SAI_OUTPUT_NOTRELEASED;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_16BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1232,6 +1232,53 @@ void Audio_Function(void* argument)
 		  dacReady = false;
 	  }
    }
+}
+
+void StartTask04(void* argument) {
+
+	for(;;)
+	{
+		  if(adcReady)
+		  {
+			  //Loads sample data into Structs
+			  for (uint16_t channel = 0; channel < channelCount; channel++)
+			  {
+			        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
+			        {
+			            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
+
+			            if(channel == 1){
+			            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+						//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+			            }
+			        }
+			  }
+			  //TODO: apply effects
+			  //TODO: mix
+			  adcReady = false;
+		  }
+		  if(dacReady)
+		  {
+			  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
+			  {
+				  int32_t mixedSignalLeft = 0;
+				  int32_t mixedSignalRight = 0;
+				  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
+				  {
+					  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
+					  digGain = digGain * maxGain;
+
+					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
+					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+				  }
+				  mixedSignalLeft = mixedSignalLeft / 6;
+				  mixedSignalRight = mixedSignalRight / 6;
+				  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
+				  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
+			  }
+			  dacReady = false;
+		  }
+	}
 }
 /* USER CODE END 4 */
 
