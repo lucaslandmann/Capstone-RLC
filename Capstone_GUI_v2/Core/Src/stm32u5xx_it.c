@@ -64,7 +64,6 @@ extern DMA_HandleTypeDef handle_GPDMA1_Channel3;
 extern DMA2D_HandleTypeDef hdma2d;
 extern GPU2D_HandleTypeDef hgpu2d;
 extern XSPI_HandleTypeDef hxspi1;
-extern I2C_HandleTypeDef hi2c2;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel1;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel0;
 extern JPEG_HandleTypeDef hjpeg;
@@ -75,6 +74,7 @@ extern DMA_HandleTypeDef handle_GPDMA1_Channel5;
 extern DMA_NodeTypeDef Node_GPDMA1_Channel4;
 extern DMA_QListTypeDef List_GPDMA1_Channel4;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel4;
+extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN EV */
@@ -292,31 +292,17 @@ void TIM6_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles I2C2 Event interrupt.
+  * @brief This function handles TIM15 global interrupt.
   */
-void I2C2_EV_IRQHandler(void)
+void TIM15_IRQHandler(void)
 {
-  /* USER CODE BEGIN I2C2_EV_IRQn 0 */
+  /* USER CODE BEGIN TIM15_IRQn 0 */
 
-  /* USER CODE END I2C2_EV_IRQn 0 */
-  HAL_I2C_EV_IRQHandler(&hi2c2);
-  /* USER CODE BEGIN I2C2_EV_IRQn 1 */
+  /* USER CODE END TIM15_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim15);
+  /* USER CODE BEGIN TIM15_IRQn 1 */
 
-  /* USER CODE END I2C2_EV_IRQn 1 */
-}
-
-/**
-  * @brief This function handles I2C2 Error interrupt.
-  */
-void I2C2_ER_IRQHandler(void)
-{
-  /* USER CODE BEGIN I2C2_ER_IRQn 0 */
-
-  /* USER CODE END I2C2_ER_IRQn 0 */
-  HAL_I2C_ER_IRQHandler(&hi2c2);
-  /* USER CODE BEGIN I2C2_ER_IRQn 1 */
-
-  /* USER CODE END I2C2_ER_IRQn 1 */
+  /* USER CODE END TIM15_IRQn 1 */
 }
 
 /**

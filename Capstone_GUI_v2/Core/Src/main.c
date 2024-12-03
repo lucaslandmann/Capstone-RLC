@@ -1189,96 +1189,57 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 
 void Audio_Function(void* argument)
 {
-	for(;;)
-	{
-	  if(adcReady)
-	  {
-		  //Loads sample data into Structs
-		  for (uint16_t channel = 0; channel < channelCount; channel++)
-		  {
-		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
-		        {
-		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
-
-		            if(channel == 1){
-		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
-					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
-		            }
-		        }
-		  }
-		  //TODO: apply effects
-		  //TODO: mix
-		  adcReady = false;
-	  }
-	  if(dacReady)
-	  {
-		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
-		  {
-			  int32_t mixedSignalLeft = 0;
-			  int32_t mixedSignalRight = 0;
-			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
-			  {
-				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
-				  digGain = digGain * maxGain;
-
-				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
-				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
-			  }
-			  mixedSignalLeft = mixedSignalLeft / 6;
-			  mixedSignalRight = mixedSignalRight / 6;
-			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
-			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
-		  }
-		  dacReady = false;
-	  }
-   }
+	for(;;) {
+////	  if(adcReady)
+////	  {
+////		  //Loads sample data into Structs
+////		  for (uint16_t channel = 0; channel < channelCount; channel++)
+////		  {
+////		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
+////		        {
+////		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
+////
+////		            if(channel == 1){
+////		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+////					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+////		            }
+////		        }
+////		  }
+////		  //TODO: apply effects
+////		  //TODO: mixs
+////		  adcReady = false;
+////	  }
+////	  if(dacReady)
+////	  {
+////		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
+////		  {
+////			  int32_t mixedSignalLeft = 0;
+////			  int32_t mixedSignalRight = 0;
+////			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
+////			  {
+////				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
+////				  digGain = digGain * maxGain;
+////
+////				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
+////				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+////			  }
+////			  mixedSignalLeft = mixedSignalLeft / 6;
+////			  mixedSignalRight = mixedSignalRight / 6;
+////			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
+////			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
+////		  }
+////		  dacReady = false;
+////	  }
+	  osDelay(10);
+	}
 }
 
 void StartTask04(void* argument) {
 
-	for(;;)
-	{
-		  if(adcReady)
-		  {
-			  //Loads sample data into Structs
-			  for (uint16_t channel = 0; channel < channelCount; channel++)
-			  {
-			        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
-			        {
-			            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
-
-			            if(channel == 1){
-			            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
-						//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
-			            }
-			        }
-			  }
-			  //TODO: apply effects
-			  //TODO: mix
-			  adcReady = false;
-		  }
-		  if(dacReady)
-		  {
-			  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
-			  {
-				  int32_t mixedSignalLeft = 0;
-				  int32_t mixedSignalRight = 0;
-				  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
-				  {
-					  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
-					  digGain = digGain * maxGain;
-
-					  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
-					  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
-				  }
-				  mixedSignalLeft = mixedSignalLeft / 6;
-				  mixedSignalRight = mixedSignalRight / 6;
-				  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
-				  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
-			  }
-			  dacReady = false;
-		  }
+	for(;;) {
+		osDelay(10);
 	}
+
 }
 /* USER CODE END 4 */
 

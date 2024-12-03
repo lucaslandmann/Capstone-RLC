@@ -5,7 +5,7 @@ C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1172:6:HAL_SAI_RxCpltCallback	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1178:6:HAL_SAI_TxHalfCpltCallback	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1184:6:HAL_SAI_TxCpltCallback	0	static
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1190:6:Audio_Function	32	static
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1190:6:Audio_Function	8	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1237:6:StartTask04	8	static
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1293:6:HAL_TIM_PeriodElapsedCallback	0	static
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1310:6:Error_Handler	0	static,ignoring_inline_asm
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1254:6:HAL_TIM_PeriodElapsedCallback	0	static
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/main.c:1271:6:Error_Handler	0	static,ignoring_inline_asm

@@ -57,15 +57,15 @@ const osThreadAttr_t defaultTask_attributes = {
 osThreadId_t GUI_TaskHandle;
 const osThreadAttr_t GUI_Task_attributes = {
   .name = "GUI_Task",
-  .priority = (osPriority_t) osPriorityNormal1,
-  .stack_size = 8192 * 4
+  .priority = (osPriority_t) osPriorityHigh,
+  .stack_size = 16384 * 4
 };
 /* Definitions for Audio_Task */
 osThreadId_t Audio_TaskHandle;
 const osThreadAttr_t Audio_Task_attributes = {
   .name = "Audio_Task",
-  .priority = (osPriority_t) osPriorityNormal2,
-  .stack_size = 131072 * 4
+  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 128 * 4
 };
 /* Definitions for myTask04 */
 osThreadId_t myTask04Handle;
@@ -114,7 +114,6 @@ void vApplicationIdleHook( void )
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -139,10 +138,10 @@ void MX_FREERTOS_Init(void) {
   GUI_TaskHandle = osThreadNew(TouchGFX_Task, NULL, &GUI_Task_attributes);
 
   /* creation of Audio_Task */
-  Audio_TaskHandle = osThreadNew(Audio_Function, NULL, &Audio_Task_attributes);
+  //Audio_TaskHandle = osThreadNew(Audio_Function, NULL, &Audio_Task_attributes);
 
   /* creation of myTask04 */
-  myTask04Handle = osThreadNew(StartTask04, NULL, &myTask04_attributes);
+  //myTask04Handle = osThreadNew(StartTask04, NULL, &myTask04_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -163,9 +162,9 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN defaultTask */
-  for(;;)
-  {
-  }
+	for(;;) {
+		osDelay(100);
+	}
   /* USER CODE END defaultTask */
 }
 
