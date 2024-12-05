@@ -138,10 +138,10 @@ void MX_FREERTOS_Init(void) {
   GUI_TaskHandle = osThreadNew(TouchGFX_Task, NULL, &GUI_Task_attributes);
 
   /* creation of Audio_Task */
-  //Audio_TaskHandle = osThreadNew(Audio_Function, NULL, &Audio_Task_attributes);
+  Audio_TaskHandle = osThreadNew(Audio_Function, NULL, &Audio_Task_attributes);
 
   /* creation of myTask04 */
-  //myTask04Handle = osThreadNew(StartTask04, NULL, &myTask04_attributes);
+  myTask04Handle = osThreadNew(StartTask04, NULL, &myTask04_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */

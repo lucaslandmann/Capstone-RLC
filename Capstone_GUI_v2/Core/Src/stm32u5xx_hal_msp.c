@@ -558,7 +558,7 @@ void HAL_GPU2D_MspInit(GPU2D_HandleTypeDef* hgpu2d)
     /* GPU2D interrupt Init */
     HAL_NVIC_SetPriority(GPU2D_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPU2D_IRQn);
-    HAL_NVIC_SetPriority(GPU2D_ER_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(GPU2D_ER_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(GPU2D_ER_IRQn);
   /* USER CODE BEGIN GPU2D_MspInit 1 */
 
@@ -643,7 +643,7 @@ void HAL_XSPI_MspInit(XSPI_HandleTypeDef* hxspi)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
     /* HSPI1 interrupt Init */
-    HAL_NVIC_SetPriority(HSPI1_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(HSPI1_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(HSPI1_IRQn);
   /* USER CODE BEGIN HSPI1_MspInit 1 */
 
@@ -1152,7 +1152,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     /* Peripheral clock enable */
     __HAL_RCC_TIM15_CLK_ENABLE();
     /* TIM15 interrupt Init */
-    HAL_NVIC_SetPriority(TIM15_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(TIM15_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(TIM15_IRQn);
   /* USER CODE BEGIN TIM15_MspInit 1 */
 
@@ -1270,7 +1270,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     }
 
     handle_GPDMA1_Channel5.Instance = GPDMA1_Channel5;
-    handle_GPDMA1_Channel5.InitLinkedList.Priority = DMA_LOW_PRIORITY_HIGH_WEIGHT;
+    handle_GPDMA1_Channel5.InitLinkedList.Priority = DMA_LOW_PRIORITY_LOW_WEIGHT;
     handle_GPDMA1_Channel5.InitLinkedList.LinkStepMode = DMA_LSM_FULL_EXECUTION;
     handle_GPDMA1_Channel5.InitLinkedList.LinkAllocatedPort = DMA_LINK_ALLOCATED_PORT0;
     handle_GPDMA1_Channel5.InitLinkedList.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
@@ -1330,8 +1330,8 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     NodeConfig.Init.Direction = DMA_PERIPH_TO_MEMORY;
     NodeConfig.Init.SrcInc = DMA_SINC_FIXED;
     NodeConfig.Init.DestInc = DMA_DINC_INCREMENTED;
-    NodeConfig.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
-    NodeConfig.Init.DestDataWidth = DMA_DEST_DATAWIDTH_BYTE;
+    NodeConfig.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_WORD;
+    NodeConfig.Init.DestDataWidth = DMA_DEST_DATAWIDTH_WORD;
     NodeConfig.Init.SrcBurstLength = 1;
     NodeConfig.Init.DestBurstLength = 1;
     NodeConfig.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
@@ -1356,7 +1356,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     }
 
     handle_GPDMA1_Channel4.Instance = GPDMA1_Channel4;
-    handle_GPDMA1_Channel4.InitLinkedList.Priority = DMA_LOW_PRIORITY_MID_WEIGHT;
+    handle_GPDMA1_Channel4.InitLinkedList.Priority = DMA_LOW_PRIORITY_LOW_WEIGHT;
     handle_GPDMA1_Channel4.InitLinkedList.LinkStepMode = DMA_LSM_FULL_EXECUTION;
     handle_GPDMA1_Channel4.InitLinkedList.LinkAllocatedPort = DMA_LINK_ALLOCATED_PORT0;
     handle_GPDMA1_Channel4.InitLinkedList.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
