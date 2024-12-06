@@ -1,0 +1,8 @@
+Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	0	static
+Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
+Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+DelayView.cpp:13:6:virtual void DelayView::tearDownScreen()	0	static
+DelayView.hpp:11:13:DelayView::~DelayView()	8	static
+DelayView.hpp:11:13:virtual DelayView::~DelayView()	8	static
+DelayView.cpp:3:1:DelayView::DelayView()	8	static
+DelayView.cpp:8:6:virtual void DelayView::setupScreen()	0	static

@@ -94,10 +94,20 @@ void Error_Handler(void);
 #define Channel_5_LR_GPIO_Port GPIOG
 #define Channel_6_LR_Pin GPIO_PIN_1
 #define Channel_6_LR_GPIO_Port GPIOG
-#define USER_LD2_RED_Pin GPIO_PIN_2
-#define USER_LD2_RED_GPIO_Port GPIOD
+#define VSYNC_FREQ_Pin GPIO_PIN_9
+#define VSYNC_FREQ_GPIO_Port GPIOA
+#define RENDER_TIME_Pin GPIO_PIN_10
+#define RENDER_TIME_GPIO_Port GPIOA
+#define FRAME_RATE_Pin GPIO_PIN_11
+#define FRAME_RATE_GPIO_Port GPIOA
+#define MCU_ACTIVE_Pin GPIO_PIN_12
+#define MCU_ACTIVE_GPIO_Port GPIOA
+#define RED_LED_Pin GPIO_PIN_2
+#define RED_LED_GPIO_Port GPIOD
 #define USER_LD3_GREEN_Pin GPIO_PIN_4
 #define USER_LD3_GREEN_GPIO_Port GPIOD
+#define Test_Pin_1_Pin GPIO_PIN_7
+#define Test_Pin_1_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

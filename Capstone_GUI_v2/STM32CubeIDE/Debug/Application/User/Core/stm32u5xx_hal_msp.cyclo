@@ -19,5 +19,5 @@ C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1077:6:HAL_LTDC_MspDeInit	2
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1145:6:HAL_TIM_Base_MspInit	2
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1171:6:HAL_TIM_Base_MspDeInit	2
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1204:6:HAL_SAI_MspInit	17
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1384:6:HAL_SAI_MspDeInit	5
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1211:6:HAL_SAI_MspInit	25
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Core/Src/stm32u5xx_hal_msp.c:1485:6:HAL_SAI_MspDeInit	7

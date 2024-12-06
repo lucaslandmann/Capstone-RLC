@@ -68,9 +68,20 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXGeneratedHAL.o: 
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
- TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp \
- TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp \
+ TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
+ TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ TouchGFX/gui/include/gui/delay_screen/DelayView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
+ TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp \
+ TouchGFX/gui/include/gui/eq_screen/EQView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
+ TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp \
+ TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp \
+ TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
  Middlewares/ST/touchgfx_components/gpu2d/TouchGFXNema/include/touchgfx_nema/GPU2DVectorRenderer.hpp \
  TouchGFX/Target/generated/HardwareMJPEGDecoder.hpp \
@@ -100,6 +111,9 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXGeneratedHAL.o: 
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma2d.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h \
@@ -112,6 +126,8 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXGeneratedHAL.o: 
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dsi.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h \
@@ -255,11 +271,33 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
 
-TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:
+TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp:
+TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp:
 
-TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:
+TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+
+TouchGFX/gui/include/gui/delay_screen/DelayView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp:
+
+TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp:
+
+TouchGFX/gui/include/gui/eq_screen/EQView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp:
+
+TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp:
+
+TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp:
+
+TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
 
@@ -323,6 +361,12 @@ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma2d.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h:
 
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc_ex.h:
+
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h:
@@ -346,6 +390,10 @@ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dsi.h:
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai_ex.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h:
 

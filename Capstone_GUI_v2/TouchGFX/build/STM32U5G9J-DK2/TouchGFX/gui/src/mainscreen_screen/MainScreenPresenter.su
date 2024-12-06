@@ -1,3 +1,5 @@
+ModelListener.hpp:18:18:virtual void ModelListener::newButtonValue(bool)	0	static
+ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	0	static
 MainScreenPresenter.hpp:28:13:MainScreenPresenter::~MainScreenPresenter()	0	static
 MainScreenPresenter.cpp:10:6:virtual void MainScreenPresenter::activate()	0	static
 MainScreenPresenter.hpp:28:13:virtual MainScreenPresenter::~MainScreenPresenter()	8	static

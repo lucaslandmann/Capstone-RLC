@@ -1,5 +1,0 @@
-EffectsMatrixPresenter.hpp:28:13:EffectsMatrixPresenter::~EffectsMatrixPresenter()	0	static
-EffectsMatrixPresenter.cpp:10:6:virtual void EffectsMatrixPresenter::activate()	0	static
-EffectsMatrixPresenter.hpp:28:13:virtual EffectsMatrixPresenter::~EffectsMatrixPresenter()	8	static
-EffectsMatrixPresenter.hpp:28:13:virtual void* EffectsMatrixPresenter::_ZThn4_N22EffectsMatrixPresenterD1Ev()	0	static
-EffectsMatrixPresenter.cpp:4:1:EffectsMatrixPresenter::EffectsMatrixPresenter(EffectsMatrixView&)	8	static

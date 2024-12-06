@@ -20,6 +20,9 @@ TouchGFX/build/STM32U5G9J-DK2/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma2d.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h \
@@ -32,6 +35,8 @@ TouchGFX/build/STM32U5G9J-DK2/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dsi.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai.h \
+ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim_ex.h \
  Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_exti.h \
@@ -83,6 +88,12 @@ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dma2d.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_cortex.h:
 
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_adc_ex.h:
+
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h:
@@ -106,6 +117,10 @@ Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_dsi.h:
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai.h:
+
+Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_sai_ex.h:
 
 Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_tim.h:
 

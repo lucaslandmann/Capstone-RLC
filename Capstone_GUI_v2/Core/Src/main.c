@@ -40,7 +40,7 @@
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define maxGain 10.0f
-#define channelCount 8
+#define channelCount 2
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 0
@@ -95,14 +95,18 @@ DMA_HandleTypeDef handle_GPDMA1_Channel0;
 
 LTDC_HandleTypeDef hltdc;
 
+SAI_HandleTypeDef hsai_BlockB1;
 SAI_HandleTypeDef hsai_BlockA2;
 SAI_HandleTypeDef hsai_BlockB2;
+DMA_NodeTypeDef Node_GPDMA1_Channel6;
+DMA_QListTypeDef List_GPDMA1_Channel6;
+DMA_HandleTypeDef handle_GPDMA1_Channel6;
+DMA_NodeTypeDef Node_GPDMA1_Channel7;
+DMA_QListTypeDef List_GPDMA1_Channel7;
+DMA_HandleTypeDef handle_GPDMA1_Channel7;
 DMA_NodeTypeDef Node_GPDMA1_Channel5;
 DMA_QListTypeDef List_GPDMA1_Channel5;
 DMA_HandleTypeDef handle_GPDMA1_Channel5;
-DMA_NodeTypeDef Node_GPDMA1_Channel4;
-DMA_QListTypeDef List_GPDMA1_Channel4;
-DMA_HandleTypeDef handle_GPDMA1_Channel4;
 
 TIM_HandleTypeDef htim15;
 
@@ -183,6 +187,7 @@ static void MX_ADC4_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM15_Init(void);
 static void MX_SAI2_Init(void);
+static void MX_SAI1_Init(void);
 /* USER CODE BEGIN PFP */
 void leds(char opt);
 static inline int32_t signExtend24(uint32_t value);
@@ -246,32 +251,35 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM15_Init();
   MX_SAI2_Init();
+  MX_SAI1_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
   //Begins DMA transfer for first ADC
-    HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1));
-    //begins DMA transfer for fourth ADC
-    HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
-    HAL_TIM_Base_Start(&htim15);
-    //Config ADC/DAC
-
-    HAL_Delay(2000);
-    HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
-    HAL_Delay(2000);
-
-    for(int i = 0; i < sizeof(pcm6260Config); i++)
-    {
-  	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
-  	  HAL_Delay(10);
-    }
+//    HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1));
+//    //begins DMA transfer for fourth ADC
+//    HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
+//    HAL_TIM_Base_Start(&htim15);
+//    //Config ADC/DAC
+//
+//    HAL_Delay(2000);
+//    HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
+//    HAL_Delay(2000);
+//
+//    for(int i = 0; i < sizeof(pcm6260Config); i++)
+//    {
+//  	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
+//  	  HAL_Delay(10);
+//    }
 
     HAL_Delay(100);
+
+    HAL_SAI_Receive_DMA(&hsai_BlockB1, (uint8_t*)pcmData, DIM(pcmData));
     //Begins DMA transfer for PCM6260
     HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData));
     //Begins DMA transfer for CS4334k-QZ
-    HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
+    //HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
 
   /* USER CODE END 2 */
 
@@ -361,7 +369,9 @@ void PeriphCommonClock_Config(void)
 
   /** Initializes the common periph clock
   */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_HSPI|RCC_PERIPHCLK_SAI2;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_HSPI|RCC_PERIPHCLK_SAI1
+                              |RCC_PERIPHCLK_SAI2;
+  PeriphClkInit.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLL2;
   PeriphClkInit.Sai2ClockSelection = RCC_SAI2CLKSOURCE_PLL2;
   PeriphClkInit.HspiClockSelection = RCC_HSPICLKSOURCE_PLL2;
   PeriphClkInit.PLL2.PLL2Source = RCC_PLLSOURCE_HSE;
@@ -660,18 +670,20 @@ static void MX_GPDMA1_Init(void)
   __HAL_RCC_GPDMA1_CLK_ENABLE();
 
   /* GPDMA1 interrupt Init */
-    HAL_NVIC_SetPriority(GPDMA1_Channel0_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel0_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel0_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel1_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel1_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel1_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel2_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel2_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel2_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel3_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel3_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel3_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel4_IRQn, 1, 0);
-    HAL_NVIC_EnableIRQ(GPDMA1_Channel4_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel5_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel5_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel5_IRQn);
+    HAL_NVIC_SetPriority(GPDMA1_Channel6_IRQn, 1, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel6_IRQn);
+    HAL_NVIC_SetPriority(GPDMA1_Channel7_IRQn, 1, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel7_IRQn);
 
   /* USER CODE BEGIN GPDMA1_Init 1 */
 
@@ -834,7 +846,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x30909DEC;
+  hi2c2.Init.Timing = 0x00F07BFF;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -987,6 +999,42 @@ static void MX_LTDC_Init(void)
 }
 
 /**
+  * @brief SAI1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SAI1_Init(void)
+{
+
+  /* USER CODE BEGIN SAI1_Init 0 */
+
+  /* USER CODE END SAI1_Init 0 */
+
+  /* USER CODE BEGIN SAI1_Init 1 */
+
+  /* USER CODE END SAI1_Init 1 */
+  hsai_BlockB1.Instance = SAI1_Block_B;
+  hsai_BlockB1.Init.AudioMode = SAI_MODEMASTER_RX;
+  hsai_BlockB1.Init.Synchro = SAI_ASYNCHRONOUS;
+  hsai_BlockB1.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockB1.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
+  hsai_BlockB1.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_HF;
+  hsai_BlockB1.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_48K;
+  hsai_BlockB1.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
+  hsai_BlockB1.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
+  hsai_BlockB1.Init.MonoStereoMode = SAI_STEREOMODE;
+  hsai_BlockB1.Init.CompandingMode = SAI_NOCOMPANDING;
+  if (HAL_SAI_InitProtocol(&hsai_BlockB1, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SAI1_Init 2 */
+
+  /* USER CODE END SAI1_Init 2 */
+
+}
+
+/**
   * @brief SAI2 Initialization Function
   * @param None
   * @retval None
@@ -1028,7 +1076,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1113,7 +1161,13 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOE, LCD_DISP_EN_Pin|LCD_BL_CTRL_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, USER_LD2_RED_Pin|USER_LD3_GREEN_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, VSYNC_FREQ_Pin|RENDER_TIME_Pin|FRAME_RATE_Pin|MCU_ACTIVE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, RED_LED_Pin|USER_LD3_GREEN_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(Test_Pin_1_GPIO_Port, Test_Pin_1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : ADC_Power_On_Pin LCD_DISP_EN_Pin */
   GPIO_InitStruct.Pin = ADC_Power_On_Pin|LCD_DISP_EN_Pin;
@@ -1141,15 +1195,29 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(USER_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : USER_LD2_RED_Pin USER_LD3_GREEN_Pin */
-  GPIO_InitStruct.Pin = USER_LD2_RED_Pin|USER_LD3_GREEN_Pin;
+  /*Configure GPIO pins : VSYNC_FREQ_Pin RENDER_TIME_Pin FRAME_RATE_Pin MCU_ACTIVE_Pin */
+  GPIO_InitStruct.Pin = VSYNC_FREQ_Pin|RENDER_TIME_Pin|FRAME_RATE_Pin|MCU_ACTIVE_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : RED_LED_Pin USER_LD3_GREEN_Pin */
+  GPIO_InitStruct.Pin = RED_LED_Pin|USER_LD3_GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : Test_Pin_1_Pin */
+  GPIO_InitStruct.Pin = Test_Pin_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(Test_Pin_1_GPIO_Port, &GPIO_InitStruct);
+
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI5_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(EXTI5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -1163,29 +1231,29 @@ static inline int32_t signExtend24(uint32_t value)
     return (int32_t)((value & (1 << 23)) ? value | 0xFF000000 : value & 0x007FFFFF);
 }
 
-void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
-{
-	adcReady = true;
-	adcData = &pcmData[0];
-}
-
-void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
-{
-	adcReady = true;
-	adcData = &pcmData[sampleSize * (channelCount / 2)];
-}
-
-void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
-{
-	dacReady = true;
-	dacData = &dacDataBuffer[0];
-}
-
-void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
-{
-	dacReady = true;
-	dacData = &dacDataBuffer[sampleSize];
-}
+//void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+//{
+//	adcReady = true;
+//	adcData = &pcmData[0];
+//}
+//
+//void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
+//{
+//	adcReady = true;
+//	adcData = &pcmData[sampleSize * (channelCount / 2)];
+//}
+//
+//void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+//{
+//	dacReady = true;
+//	dacData = &dacDataBuffer[0];
+//}
+//
+//void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
+//{
+//	dacReady = true;
+//	dacData = &dacDataBuffer[sampleSize];
+//}
 
 void Audio_Function(void* argument)
 {
@@ -1230,14 +1298,16 @@ void Audio_Function(void* argument)
 ////		  }
 ////		  dacReady = false;
 ////	  }
-	  osDelay(10);
+	  osDelay(100);
 	}
 }
 
 void StartTask04(void* argument) {
 
 	for(;;) {
-		osDelay(10);
+
+		HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+		osDelay(1000);
 	}
 
 }

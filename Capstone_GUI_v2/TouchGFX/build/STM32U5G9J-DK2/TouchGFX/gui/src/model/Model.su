@@ -1,2 +1,4 @@
-Model.cpp:4:1:Model::Model()	0	static
-Model.cpp:9:6:void Model::tick()	0	static
+Model.cpp:11:6:bool Model::getButtonValue()	0	static
+Model.cpp:22:6:void Model::toggleLed(char)	0	static
+Model.cpp:31:1:Model::Model()	0	static
+Model.cpp:36:6:void Model::tick()	0	static

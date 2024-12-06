@@ -62,9 +62,20 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/generated/gui_generated/src/common/Fronte
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
- TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp \
- TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp \
+ TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
+ TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ TouchGFX/gui/include/gui/delay_screen/DelayView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
+ TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp \
+ TouchGFX/gui/include/gui/eq_screen/EQView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp \
+ TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp \
+ TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp \
+ TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp \
  TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp
 
 TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
@@ -191,10 +202,32 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
 
-TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixView.hpp:
+TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/effectsmatrix_screen/EffectsMatrixViewBase.hpp:
+TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp:
 
-TouchGFX/gui/include/gui/effectsmatrix_screen/EffectsMatrixPresenter.hpp:
+TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+
+TouchGFX/gui/include/gui/delay_screen/DelayView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp:
+
+TouchGFX/gui/include/gui/delay_screen/DelayPresenter.hpp:
+
+TouchGFX/gui/include/gui/eq_screen/EQView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/eq_screen/EQViewBase.hpp:
+
+TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp:
+
+TouchGFX/gui/include/gui/reverb_screen/ReverbView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/reverb_screen/ReverbViewBase.hpp:
+
+TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp:
 
 TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:

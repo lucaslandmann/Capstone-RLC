@@ -1,0 +1,8 @@
+Screen.hpp:104:18:virtual void touchgfx::Screen::afterTransition()	0	static
+Screen.hpp:144:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
+Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+EQView.cpp:13:6:virtual void EQView::tearDownScreen()	0	static
+EQView.hpp:11:13:EQView::~EQView()	8	static
+EQView.hpp:11:13:virtual EQView::~EQView()	8	static
+EQView.cpp:3:1:EQView::EQView()	8	static
+EQView.cpp:8:6:virtual void EQView::setupScreen()	0	static
