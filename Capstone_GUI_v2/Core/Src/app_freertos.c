@@ -74,6 +74,21 @@ const osThreadAttr_t myTask04_attributes = {
   .priority = (osPriority_t) osPriorityBelowNormal,
   .stack_size = 128 * 4
 };
+/* Definitions for lrPollMutex */
+osMutexId_t lrPollMutexHandle;
+const osMutexAttr_t lrPollMutex_attributes = {
+  .name = "lrPollMutex"
+};
+/* Definitions for dacSemaphore */
+osSemaphoreId_t dacSemaphoreHandle;
+const osSemaphoreAttr_t dacSemaphore_attributes = {
+  .name = "dacSemaphore"
+};
+/* Definitions for adcSemaphore */
+osSemaphoreId_t adcSemaphoreHandle;
+const osSemaphoreAttr_t adcSemaphore_attributes = {
+  .name = "adcSemaphore"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -115,10 +130,17 @@ void vApplicationIdleHook( void )
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
   /* USER CODE END Init */
+  /* creation of lrPollMutex */
+  lrPollMutexHandle = osMutexNew(&lrPollMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
+  /* creation of dacSemaphore */
+  dacSemaphoreHandle = osSemaphoreNew(1, 1, &dacSemaphore_attributes);
+
+  /* creation of adcSemaphore */
+  adcSemaphoreHandle = osSemaphoreNew(1, 1, &adcSemaphore_attributes);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
@@ -163,7 +185,9 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN defaultTask */
 	for(;;) {
+
 		osDelay(100);
+
 	}
   /* USER CODE END defaultTask */
 }

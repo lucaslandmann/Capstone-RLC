@@ -27,6 +27,12 @@
 #include "Components/mx66uw1g45g/mx66uw1g45g.h"
 #include "math.h"
 #include "stdbool.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "queue.h"
+#include "semphr.h"
+#include "event_groups.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -40,7 +46,7 @@
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define maxGain 10.0f
-#define channelCount 2
+#define channelCount 8
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
 #define c1Vol 0
@@ -163,6 +169,14 @@ static volatile int32_t *dacData = 0;
 uint16_t test = 0;
 uint16_t test2 = 0;
 
+extern osMutexId_t lrPollMutexHandle;
+
+extern osSemaphoreId_t dacSemaphoreHandle;
+extern osSemaphoreId_t adcSemaphoreHandle;
+
+uint16_t index = 0;
+uint16_t pan = 256;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -257,29 +271,28 @@ int main(void)
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
   //Begins DMA transfer for first ADC
-//    HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1));
-//    //begins DMA transfer for fourth ADC
-//    HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
-//    HAL_TIM_Base_Start(&htim15);
-//    //Config ADC/DAC
-//
-//    HAL_Delay(2000);
-//    HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
-//    HAL_Delay(2000);
-//
-//    for(int i = 0; i < sizeof(pcm6260Config); i++)
-//    {
-//  	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
-//  	  HAL_Delay(10);
-//    }
+    HAL_ADC_Start_DMA(&hadc1, (uint16_t*)adcGroup1, DIM(adcGroup1));
+    //begins DMA transfer for fourth ADC
+    HAL_ADC_Start_DMA(&hadc4, (uint16_t*)adcGroup4, DIM(adcGroup4));
+    HAL_TIM_Base_Start(&htim15);
+    //Config ADC/DAC
+
+    HAL_Delay(2000);
+    HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
+    HAL_Delay(2000);
+
+    for(int i = 0; i < sizeof(pcm6260Config); i++)
+    {
+  	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
+  	  HAL_Delay(10);
+    }
 
     HAL_Delay(100);
 
-    HAL_SAI_Receive_DMA(&hsai_BlockB1, (uint8_t*)pcmData, DIM(pcmData));
     //Begins DMA transfer for PCM6260
     HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*)pcmData, DIM(pcmData));
     //Begins DMA transfer for CS4334k-QZ
-    //HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
+    HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*)dacDataBuffer, DIM(dacDataBuffer));
 
   /* USER CODE END 2 */
 
@@ -435,22 +448,22 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc1.Init.Resolution = ADC_RESOLUTION_14B;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.GainCompensation = 0;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  hadc1.Init.LowPowerAutoWait = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.LowPowerAutoWait = ENABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.NbrOfConversion = 12;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T15_TRGO;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
+  hadc1.Init.DMAContinuousRequests = ENABLE;
   hadc1.Init.TriggerFrequencyMode = ADC_TRIGGER_FREQ_HIGH;
   hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
-  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+  hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
   hadc1.Init.OversamplingMode = DISABLE;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
@@ -465,6 +478,94 @@ static void MX_ADC1_Init(void)
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_6;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_7;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_8;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_9;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_10;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_11;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC_REGULAR_RANK_12;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -499,16 +600,15 @@ static void MX_ADC4_Init(void)
   hadc4.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
   hadc4.Init.Resolution = ADC_RESOLUTION_12B;
   hadc4.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc4.Init.ScanConvMode = ADC4_SCAN_DISABLE;
+  hadc4.Init.ScanConvMode = ADC4_SCAN_ENABLE;
   hadc4.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   hadc4.Init.LowPowerAutoPowerOff = ADC_LOW_POWER_NONE;
   hadc4.Init.LowPowerAutoWait = DISABLE;
-  hadc4.Init.ContinuousConvMode = DISABLE;
-  hadc4.Init.NbrOfConversion = 1;
-  hadc4.Init.DiscontinuousConvMode = DISABLE;
-  hadc4.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc4.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc4.Init.DMAContinuousRequests = DISABLE;
+  hadc4.Init.ContinuousConvMode = ENABLE;
+  hadc4.Init.NbrOfConversion = 2;
+  hadc4.Init.ExternalTrigConv = ADC4_EXTERNALTRIG_T15_TRGO;
+  hadc4.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
+  hadc4.Init.DMAContinuousRequests = ENABLE;
   hadc4.Init.TriggerFrequencyMode = ADC_TRIGGER_FREQ_LOW;
   hadc4.Init.Overrun = ADC_OVR_DATA_PRESERVED;
   hadc4.Init.SamplingTimeCommon1 = ADC4_SAMPLETIME_1CYCLE_5;
@@ -526,6 +626,14 @@ static void MX_ADC4_Init(void)
   sConfig.SamplingTime = ADC4_SAMPLINGTIME_COMMON_1;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
+  if (HAL_ADC_ConfigChannel(&hadc4, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Rank = ADC4_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc4, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -680,9 +788,9 @@ static void MX_GPDMA1_Init(void)
     HAL_NVIC_EnableIRQ(GPDMA1_Channel3_IRQn);
     HAL_NVIC_SetPriority(GPDMA1_Channel5_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel5_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel6_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel6_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel6_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel7_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(GPDMA1_Channel7_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel7_IRQn);
 
   /* USER CODE BEGIN GPDMA1_Init 1 */
@@ -1076,7 +1184,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.MckOutput = SAI_MCK_OUTPUT_ENABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
-  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 2) != HAL_OK)
+  if (HAL_SAI_InitProtocol(&hsai_BlockB2, SAI_I2S_STANDARD, SAI_PROTOCOL_DATASIZE_24BIT, 8) != HAL_OK)
   {
     Error_Handler();
   }
@@ -1105,7 +1213,7 @@ static void MX_TIM15_Init(void)
 
   /* USER CODE END TIM15_Init 1 */
   htim15.Instance = TIM15;
-  htim15.Init.Prescaler = 26;
+  htim15.Init.Prescaler = 16;
   htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim15.Init.Period = 49;
   htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -1231,74 +1339,94 @@ static inline int32_t signExtend24(uint32_t value)
     return (int32_t)((value & (1 << 23)) ? value | 0xFF000000 : value & 0x007FFFFF);
 }
 
-//void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
-//{
-//	adcReady = true;
-//	adcData = &pcmData[0];
-//}
-//
-//void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
-//{
-//	adcReady = true;
-//	adcData = &pcmData[sampleSize * (channelCount / 2)];
-//}
-//
-//void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
-//{
-//	dacReady = true;
-//	dacData = &dacDataBuffer[0];
-//}
-//
-//void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
-//{
-//	dacReady = true;
-//	dacData = &dacDataBuffer[sampleSize];
-//}
+void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+
+	adcReady = true;
+	adcData = &pcmData[0];
+	osSemaphoreRelease(adcSemaphoreHandle);
+}
+
+void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	adcReady = true;
+	adcData = &pcmData[sampleSize * (channelCount / 2)];
+	osSemaphoreRelease(adcSemaphoreHandle);
+}
+
+void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+
+	dacReady = true;
+	dacData = &dacDataBuffer[0];
+	osSemaphoreRelease(dacSemaphoreHandle);
+}
+
+void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+
+	dacReady = true;
+	dacData = &dacDataBuffer[sampleSize];
+	osSemaphoreRelease(dacSemaphoreHandle);
+}
 
 void Audio_Function(void* argument)
 {
 	for(;;) {
-////	  if(adcReady)
-////	  {
-////		  //Loads sample data into Structs
-////		  for (uint16_t channel = 0; channel < channelCount; channel++)
-////		  {
-////		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
-////		        {
-////		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
-////
-////		            if(channel == 1){
-////		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
-////					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
-////		            }
-////		        }
-////		  }
-////		  //TODO: apply effects
-////		  //TODO: mixs
-////		  adcReady = false;
-////	  }
-////	  if(dacReady)
-////	  {
-////		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
-////		  {
-////			  int32_t mixedSignalLeft = 0;
-////			  int32_t mixedSignalRight = 0;
-////			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
-////			  {
-////				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
-////				  digGain = digGain * maxGain;
-////
-////				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
-////				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
-////			  }
-////			  mixedSignalLeft = mixedSignalLeft / 6;
-////			  mixedSignalRight = mixedSignalRight / 6;
-////			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
-////			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
-////		  }
-////		  dacReady = false;
-////	  }
-	  osDelay(100);
+
+	  osSemaphoreAcquire(adcSemaphoreHandle, osWaitForever);
+	  if(adcReady)
+	  {
+		  //Loads sample data into Structs
+		  for (uint16_t channel = 0; channel < channelCount; channel++)
+		  {
+		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
+		        {
+		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
+
+		            if(channel == 1){
+		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+		            }
+		        }
+		  }
+		  //TODO: apply effects
+		  //TODO: mixs
+		  adcReady = false;
+	  }
+
+	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever);
+	  osMutexAcquire(lrPollMutexHandle, osWaitForever);
+
+	  index++;
+
+
+
+	  if(dacReady)
+	  {
+		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
+		  {
+			  int32_t mixedSignalLeft = 0;
+			  int32_t mixedSignalRight = 0;
+			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
+			  {
+				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
+				  digGain = digGain * maxGain;
+
+				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
+				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+			  }
+			  mixedSignalLeft = mixedSignalLeft / 6;
+			  mixedSignalRight = mixedSignalRight / 6;
+			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
+			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
+		  }
+		  dacReady = false;
+	  }
+	  osMutexRelease(lrPollMutexHandle);
+
+
+
 	}
 }
 
@@ -1306,8 +1434,55 @@ void StartTask04(void* argument) {
 
 	for(;;) {
 
-		HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
-		osDelay(1000);
+		  osMutexAcquire(lrPollMutexHandle, osWaitForever);
+		  //Channel 1 Volume
+		  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
+		  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
+		  channels[0].volumeRunner -= channels[0].volumeBuffer[(index + 1) % (sizeof(channels[0].volumeBuffer) / 2)];
+
+		  //Channel 2 Volume
+		  channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)] = adcGroup1[c2Vol];
+		  channels[1].volumeRunner += channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)];
+		  channels[1].volumeRunner -= channels[1].volumeBuffer[(index + 1) % (sizeof(channels[1].volumeBuffer) / 2)];
+
+		  //Channel 3 Volume
+		  channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)] = adcGroup1[c3Vol];
+		  channels[2].volumeRunner += channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)];
+		  channels[2].volumeRunner -= channels[2].volumeBuffer[(index + 1) % (sizeof(channels[2].volumeBuffer) / 2)];
+
+		  //Channel 4 Volume
+		  channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)] = adcGroup1[c4Vol];
+		  channels[3].volumeRunner += channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)];
+		  channels[3].volumeRunner -= channels[3].volumeBuffer[(index + 1) % (sizeof(channels[3].volumeBuffer) / 2)];
+
+		  //Channel 5 Volume
+		  channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)] = adcGroup1[c5Vol];
+		  channels[4].volumeRunner += channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)];
+		  channels[4].volumeRunner -= channels[4].volumeBuffer[(index + 1) % (sizeof(channels[4].volumeBuffer) / 2)];
+
+		  //Channel 6 Volume
+		  channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)] = adcGroup1[c6Vol];
+		  channels[5].volumeRunner += channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)];
+		  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
+
+		  //Channel 1 LR
+		  channels[0].lr = adcGroup1[c1LR];
+
+		  //Channel 2 LR
+		  channels[1].lr = adcGroup1[c2LR];
+
+		  //Channel 3 LR
+		  channels[2].lr = adcGroup1[c3LR];
+
+		  //Channel 4 LR
+		  channels[3].lr = adcGroup1[c4LR];
+
+		  //Channel 5 LR
+		  channels[4].lr = adcGroup4[c5LR];
+
+		  //Channel 6 LR
+		  channels[5].lr = adcGroup4[c6LR];
+		  osMutexRelease(lrPollMutexHandle);
 	}
 
 }

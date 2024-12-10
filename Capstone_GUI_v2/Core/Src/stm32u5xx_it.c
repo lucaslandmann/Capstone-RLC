@@ -61,6 +61,7 @@ extern DMA_HandleTypeDef handle_GPDMA1_Channel2;
 extern DMA_NodeTypeDef Node_GPDMA1_Channel3;
 extern DMA_QListTypeDef List_GPDMA1_Channel3;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel3;
+extern ADC_HandleTypeDef hadc1;
 extern DMA2D_HandleTypeDef hdma2d;
 extern GPU2D_HandleTypeDef hgpu2d;
 extern XSPI_HandleTypeDef hxspi1;
@@ -294,6 +295,20 @@ void GPDMA1_Channel7_IRQHandler(void)
   /* USER CODE BEGIN GPDMA1_Channel7_IRQn 1 */
 
   /* USER CODE END GPDMA1_Channel7_IRQn 1 */
+}
+
+/**
+  * @brief This function handles ADC1 and ADC2 global interrupt.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_2_IRQn 0 */
+
+  /* USER CODE END ADC1_2_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  /* USER CODE BEGIN ADC1_2_IRQn 1 */
+
+  /* USER CODE END ADC1_2_IRQn 1 */
 }
 
 /**

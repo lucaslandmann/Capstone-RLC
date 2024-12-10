@@ -60,6 +60,7 @@ void GPDMA1_Channel3_IRQHandler(void);
 void GPDMA1_Channel5_IRQHandler(void);
 void GPDMA1_Channel6_IRQHandler(void);
 void GPDMA1_Channel7_IRQHandler(void);
+void ADC1_2_IRQHandler(void);
 void TIM6_IRQHandler(void);
 void TIM15_IRQHandler(void);
 void SAI2_IRQHandler(void);

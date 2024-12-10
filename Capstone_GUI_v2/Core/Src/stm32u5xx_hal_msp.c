@@ -135,6 +135,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     PC3     ------> ADC1_IN4
     PA0     ------> ADC1_IN5
     PA2     ------> ADC1_IN7
+    PA3     ------> ADC1_IN8
     PA5     ------> ADC1_IN10
     PA6     ------> ADC1_IN11
     PA7     ------> ADC1_IN12
@@ -146,8 +147,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = Channel_5_Volume_Pin|Channel_6_Volume_Pin|Master_Volume_Pin|Channel_1_LR_Pin
-                          |Channel_2_LR_Pin;
+    GPIO_InitStruct.Pin = Channel_5_Volume_Pin|Channel_6_Volume_Pin|GPIO_PIN_3|Master_Volume_Pin
+                          |Channel_1_LR_Pin|Channel_2_LR_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -165,7 +166,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     NodeConfig.Init.Direction = DMA_PERIPH_TO_MEMORY;
     NodeConfig.Init.SrcInc = DMA_SINC_FIXED;
     NodeConfig.Init.DestInc = DMA_DINC_INCREMENTED;
-    NodeConfig.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
+    NodeConfig.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_HALFWORD;
     NodeConfig.Init.DestDataWidth = DMA_DEST_DATAWIDTH_HALFWORD;
     NodeConfig.Init.SrcBurstLength = 1;
     NodeConfig.Init.DestBurstLength = 1;
@@ -215,6 +216,9 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
       Error_Handler();
     }
 
+    /* ADC1 interrupt Init */
+    HAL_NVIC_SetPriority(ADC1_2_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
   /* USER CODE BEGIN ADC1_MspInit 1 */
 
   /* USER CODE END ADC1_MspInit 1 */
@@ -254,12 +258,12 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     NodeConfig.Init.BlkHWRequest = DMA_BREQ_SINGLE_BURST;
     NodeConfig.Init.Direction = DMA_PERIPH_TO_MEMORY;
     NodeConfig.Init.SrcInc = DMA_SINC_FIXED;
-    NodeConfig.Init.DestInc = DMA_DINC_FIXED;
+    NodeConfig.Init.DestInc = DMA_DINC_INCREMENTED;
     NodeConfig.Init.SrcDataWidth = DMA_SRC_DATAWIDTH_HALFWORD;
     NodeConfig.Init.DestDataWidth = DMA_DEST_DATAWIDTH_HALFWORD;
     NodeConfig.Init.SrcBurstLength = 1;
     NodeConfig.Init.DestBurstLength = 1;
-    NodeConfig.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT1;
+    NodeConfig.Init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0|DMA_DEST_ALLOCATED_PORT0;
     NodeConfig.Init.TransferEventMode = DMA_TCEM_BLOCK_TRANSFER;
     NodeConfig.Init.Mode = DMA_NORMAL;
     NodeConfig.TriggerConfig.TriggerMode = DMA_TRIGM_BLOCK_TRANSFER;
@@ -335,6 +339,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     PC3     ------> ADC1_IN4
     PA0     ------> ADC1_IN5
     PA2     ------> ADC1_IN7
+    PA3     ------> ADC1_IN8
     PA5     ------> ADC1_IN10
     PA6     ------> ADC1_IN11
     PA7     ------> ADC1_IN12
@@ -343,13 +348,16 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     */
     HAL_GPIO_DeInit(GPIOC, Channel_1_Volume_Pin|Channel_2_Volume_Pin|Channel_3_Volume_Pin|Channel_4_Volume_Pin);
 
-    HAL_GPIO_DeInit(GPIOA, Channel_5_Volume_Pin|Channel_6_Volume_Pin|Master_Volume_Pin|Channel_1_LR_Pin
-                          |Channel_2_LR_Pin);
+    HAL_GPIO_DeInit(GPIOA, Channel_5_Volume_Pin|Channel_6_Volume_Pin|GPIO_PIN_3|Master_Volume_Pin
+                          |Channel_1_LR_Pin|Channel_2_LR_Pin);
 
     HAL_GPIO_DeInit(GPIOB, Channel_3_LR_Pin|Channel_4_LR_Pin);
 
     /* ADC1 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
+
+    /* ADC1 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(ADC1_2_IRQn);
   /* USER CODE BEGIN ADC1_MspDeInit 1 */
 
   /* USER CODE END ADC1_MspDeInit 1 */
@@ -1316,7 +1324,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
        __HAL_RCC_SAI2_CLK_ENABLE();
 
     /* Peripheral interrupt init*/
-    HAL_NVIC_SetPriority(SAI2_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(SAI2_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(SAI2_IRQn);
     }
     SAI2_client ++;
@@ -1406,7 +1414,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
        __HAL_RCC_SAI2_CLK_ENABLE();
 
       /* Peripheral interrupt init*/
-      HAL_NVIC_SetPriority(SAI2_IRQn, 1, 0);
+      HAL_NVIC_SetPriority(SAI2_IRQn, 5, 0);
       HAL_NVIC_EnableIRQ(SAI2_IRQn);
       }
     SAI2_client ++;
