@@ -64,7 +64,7 @@ const osThreadAttr_t GUI_Task_attributes = {
 osThreadId_t Audio_TaskHandle;
 const osThreadAttr_t Audio_Task_attributes = {
   .name = "Audio_Task",
-  .priority = (osPriority_t) osPriorityAboveNormal,
+  .priority = (osPriority_t) osPriorityRealtime,
   .stack_size = 128 * 4
 };
 /* Definitions for myTask04 */

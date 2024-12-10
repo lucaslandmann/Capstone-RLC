@@ -42,7 +42,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 512
+#define sampleSize 1024
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
 #define maxGain 10.0f
@@ -104,9 +104,6 @@ LTDC_HandleTypeDef hltdc;
 SAI_HandleTypeDef hsai_BlockB1;
 SAI_HandleTypeDef hsai_BlockA2;
 SAI_HandleTypeDef hsai_BlockB2;
-DMA_NodeTypeDef Node_GPDMA1_Channel6;
-DMA_QListTypeDef List_GPDMA1_Channel6;
-DMA_HandleTypeDef handle_GPDMA1_Channel6;
 DMA_NodeTypeDef Node_GPDMA1_Channel7;
 DMA_QListTypeDef List_GPDMA1_Channel7;
 DMA_HandleTypeDef handle_GPDMA1_Channel7;
@@ -123,6 +120,7 @@ struct channelStruct{
 	bool masterMute;
 	uint16_t volumeBuffer[8];
 	uint16_t volumeRunner;
+	uint16_t digGain;
 	uint16_t lr;
 	float lFloat;
 	float rFloat;
@@ -788,8 +786,6 @@ static void MX_GPDMA1_Init(void)
     HAL_NVIC_EnableIRQ(GPDMA1_Channel3_IRQn);
     HAL_NVIC_SetPriority(GPDMA1_Channel5_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel5_IRQn);
-    HAL_NVIC_SetPriority(GPDMA1_Channel6_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(GPDMA1_Channel6_IRQn);
     HAL_NVIC_SetPriority(GPDMA1_Channel7_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(GPDMA1_Channel7_IRQn);
 
@@ -1228,7 +1224,7 @@ static void MX_TIM15_Init(void)
   {
     Error_Handler();
   }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim15, &sMasterConfig) != HAL_OK)
   {
@@ -1398,9 +1394,17 @@ void Audio_Function(void* argument)
 	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever);
 	  osMutexAcquire(lrPollMutexHandle, osWaitForever);
 
-	  index++;
-
-
+//	  uint16_t currChannelLR = channels[index % 6].lr >> 2;
+//	  if(currChannelLR >= 512)
+//	  {
+//		  channels[index % 6].lFloat = 1;
+//		  channels[index % 6].rFloat = 1.0f - ((float)(currChannelLR - 512) / 512.0f);
+//	  }
+//	  else
+//	  {
+//		  channels[index % 6].lFloat = (float)currChannelLR / 512.0f;
+//		  channels[index %6].rFloat = 1;
+//	  }
 
 	  if(dacReady)
 	  {
@@ -1410,11 +1414,8 @@ void Audio_Function(void* argument)
 			  int32_t mixedSignalRight = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
-				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
-				  digGain = digGain * maxGain;
-
-				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
-				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+				  mixedSignalLeft += channels[currChannel].channelData[sample] * channels[currChannel].digGain; //* channels[currChannel].lFloat);
+				  mixedSignalRight += channels[currChannel].channelData[sample] * channels[currChannel].digGain; //* channels[currChannel].rFloat);
 			  }
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;
@@ -1439,7 +1440,7 @@ void StartTask04(void* argument) {
 		  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
 		  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
 		  channels[0].volumeRunner -= channels[0].volumeBuffer[(index + 1) % (sizeof(channels[0].volumeBuffer) / 2)];
-
+		  channels[0].digGain = (channels[0].volumeRunner * 10) / 16384;
 		  //Channel 2 Volume
 		  channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)] = adcGroup1[c2Vol];
 		  channels[1].volumeRunner += channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)];
@@ -1482,6 +1483,8 @@ void StartTask04(void* argument) {
 
 		  //Channel 6 LR
 		  channels[5].lr = adcGroup4[c6LR];
+
+		  index++;
 		  osMutexRelease(lrPollMutexHandle);
 	}
 

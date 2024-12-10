@@ -62,6 +62,7 @@ extern DMA_NodeTypeDef Node_GPDMA1_Channel3;
 extern DMA_QListTypeDef List_GPDMA1_Channel3;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel3;
 extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc4;
 extern DMA2D_HandleTypeDef hdma2d;
 extern GPU2D_HandleTypeDef hgpu2d;
 extern XSPI_HandleTypeDef hxspi1;
@@ -69,9 +70,6 @@ extern DMA_HandleTypeDef handle_GPDMA1_Channel1;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel0;
 extern JPEG_HandleTypeDef hjpeg;
 extern LTDC_HandleTypeDef hltdc;
-extern DMA_NodeTypeDef Node_GPDMA1_Channel6;
-extern DMA_QListTypeDef List_GPDMA1_Channel6;
-extern DMA_HandleTypeDef handle_GPDMA1_Channel6;
 extern DMA_NodeTypeDef Node_GPDMA1_Channel7;
 extern DMA_QListTypeDef List_GPDMA1_Channel7;
 extern DMA_HandleTypeDef handle_GPDMA1_Channel7;
@@ -270,20 +268,6 @@ void GPDMA1_Channel5_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles GPDMA1 Channel 6 global interrupt.
-  */
-void GPDMA1_Channel6_IRQHandler(void)
-{
-  /* USER CODE BEGIN GPDMA1_Channel6_IRQn 0 */
-
-  /* USER CODE END GPDMA1_Channel6_IRQn 0 */
-  HAL_DMA_IRQHandler(&handle_GPDMA1_Channel6);
-  /* USER CODE BEGIN GPDMA1_Channel6_IRQn 1 */
-
-  /* USER CODE END GPDMA1_Channel6_IRQn 1 */
-}
-
-/**
   * @brief This function handles GPDMA1 Channel 7 global interrupt.
   */
 void GPDMA1_Channel7_IRQHandler(void)
@@ -352,6 +336,20 @@ void SAI2_IRQHandler(void)
   /* USER CODE BEGIN SAI2_IRQn 1 */
 
   /* USER CODE END SAI2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles ADC4 (12bits) global interrupt.
+  */
+void ADC4_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC4_IRQn 0 */
+
+  /* USER CODE END ADC4_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc4);
+  /* USER CODE BEGIN ADC4_IRQn 1 */
+
+  /* USER CODE END ADC4_IRQn 1 */
 }
 
 /**
