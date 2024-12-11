@@ -398,16 +398,16 @@ int main(void)
 	  index++;
 
 	  uint16_t currChannelLR = channels[index % 6].lr >> 2;
-	  if(currChannelLR >= 512)
-	  {
-		  channels[index % 6].lFloat = 1;
-		  channels[index % 6].rFloat = 1.0f - ((float)(pan - 512) / 512.0f);
-	  }
-	  else
-	  {
-		  channels[index % 6].lFloat = (float)pan / 512.0f;
-		  channels[index %6].rFloat = 1;
-	  }
+//	  if(currChannelLR >= 512)
+//	  {
+//		  channels[index % 6].lFloat = 1;
+//		  channels[index % 6].rFloat = 1.0f - ((float)(pan - 512) / 512.0f);
+//	  }
+//	  else
+//	  {
+//		  channels[index % 6].lFloat = (float)pan / 512.0f;
+//		  channels[index %6].rFloat = 1;
+//	  }
 
 	  if(adcReady)
 	  {
@@ -439,8 +439,8 @@ int main(void)
 				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
 				  digGain = digGain * maxGain;
 
-				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].lFloat);
-				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample] * digGain * channels[currChannel].rFloat);
+				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample]); //* digGain * channels[currChannel].lFloat);
+				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample]); //* digGain * channels[currChannel].rFloat);
 			  }
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;
@@ -1484,52 +1484,52 @@ static inline int32_t signExtend24(uint32_t value)
 static void volumeLRPoll(uint16_t index)
 {
 	  //Channel 1 Volume
-	  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
-	  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
-	  channels[0].volumeRunner -= channels[0].volumeBuffer[(index + 1) % (sizeof(channels[0].volumeBuffer) / 2)];
-
-	  //Channel 2 Volume
-	  channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)] = adcGroup1[c2Vol];
-	  channels[1].volumeRunner += channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)];
-	  channels[1].volumeRunner -= channels[1].volumeBuffer[(index + 1) % (sizeof(channels[1].volumeBuffer) / 2)];
-
-	  //Channel 3 Volume
-	  channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)] = adcGroup1[c3Vol];
-	  channels[2].volumeRunner += channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)];
-	  channels[2].volumeRunner -= channels[2].volumeBuffer[(index + 1) % (sizeof(channels[2].volumeBuffer) / 2)];
-
-	  //Channel 4 Volume
-	  channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)] = adcGroup1[c4Vol];
-	  channels[3].volumeRunner += channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)];
-	  channels[3].volumeRunner -= channels[3].volumeBuffer[(index + 1) % (sizeof(channels[3].volumeBuffer) / 2)];
-
-	  //Channel 5 Volume
-	  channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)] = adcGroup1[c5Vol];
-	  channels[4].volumeRunner += channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)];
-	  channels[4].volumeRunner -= channels[4].volumeBuffer[(index + 1) % (sizeof(channels[4].volumeBuffer) / 2)];
-
-	  //Channel 6 Volume
-	  channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)] = adcGroup1[c6Vol];
-	  channels[5].volumeRunner += channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)];
-	  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
-
-	  //Channel 1 LR
-	  channels[0].lr = adcGroup1[c1LR];
-
-	  //Channel 2 LR
-	  channels[1].lr = adcGroup1[c2LR];
-
-	  //Channel 3 LR
-	  channels[2].lr = adcGroup1[c3LR];
-
-	  //Channel 4 LR
-	  channels[3].lr = adcGroup1[c4LR];
-
-	  //Channel 5 LR
-	  channels[4].lr = adcGroup4[c5LR];
-
-	  //Channel 6 LR
-	  channels[5].lr = adcGroup4[c6LR];
+//	  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
+//	  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
+//	  channels[0].volumeRunner -= channels[0].volumeBuffer[(index + 1) % (sizeof(channels[0].volumeBuffer) / 2)];
+//
+//	  //Channel 2 Volume
+//	  channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)] = adcGroup1[c2Vol];
+//	  channels[1].volumeRunner += channels[1].volumeBuffer[index % (sizeof(channels[1].volumeBuffer) / 2)];
+//	  channels[1].volumeRunner -= channels[1].volumeBuffer[(index + 1) % (sizeof(channels[1].volumeBuffer) / 2)];
+//
+//	  //Channel 3 Volume
+//	  channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)] = adcGroup1[c3Vol];
+//	  channels[2].volumeRunner += channels[2].volumeBuffer[index % (sizeof(channels[2].volumeBuffer) / 2)];
+//	  channels[2].volumeRunner -= channels[2].volumeBuffer[(index + 1) % (sizeof(channels[2].volumeBuffer) / 2)];
+//
+//	  //Channel 4 Volume
+//	  channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)] = adcGroup1[c4Vol];
+//	  channels[3].volumeRunner += channels[3].volumeBuffer[index % (sizeof(channels[3].volumeBuffer) / 2)];
+//	  channels[3].volumeRunner -= channels[3].volumeBuffer[(index + 1) % (sizeof(channels[3].volumeBuffer) / 2)];
+//
+//	  //Channel 5 Volume
+//	  channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)] = adcGroup1[c5Vol];
+//	  channels[4].volumeRunner += channels[4].volumeBuffer[index % (sizeof(channels[4].volumeBuffer) / 2)];
+//	  channels[4].volumeRunner -= channels[4].volumeBuffer[(index + 1) % (sizeof(channels[4].volumeBuffer) / 2)];
+//
+//	  //Channel 6 Volume
+//	  channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)] = adcGroup1[c6Vol];
+//	  channels[5].volumeRunner += channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)];
+//	  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
+//
+//	  //Channel 1 LR
+//	  channels[0].lr = adcGroup1[c1LR];
+//
+//	  //Channel 2 LR
+//	  channels[1].lr = adcGroup1[c2LR];
+//
+//	  //Channel 3 LR
+//	  channels[2].lr = adcGroup1[c3LR];
+//
+//	  //Channel 4 LR
+//	  channels[3].lr = adcGroup1[c4LR];
+//
+//	  //Channel 5 LR
+//	  channels[4].lr = adcGroup4[c5LR];
+//
+//	  //Channel 6 LR
+//	  channels[5].lr = adcGroup4[c6LR];
 }
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
