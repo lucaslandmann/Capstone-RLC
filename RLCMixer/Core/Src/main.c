@@ -418,10 +418,10 @@ int main(void)
 		        {
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
-		            if(channel == 1){
-		            channels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
-							    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
-		            }
+//		            if(channel == 1){
+//		            channels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+//							    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+//		            }
 		        }
 		  }
 		  //TODO: apply effects
@@ -439,8 +439,8 @@ int main(void)
 				  float digGain = (float)(channels[currChannel].volumeRunner >> 6) / 512.0f;
 				  digGain = digGain * maxGain;
 
-				  mixedSignalLeft += (int32_t)((float)channels[currChannel].channelData[sample]); //* digGain * channels[currChannel].lFloat);
-				  mixedSignalRight += (int32_t)((float)channels[currChannel].channelData[sample]); //* digGain * channels[currChannel].rFloat);
+				  mixedSignalLeft += channels[currChannel].channelData[sample]; //* digGain * channels[currChannel].lFloat);
+				  mixedSignalRight += channels[currChannel].channelData[sample]; //* digGain * channels[currChannel].rFloat);
 			  }
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;

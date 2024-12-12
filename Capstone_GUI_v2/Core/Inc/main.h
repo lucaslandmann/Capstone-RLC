@@ -78,8 +78,6 @@ void Error_Handler(void);
 #define Channel_4_Volume_GPIO_Port GPIOC
 #define Channel_5_Volume_Pin GPIO_PIN_0
 #define Channel_5_Volume_GPIO_Port GPIOA
-#define Channel_6_Volume_Pin GPIO_PIN_2
-#define Channel_6_Volume_GPIO_Port GPIOA
 #define Master_Volume_Pin GPIO_PIN_5
 #define Master_Volume_GPIO_Port GPIOA
 #define Channel_1_LR_Pin GPIO_PIN_6

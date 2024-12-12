@@ -1,7 +1,7 @@
 ../Core/Src/main.c:152:7:Do_Comb0	24	static
 ../Core/Src/main.c:167:7:Do_Allpass0	24	static
 ../Core/Src/main.c:183:7:Do_Delay	24	static
-../Core/Src/main.c:278:5:main	72	static
+../Core/Src/main.c:278:5:main	64	static
 ../Core/Src/main.c:463:6:SystemClock_Config	128	static
 ../Core/Src/main.c:524:6:PeriphCommonClock_Config	232	static
 ../Core/Src/main.c:552:13:SystemPower_Config	8	static
