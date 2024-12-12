@@ -64,6 +64,11 @@
 #define c6LR 1
 
 #define channelSettings 0xA0
+
+//delays form samples
+#define CB 3250*2
+#define AP 480*2
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -182,6 +187,42 @@ uint16_t index = 0;
 float gain[6] = {0};
 float pan[6] = {0};
 
+//define wet 0.0 - 1.0
+float wet = 0.5f;
+//define time delay 0.0 - 1.0
+float time = 1.0f;
+
+//define pointer limits = delay time
+int cf0_lim, ap0_lim;
+
+//define buffer for comb- and allpassfilters
+float cfbuf0[CB];
+float apbuf0[AP];
+//feedback controll
+float cf0_g = 0.7f;
+float ap0_g = 0.8f;
+//buffer-pointer
+int cf0_p=0, ap0_p=0;
+int cf1_p=0, ap1_p=0;
+int cf2_p=0, ap2_p=0;
+int cf3_p=0, ap3_p=0;
+int cf4_p=0, ap4_p=0;
+int cf5_p=0, ap5_p=0;
+
+struct delayInit{
+
+	int cf_lim, ap_lim; //define pointer limits
+	float cfbuf[CB]; //define buffer for comb filter
+	float apbuf[AP]; //define buffer for allpass filter
+	float cf_g; //comb gain
+	float ap_g; //allpass gain
+	int cf_p;
+	int ap_p;
+};
+
+struct delayInit delayChannel[6] = {0};
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -212,6 +253,11 @@ void leds(char opt);
 static inline int32_t signExtend24(uint32_t value);
 void Audio_Function(void* argument);
 void StartTask04(void* argument);
+
+//functions for delay
+float Do_Comb0(float inSample, int channelNum);
+float Do_Allpass0(float inSample, int channelNum);
+float Do_Delay(float inSample, int channelNum);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -1376,6 +1422,44 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+float Do_Comb0(float inSample, int channelNum)
+{
+	delayChannel[2].cf_g = 0.8;
+
+	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
+	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
+	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new;
+	delayChannel[channelNum].cf_p++;
+	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim)
+	{
+		delayChannel[channelNum].cf_p = 0;
+	}
+	return readback;
+
+}
+float Do_Allpass0(float inSample, int channelNum)
+{
+	delayChannel[2].ap_g = 0.7;
+
+	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
+	readback += (-delayChannel[channelNum].ap_g) * inSample;
+	float new = readback*delayChannel[0].ap_g + inSample;
+	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new;
+	delayChannel[channelNum].ap_p++;
+	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim)
+	{
+		delayChannel[channelNum].ap_p = 0;
+	}
+	return readback;
+
+}
+float Do_Delay(float inSample, int channelNum) {
+	float newsample = (Do_Comb0(inSample, channelNum));
+	newsample = Do_Allpass0(newsample, channelNum);
+	return newsample;
+}
+
 
 static inline int32_t signExtend24(uint32_t value)
 {

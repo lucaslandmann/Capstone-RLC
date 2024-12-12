@@ -2,7 +2,7 @@
   "Application": {
     "Screens": [
       {
-        "Name": "MainScreen_1",
+        "Name": "MainScreen",
         "Components": [
           {
             "Type": "Image",
@@ -245,21 +245,20 @@
           {
             "Type": "Slider",
             "Name": "Master_Slider",
-            "X": 683,
+            "X": 679,
             "Y": 208,
             "Width": 36,
             "Height": 222,
             "BackgroundUnselected": "path27.png",
             "BackgroundSelected": "path27.png",
             "Indicator": "MasterSLider.png",
-            "BackgroundX": 17,
+            "BackgroundX": 21,
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
@@ -275,10 +274,9 @@
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
@@ -294,10 +292,9 @@
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
@@ -313,10 +310,9 @@
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
@@ -332,10 +328,9 @@
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
@@ -351,29 +346,27 @@
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "Slider",
             "Name": "CH1_Slider",
-            "X": 82,
+            "X": 79,
             "Y": 208,
             "Width": 36,
             "Height": 222,
             "BackgroundUnselected": "path27.png",
             "BackgroundSelected": "path27.png",
-            "Indicator": "MasterSLider.png",
-            "BackgroundX": 18,
+            "Indicator": "betterSlider2.png",
+            "BackgroundX": 21,
             "BackgroundY": 12,
             "IndicatorPos": 12,
             "IndicatorMax": 174,
-            "IndicatorMin": 157,
             "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
+            "ValueMin": 37,
+            "InitValue": 37
           },
           {
             "Type": "TextArea",
@@ -441,542 +434,6 @@
             "Width": 45,
             "Height": 16,
             "TextId": "__SingleUse_YBS0",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH6_Mute",
-            "X": 571,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH5_Mute",
-            "X": 471,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH4_Mute",
-            "X": 369,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH3_Mute",
-            "X": 273,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH2_Mute",
-            "X": 173,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "CH1_Mute",
-            "X": 71,
-            "Y": 21,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_rounded_small_on_active.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\rounded_neutral_active.json"
-          },
-          {
-            "Type": "ButtonWithIcon",
-            "Name": "EffectsSelect",
-            "X": 673,
-            "Y": 21,
-            "Width": 100,
-            "Height": 36,
-            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_pressed.png",
-            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_active.png",
-            "IconPressed": "__generated\\icon_theme_images_image_auto_awesome_30_30_E8F6FB.svg.png",
-            "IconReleased": "__generated\\icon_theme_images_image_auto_awesome_30_30_E8F6FB.svg.png",
-            "IconX": 36,
-            "IconY": 4,
-            "IconHeight": 30,
-            "IconWidth": 30,
-            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_rounded_active.json"
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "Interaction1",
-            "Trigger": {
-              "Type": "TriggerSliderValueChanged"
-            },
-            "Action": {
-              "Type": "ActionNone"
-            }
-          },
-          {
-            "InteractionName": "Interaction2",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "EffectsSelect"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionWipe",
-              "ScreenTransitionDirection": "South",
-              "ActionComponent": "EffectsSelect"
-            }
-          }
-        ]
-      },
-      {
-        "Name": "MainScreen",
-        "Components": [
-          {
-            "Type": "Slider",
-            "Name": "CH1_Slider_1_1_1_1",
-            "X": 479,
-            "Y": 208,
-            "Width": 36,
-            "Height": 222,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "betterSlider2.png",
-            "BackgroundX": 21,
-            "BackgroundY": 12,
-            "IndicatorPos": 12,
-            "IndicatorMax": 174,
-            "IndicatorMin": 157,
-            "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
-          },
-          {
-            "Type": "Slider",
-            "Name": "CH1_Slider_1_1_1",
-            "X": 379,
-            "Y": 208,
-            "Width": 36,
-            "Height": 222,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "betterSlider2.png",
-            "BackgroundX": 21,
-            "BackgroundY": 12,
-            "IndicatorPos": 12,
-            "IndicatorMax": 174,
-            "IndicatorMin": 157,
-            "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
-          },
-          {
-            "Type": "Slider",
-            "Name": "CH1_Slider_1_1",
-            "X": 279,
-            "Y": 208,
-            "Width": 36,
-            "Height": 222,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "betterSlider2.png",
-            "BackgroundX": 21,
-            "BackgroundY": 12,
-            "IndicatorPos": 12,
-            "IndicatorMax": 174,
-            "IndicatorMin": 157,
-            "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
-          },
-          {
-            "Type": "Slider",
-            "Name": "CH1_Slider_1",
-            "X": 179,
-            "Y": 208,
-            "Width": 36,
-            "Height": 222,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "betterSlider2.png",
-            "BackgroundX": 21,
-            "BackgroundY": 12,
-            "IndicatorPos": 12,
-            "IndicatorMax": 174,
-            "IndicatorMin": 157,
-            "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
-          },
-          {
-            "Type": "Image",
-            "Name": "image1_3",
-            "Width": 800,
-            "Height": 480,
-            "LockPosition": true,
-            "RelativeFilename": "fullbackPlateV3.png"
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1_4",
-            "X": 487,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_1CKN",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1_5",
-            "X": 587,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_5HMT",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1_3",
-            "X": 87,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_8NGO",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1_2",
-            "X": 287,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_DH6C",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1_1",
-            "X": 189,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_4L1H",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2_1",
-            "X": 387,
-            "Y": 67,
-            "Width": 30,
-            "Height": 16,
-            "TextId": "__SingleUse_WC53",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "textureMapper1_4",
-            "X": 482,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "textureMapper1_5",
-            "X": 582,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "textureMapper1_3",
-            "X": 382,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "textureMapper1_2",
-            "X": 282,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1_1",
-            "X": 62,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_F8U3",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1_3",
-            "X": 362,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_1E6D",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_2",
-            "X": 162,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_M40N",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1",
-            "X": 562,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_O89H",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1_4",
-            "X": 662,
-            "Y": 443,
-            "Width": 84,
-            "Height": 30,
-            "TextId": "__SingleUse_D2RN",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "Slider",
-            "Name": "slider1_6",
-            "X": 692,
-            "Y": 208,
-            "Width": 24,
-            "Height": 248,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "MasterSLider.png",
-            "BackgroundX": 9,
-            "BackgroundY": 12,
-            "IndicatorMax": 200,
-            "IndicatorMin": 16,
-            "ValueMax": 100,
-            "InitValue": 16
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1_2",
-            "X": 462,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_S8HP",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "Slider",
-            "Name": "CH1_Slider",
-            "X": 79,
-            "Y": 208,
-            "Width": 36,
-            "Height": 222,
-            "BackgroundUnselected": "path27.png",
-            "BackgroundSelected": "path27.png",
-            "Indicator": "betterSlider2.png",
-            "BackgroundX": 21,
-            "BackgroundY": 12,
-            "IndicatorPos": 12,
-            "IndicatorMax": 174,
-            "IndicatorMin": 157,
-            "ValueMax": 100,
-            "ValueMin": 32,
-            "InitValue": 42
-          },
-          {
-            "Type": "TextArea",
-            "Name": "RLCHeader",
-            "Width": 49,
-            "Height": 170,
-            "TextId": "__SingleUse_3N9X",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 90,
-              "Green": 94,
-              "Blue": 209
-            }
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1",
-            "X": 262,
-            "Y": 443,
-            "Width": 14,
-            "Height": 30,
-            "TextId": "__SingleUse_7MLS",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "Ch1PanKnob",
-            "X": 82,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextureMapper",
-            "Name": "CH2PanKnob",
-            "X": 182,
-            "Y": 112,
-            "Width": 40,
-            "Height": 40,
-            "RenderingAlgorithm": "Nearest-neighbor",
-            "FileNameImage": "RedKnobV2.png",
-            "LockBitmapToCenter": true,
-            "Scale": 1.0,
-            "LockOrigoToCenter": true,
-            "XOrigo": 20.0,
-            "YOrigo": 20.0,
-            "ZOrigo": 1000.0,
-            "CameraDistance": 1000.0
-          },
-          {
-            "Type": "TextArea",
-            "Name": "CH1EffectsSendText",
-            "X": 701,
-            "Y": 67,
-            "Width": 45,
-            "Height": 16,
-            "TextId": "__SingleUse_0LDN",
             "TextRotation": "0",
             "Color": {
               "Red": 255,

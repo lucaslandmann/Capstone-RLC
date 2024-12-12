@@ -55,10 +55,10 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXConfiguration.o:
  Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp \
  TouchGFX/gui/include/gui/model/Model.hpp \
- TouchGFX/gui/include/gui/mainscreen_1_screen/MainScreen_1View.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_1_screen/MainScreen_1ViewBase.hpp \
+ TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp \
  Middlewares/ST/touchgfx/framework/include/mvp/View.hpp \
- TouchGFX/gui/include/gui/mainscreen_1_screen/MainScreen_1Presenter.hpp \
+ TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp \
  TouchGFX/gui/include/gui/model/ModelListener.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
@@ -69,9 +69,6 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/Target/generated/TouchGFXConfiguration.o:
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp \
- TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp \
- TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp \
  TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
  TouchGFX/generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
  TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
@@ -267,13 +264,13 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:
 
 TouchGFX/gui/include/gui/model/Model.hpp:
 
-TouchGFX/gui/include/gui/mainscreen_1_screen/MainScreen_1View.hpp:
+TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_1_screen/MainScreen_1ViewBase.hpp:
+TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp:
 
 Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:
 
-TouchGFX/gui/include/gui/mainscreen_1_screen/MainScreen_1Presenter.hpp:
+TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp:
 
 TouchGFX/gui/include/gui/model/ModelListener.hpp:
 
@@ -294,12 +291,6 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:
-
-TouchGFX/gui/include/gui/mainscreen_screen/MainScreenView.hpp:
-
-TouchGFX/generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp:
-
-TouchGFX/gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp:
 
 TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 

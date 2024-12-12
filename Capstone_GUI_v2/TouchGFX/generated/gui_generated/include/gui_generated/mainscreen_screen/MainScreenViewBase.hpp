@@ -8,10 +8,10 @@
 #include <mvp/View.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextureMapper.hpp>
+#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/ButtonWithIcon.hpp>
 
@@ -31,10 +31,6 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Slider CH1_Slider_1_1_1_1;
-    touchgfx::Slider CH1_Slider_1_1_1;
-    touchgfx::Slider CH1_Slider_1_1;
-    touchgfx::Slider CH1_Slider_1;
     touchgfx::Image image1_3;
     touchgfx::TextArea textArea2_1_4;
     touchgfx::TextArea textArea2_1_5;
@@ -51,8 +47,13 @@ protected:
     touchgfx::TextArea textArea1_2;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea1_1_4;
-    touchgfx::Slider slider1_6;
     touchgfx::TextArea textArea1_1_2;
+    touchgfx::Slider Master_Slider;
+    touchgfx::Slider CH6_Slider;
+    touchgfx::Slider CH5_Slider;
+    touchgfx::Slider CH4_Slider;
+    touchgfx::Slider CH3_Slider;
+    touchgfx::Slider CH2_Slider;
     touchgfx::Slider CH1_Slider;
     touchgfx::TextArea RLCHeader;
     touchgfx::TextArea textArea1;

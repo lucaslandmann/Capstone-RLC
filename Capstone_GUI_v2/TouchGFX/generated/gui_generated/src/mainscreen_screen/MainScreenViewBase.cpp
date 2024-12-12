@@ -13,34 +13,6 @@ MainScreenViewBase::MainScreenViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    CH1_Slider_1_1_1_1.setXY(479, 208);
-    CH1_Slider_1_1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    CH1_Slider_1_1_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
-    CH1_Slider_1_1_1_1.setValueRange(32, 100);
-    CH1_Slider_1_1_1_1.setValue(42);
-    add(CH1_Slider_1_1_1_1);
-
-    CH1_Slider_1_1_1.setXY(379, 208);
-    CH1_Slider_1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    CH1_Slider_1_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
-    CH1_Slider_1_1_1.setValueRange(32, 100);
-    CH1_Slider_1_1_1.setValue(42);
-    add(CH1_Slider_1_1_1);
-
-    CH1_Slider_1_1.setXY(279, 208);
-    CH1_Slider_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    CH1_Slider_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
-    CH1_Slider_1_1.setValueRange(32, 100);
-    CH1_Slider_1_1.setValue(42);
-    add(CH1_Slider_1_1);
-
-    CH1_Slider_1.setXY(179, 208);
-    CH1_Slider_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    CH1_Slider_1.setupVerticalSlider(21, 12, 12, 157, 174);
-    CH1_Slider_1.setValueRange(32, 100);
-    CH1_Slider_1.setValue(42);
-    add(CH1_Slider_1);
-
     image1_3.setXY(0, 0);
     image1_3.setBitmap(touchgfx::Bitmap(BITMAP_FULLBACKPLATEV3_ID));
     add(image1_3);
@@ -48,37 +20,37 @@ MainScreenViewBase::MainScreenViewBase() :
     textArea2_1_4.setXY(487, 67);
     textArea2_1_4.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_4.setLinespacing(0);
-    textArea2_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1CKN));
+    textArea2_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y3GE));
     add(textArea2_1_4);
 
     textArea2_1_5.setXY(587, 67);
     textArea2_1_5.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_5.setLinespacing(0);
-    textArea2_1_5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5HMT));
+    textArea2_1_5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_COKC));
     add(textArea2_1_5);
 
     textArea2_1_3.setXY(87, 67);
     textArea2_1_3.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_3.setLinespacing(0);
-    textArea2_1_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8NGO));
+    textArea2_1_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_2YOK));
     add(textArea2_1_3);
 
     textArea2_1_2.setXY(287, 67);
     textArea2_1_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_2.setLinespacing(0);
-    textArea2_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DH6C));
+    textArea2_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QV6M));
     add(textArea2_1_2);
 
     textArea2_1_1.setXY(189, 67);
     textArea2_1_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_1.setLinespacing(0);
-    textArea2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4L1H));
+    textArea2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A8XR));
     add(textArea2_1_1);
 
     textArea2_1.setXY(387, 67);
     textArea2_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1.setLinespacing(0);
-    textArea2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WC53));
+    textArea2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EWYB));
     add(textArea2_1);
 
     textureMapper1_4.setXY(482, 112);
@@ -136,63 +108,98 @@ MainScreenViewBase::MainScreenViewBase() :
     textArea1_1_1.setXY(62, 443);
     textArea1_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1_1.setLinespacing(0);
-    textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F8U3));
+    textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YZBS));
     add(textArea1_1_1);
 
     textArea1_1_3.setXY(362, 443);
     textArea1_1_3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1_3.setLinespacing(0);
-    textArea1_1_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1E6D));
+    textArea1_1_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KZEG));
     add(textArea1_1_3);
 
     textArea1_2.setXY(162, 443);
     textArea1_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_2.setLinespacing(0);
-    textArea1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_M40N));
+    textArea1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S5GA));
     add(textArea1_2);
 
     textArea1_1.setXY(562, 443);
     textArea1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1.setLinespacing(0);
-    textArea1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_O89H));
+    textArea1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EX9C));
     add(textArea1_1);
 
     textArea1_1_4.setXY(662, 443);
     textArea1_1_4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1_4.setLinespacing(0);
-    textArea1_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D2RN));
+    textArea1_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_P33B));
     add(textArea1_1_4);
-
-    slider1_6.setXY(692, 208);
-    slider1_6.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_MASTERSLIDER_ID));
-    slider1_6.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1_6.setValueRange(0, 100);
-    slider1_6.setValue(16);
-    add(slider1_6);
 
     textArea1_1_2.setXY(462, 443);
     textArea1_1_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1_2.setLinespacing(0);
-    textArea1_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S8HP));
+    textArea1_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_N2CB));
     add(textArea1_1_2);
+
+    Master_Slider.setXY(679, 208);
+    Master_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_MASTERSLIDER_ID));
+    Master_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    Master_Slider.setValueRange(37, 100);
+    Master_Slider.setValue(37);
+    add(Master_Slider);
+
+    CH6_Slider.setXY(579, 208);
+    CH6_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH6_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH6_Slider.setValueRange(37, 100);
+    CH6_Slider.setValue(37);
+    add(CH6_Slider);
+
+    CH5_Slider.setXY(479, 208);
+    CH5_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH5_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH5_Slider.setValueRange(37, 100);
+    CH5_Slider.setValue(37);
+    add(CH5_Slider);
+
+    CH4_Slider.setXY(379, 208);
+    CH4_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH4_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH4_Slider.setValueRange(37, 100);
+    CH4_Slider.setValue(37);
+    add(CH4_Slider);
+
+    CH3_Slider.setXY(279, 208);
+    CH3_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH3_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH3_Slider.setValueRange(37, 100);
+    CH3_Slider.setValue(37);
+    add(CH3_Slider);
+
+    CH2_Slider.setXY(179, 208);
+    CH2_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH2_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH2_Slider.setValueRange(37, 100);
+    CH2_Slider.setValue(37);
+    add(CH2_Slider);
 
     CH1_Slider.setXY(79, 208);
     CH1_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    CH1_Slider.setupVerticalSlider(21, 12, 12, 157, 174);
-    CH1_Slider.setValueRange(32, 100);
-    CH1_Slider.setValue(42);
+    CH1_Slider.setupVerticalSlider(21, 12, 12, 0, 174);
+    CH1_Slider.setValueRange(37, 100);
+    CH1_Slider.setValue(37);
     add(CH1_Slider);
 
     RLCHeader.setPosition(0, 0, 49, 170);
     RLCHeader.setColor(touchgfx::Color::getColorFromRGB(90, 94, 209));
     RLCHeader.setLinespacing(0);
-    RLCHeader.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3N9X));
+    RLCHeader.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YSC6));
     add(RLCHeader);
 
     textArea1.setXY(262, 443);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_7MLS));
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_09B7));
     add(textArea1);
 
     Ch1PanKnob.setXY(82, 112);
@@ -224,7 +231,7 @@ MainScreenViewBase::MainScreenViewBase() :
     CH1EffectsSendText.setXY(701, 67);
     CH1EffectsSendText.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     CH1EffectsSendText.setLinespacing(0);
-    CH1EffectsSendText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0LDN));
+    CH1EffectsSendText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YBS0));
     add(CH1EffectsSendText);
 
     CH6_Mute.setXY(571, 21);

@@ -395,16 +395,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/eq_screen/EQView.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/gui/MainScreen_1Presenter.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/mainscreen_1_screen/MainScreen_1Presenter.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/gui/MainScreen_1View.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/mainscreen_1_screen/MainScreen_1View.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/gui/MainScreenPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/mainscreen_screen/MainScreenPresenter.cpp</locationURI>
@@ -753,11 +743,6 @@
 			<name>Application/User/generated/EQViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/eq_screen/EQViewBase.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/MainScreen_1ViewBase.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/mainscreen_1_screen/MainScreen_1ViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/MainScreenViewBase.cpp</name>

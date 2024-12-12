@@ -53,31 +53,31 @@ SlideTransition.hpp:154:18:void touchgfx::SlideTransition<templateDirection>::in
 WipeTransition.hpp:72:18:void touchgfx::WipeTransition<templateDirection>::handleTickEvent() [with touchgfx::Direction templateDirection = (touchgfx::Direction)1]	24	static
 MVPApplication.hpp:59:18:virtual void touchgfx::MVPApplication::handlePendingScreenTransition()	8	static
 Drawable.hpp:413:10:void touchgfx::Drawable::setWidthHeight(int16_t, int16_t)	16	static
-FrontendApplicationBase.cpp:29:1:FrontendApplicationBase::FrontendApplicationBase(Model&, FrontendHeap&)	24	static
-FrontendApplicationBase.cpp:50:6:void FrontendApplicationBase::gotoMainScreenScreenNoTransition()	0	static
-FrontendApplicationBase.cpp:61:6:void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouth()	0	static
-FrontendApplicationBase.cpp:74:6:void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouth()	0	static
-FrontendApplicationBase.cpp:85:6:void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouth()	0	static
-FrontendApplicationBase.cpp:98:6:void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorth()	0	static
-FrontendApplicationBase.cpp:111:6:void FrontendApplicationBase::gotoEQScreenNoTransition()	0	static
-FrontendApplicationBase.cpp:122:6:void FrontendApplicationBase::gotoEQScreenSlideTransitionNorth()	0	static
-FrontendApplicationBase.cpp:135:6:void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorth()	0	static
+FrontendApplicationBase.cpp:27:1:FrontendApplicationBase::FrontendApplicationBase(Model&, FrontendHeap&)	24	static
+FrontendApplicationBase.cpp:48:6:void FrontendApplicationBase::gotoMainScreenScreenNoTransition()	0	static
+FrontendApplicationBase.cpp:59:6:void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouth()	0	static
+FrontendApplicationBase.cpp:72:6:void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouth()	0	static
+FrontendApplicationBase.cpp:83:6:void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouth()	0	static
+FrontendApplicationBase.cpp:96:6:void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorth()	0	static
+FrontendApplicationBase.cpp:109:6:void FrontendApplicationBase::gotoEQScreenNoTransition()	0	static
+FrontendApplicationBase.cpp:120:6:void FrontendApplicationBase::gotoEQScreenSlideTransitionNorth()	0	static
+FrontendApplicationBase.cpp:133:6:void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorth()	0	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = MainScreenView; PresenterType = MainScreenPresenter; TransType = touchgfx::NoTransition; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:56:6:void FrontendApplicationBase::gotoMainScreenScreenNoTransitionImpl()	16	static
+FrontendApplicationBase.cpp:54:6:void FrontendApplicationBase::gotoMainScreenScreenNoTransitionImpl()	16	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = EffectsSelectView; PresenterType = EffectsSelectPresenter; TransType = touchgfx::WipeTransition<(touchgfx::Direction)1>; ModelType = Model]	40	static
-FrontendApplicationBase.cpp:80:6:void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouthImpl()	16	static
+FrontendApplicationBase.cpp:78:6:void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouthImpl()	16	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = EQView; PresenterType = EQPresenter; TransType = touchgfx::NoTransition; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:117:6:void FrontendApplicationBase::gotoEQScreenNoTransitionImpl()	16	static
+FrontendApplicationBase.cpp:115:6:void FrontendApplicationBase::gotoEQScreenNoTransitionImpl()	16	static
 SlideTransition.hpp:47:5:touchgfx::SlideTransition<templateDirection>::SlideTransition(uint8_t) [with touchgfx::Direction templateDirection = (touchgfx::Direction)1]	24	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = MainScreenView; PresenterType = MainScreenPresenter; TransType = touchgfx::SlideTransition<(touchgfx::Direction)1>; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:67:6:void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouthImpl()	16	static
+FrontendApplicationBase.cpp:65:6:void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouthImpl()	16	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = EffectsSelectView; PresenterType = EffectsSelectPresenter; TransType = touchgfx::SlideTransition<(touchgfx::Direction)1>; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:91:6:void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouthImpl()	16	static
+FrontendApplicationBase.cpp:89:6:void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouthImpl()	16	static
 AbstractPartition.hpp:135:8:T& touchgfx::AbstractPartition::at(uint16_t) [with T = touchgfx::SlideTransition<(touchgfx::Direction)0>]	0	static
 SlideTransition.hpp:47:5:touchgfx::SlideTransition<templateDirection>::SlideTransition(uint8_t) [with touchgfx::Direction templateDirection = (touchgfx::Direction)0]	24	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = DelayView; PresenterType = DelayPresenter; TransType = touchgfx::SlideTransition<(touchgfx::Direction)0>; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:104:6:void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorthImpl()	16	static
+FrontendApplicationBase.cpp:102:6:void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorthImpl()	16	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = EQView; PresenterType = EQPresenter; TransType = touchgfx::SlideTransition<(touchgfx::Direction)0>; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:128:6:void FrontendApplicationBase::gotoEQScreenSlideTransitionNorthImpl()	16	static
+FrontendApplicationBase.cpp:126:6:void FrontendApplicationBase::gotoEQScreenSlideTransitionNorthImpl()	16	static
 MVPApplication.hpp:161:16:PresenterType* touchgfx::makeTransition(touchgfx::Screen**, touchgfx::Presenter**, touchgfx::MVPHeap&, touchgfx::Transition**, ModelType*) [with ScreenType = ReverbView; PresenterType = ReverbPresenter; TransType = touchgfx::SlideTransition<(touchgfx::Direction)0>; ModelType = Model]	32	static
-FrontendApplicationBase.cpp:141:6:void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorthImpl()	16	static
+FrontendApplicationBase.cpp:139:6:void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorthImpl()	16	static

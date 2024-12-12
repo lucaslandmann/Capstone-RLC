@@ -11,8 +11,6 @@
 #ifdef SIMULATOR
 #include <platform/driver/lcd/LCD16bpp.hpp>
 #endif
-#include <gui/mainscreen_1_screen/MainScreen_1View.hpp>
-#include <gui/mainscreen_1_screen/MainScreen_1Presenter.hpp>
 #include <gui/mainscreen_screen/MainScreenView.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/effectsselect_screen/EffectsSelectView.hpp>
