@@ -10,10 +10,13 @@
 
 #include <touchgfx/transitions/NoTransition.hpp>
 #include <touchgfx/transitions/WipeTransition.hpp>
+#include <touchgfx/transitions/SlideTransition.hpp>
 
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
 
+#include <gui/mainscreen_1_screen/MainScreen_1View.hpp>
+#include <gui/mainscreen_1_screen/MainScreen_1Presenter.hpp>
 #include <gui/mainscreen_screen/MainScreenView.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/effectsselect_screen/EffectsSelectView.hpp>
@@ -46,12 +49,13 @@ public:
      * A list of all view types. Must end with meta::Nil.
      * @note All view types used in the application MUST be added to this list!
      */
-    typedef touchgfx::meta::TypeList< MainScreenView,
+    typedef touchgfx::meta::TypeList< MainScreen_1View,
+            touchgfx::meta::TypeList< MainScreenView,
             touchgfx::meta::TypeList< EffectsSelectView,
             touchgfx::meta::TypeList< DelayView,
             touchgfx::meta::TypeList< EQView,
             touchgfx::meta::TypeList< ReverbView,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -63,12 +67,13 @@ public:
      * A list of all presenter types. Must end with meta::Nil.
      * @note All presenter types used in the application MUST be added to this list!
      */
-    typedef touchgfx::meta::TypeList< MainScreenPresenter,
+    typedef touchgfx::meta::TypeList< MainScreen_1Presenter,
+            touchgfx::meta::TypeList< MainScreenPresenter,
             touchgfx::meta::TypeList< EffectsSelectPresenter,
             touchgfx::meta::TypeList< DelayPresenter,
             touchgfx::meta::TypeList< EQPresenter,
             touchgfx::meta::TypeList< ReverbPresenter,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**
@@ -82,7 +87,9 @@ public:
      */
     typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
             touchgfx::meta::TypeList< WipeTransition<SOUTH>,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< SlideTransition<SOUTH>,
+            touchgfx::meta::TypeList< SlideTransition<NORTH>,
+            touchgfx::meta::Nil > > >
             > GeneratedTransitionTypes;
 
     /**

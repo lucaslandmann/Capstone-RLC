@@ -23,8 +23,23 @@ public:
     // MainScreen
     void gotoMainScreenScreenNoTransition();
 
+    void gotoMainScreenScreenSlideTransitionSouth();
+
     // EffectsSelect
     void gotoEffectsSelectScreenWipeTransitionSouth();
+
+    void gotoEffectsSelectScreenSlideTransitionSouth();
+
+    // Delay
+    void gotoDelayScreenSlideTransitionNorth();
+
+    // EQ
+    void gotoEQScreenNoTransition();
+
+    void gotoEQScreenSlideTransitionNorth();
+
+    // Reverb
+    void gotoReverbScreenSlideTransitionNorth();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -34,8 +49,23 @@ protected:
     // MainScreen
     void gotoMainScreenScreenNoTransitionImpl();
 
+    void gotoMainScreenScreenSlideTransitionSouthImpl();
+
     // EffectsSelect
     void gotoEffectsSelectScreenWipeTransitionSouthImpl();
+
+    void gotoEffectsSelectScreenSlideTransitionSouthImpl();
+
+    // Delay
+    void gotoDelayScreenSlideTransitionNorthImpl();
+
+    // EQ
+    void gotoEQScreenNoTransitionImpl();
+
+    void gotoEQScreenSlideTransitionNorthImpl();
+
+    // Reverb
+    void gotoReverbScreenSlideTransitionNorthImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

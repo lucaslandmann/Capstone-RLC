@@ -51,7 +51,10 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/gui/src/eq_screen/EQPresenter.o: \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/Texts.hpp \
- Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp
+ Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp
 
 TouchGFX/gui/include/gui/eq_screen/EQView.hpp:
 
@@ -156,3 +159,9 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/TypedText.hpp:
 Middlewares/ST/touchgfx/framework/include/touchgfx/Texts.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:

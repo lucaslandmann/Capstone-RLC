@@ -157,6 +157,51 @@
     </TextGroup>
     <TextGroup Id="TopbarContainer" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_YBS0" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">FX Send</Translation>
+      </Text>
+      <Text Id="__SingleUse_09B7" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">3</Translation>
+      </Text>
+      <Text Id="__SingleUse_YSC6" Alignment="Center" TypographyId="ShareTech_48">
+        <Translation Language="GB">R&#10;L&#10;C</Translation>
+      </Text>
+      <Text Id="__SingleUse_N2CB" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">5</Translation>
+      </Text>
+      <Text Id="__SingleUse_P33B" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">Master</Translation>
+      </Text>
+      <Text Id="__SingleUse_EX9C" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">6</Translation>
+      </Text>
+      <Text Id="__SingleUse_S5GA" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">2</Translation>
+      </Text>
+      <Text Id="__SingleUse_KZEG" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">4</Translation>
+      </Text>
+      <Text Id="__SingleUse_YZBS" Alignment="Left" TypographyId="ShareTech_26">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_EWYB" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
+      <Text Id="__SingleUse_A8XR" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
+      <Text Id="__SingleUse_QV6M" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
+      <Text Id="__SingleUse_2YOK" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
+      <Text Id="__SingleUse_COKC" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y3GE" Alignment="Left" TypographyId="SairaSemiBold_16">
+        <Translation Language="GB">Mute</Translation>
+      </Text>
       <Text Id="__SingleUse_ZVD0" Alignment="Center" TypographyId="ShareTech_20">
         <Translation Language="GB">Reverb</Translation>
       </Text>
@@ -274,18 +319,6 @@
       <Text Id="__SingleUse_CRIX" Alignment="Center" TypographyId="ShareTech_26">
         <Translation Language="GB">Reverb</Translation>
       </Text>
-      <Text Id="__SingleUse_TDPA" Alignment="Left" TypographyId="SairaSemiBold_16">
-        <Translation Language="GB">FX Send</Translation>
-      </Text>
-      <Text Id="__SingleUse_63AU" Alignment="Left" TypographyId="SairaSemiBold_16">
-        <Translation Language="GB">FX Send</Translation>
-      </Text>
-      <Text Id="__SingleUse_GP56" Alignment="Left" TypographyId="SairaSemiBold_16">
-        <Translation Language="GB">FX Send</Translation>
-      </Text>
-      <Text Id="__SingleUse_NAT0" Alignment="Left" TypographyId="SairaSemiBold_16">
-        <Translation Language="GB">FX Send</Translation>
-      </Text>
       <Text Id="__SingleUse_5HMT" Alignment="Left" TypographyId="SairaSemiBold_16">
         <Translation Language="GB">Mute</Translation>
       </Text>
@@ -300,9 +333,6 @@
       </Text>
       <Text Id="__SingleUse_4L1H" Alignment="Left" TypographyId="SairaSemiBold_16">
         <Translation Language="GB">Mute</Translation>
-      </Text>
-      <Text Id="__SingleUse_NC6O" Alignment="Left" TypographyId="SairaSemiBold_16">
-        <Translation Language="GB">FX Send</Translation>
       </Text>
       <Text Id="__SingleUse_WC53" Alignment="Left" TypographyId="SairaSemiBold_16">
         <Translation Language="GB">Mute</Translation>
@@ -331,7 +361,7 @@
       <Text Id="__SingleUse_7MLS" Alignment="Left" TypographyId="ShareTech_26">
         <Translation Language="GB">3</Translation>
       </Text>
-      <Text Id="__SingleUse_3N9X" Alignment="Center" TypographyId="ShareTech_55">
+      <Text Id="__SingleUse_3N9X" Alignment="Center" TypographyId="ShareTech_48">
         <Translation Language="GB">R&#10;L&#10;C</Translation>
       </Text>
     </TextGroup>

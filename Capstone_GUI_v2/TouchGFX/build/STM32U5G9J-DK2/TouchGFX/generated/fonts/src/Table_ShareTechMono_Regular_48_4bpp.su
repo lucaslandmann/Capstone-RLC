@@ -1,2 +1,2 @@
-Table_ShareTechMono_Regular_48_4bpp.cpp:35:224:void __tcf_0()	0	static
-Table_ShareTechMono_Regular_48_4bpp.cpp:33:26:touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_48_4bpp()	72	static
+Table_ShareTechMono_Regular_48_4bpp.cpp:38:224:void __tcf_0()	0	static
+Table_ShareTechMono_Regular_48_4bpp.cpp:36:26:touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_48_4bpp()	72	static

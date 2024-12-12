@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/Slider.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class ReverbViewBase : public touchgfx::View<ReverbPresenter>
 {
@@ -34,8 +35,19 @@ protected:
     touchgfx::Slider slider1_1;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea ReverbDecay;
+    touchgfx::ButtonWithIcon buttonWithIcon1;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<ReverbViewBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

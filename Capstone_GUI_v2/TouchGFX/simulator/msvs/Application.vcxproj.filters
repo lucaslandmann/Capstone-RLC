@@ -244,6 +244,18 @@
     <Filter Include="Header Files\generated\gui_generated\delay_screen">
       <UniqueIdentifier>20391342-2BF1-23CA-27FD-7968ECD5F458</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\mainscreen_1_screen">
+      <UniqueIdentifier>0150052D-9B64-EFFA-918C-7BB0D38D5BCC</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\mainscreen_1_screen">
+      <UniqueIdentifier>2BCF95B9-EC37-9019-5645-18A3F09DC051</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\mainscreen_1_screen">
+      <UniqueIdentifier>DDFC1860-1EDF-97D0-0700-86563005B909</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\mainscreen_1_screen">
+      <UniqueIdentifier>1B6FD188-0F90-DC88-E9B0-B352E24B4AA9</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -326,6 +338,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\reverb_screen\ReverbViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\reverb_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\mainscreen_1_screen\MainScreen_1Presenter.cpp">
+      <Filter>Source Files\gui\mainscreen_1_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\mainscreen_1_screen\MainScreen_1View.cpp">
+      <Filter>Source Files\gui\mainscreen_1_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\mainscreen_1_screen\MainScreen_1ViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\mainscreen_1_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -819,6 +840,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\reverb_screen\ReverbViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\reverb_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_1_screen\MainScreen_1Presenter.hpp">
+      <Filter>Header Files\gui\mainscreen_1_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_1_screen\MainScreen_1View.hpp">
+      <Filter>Header Files\gui\mainscreen_1_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\mainscreen_1_screen\MainScreen_1ViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\mainscreen_1_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

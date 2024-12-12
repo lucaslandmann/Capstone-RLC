@@ -11,6 +11,8 @@
 #ifdef SIMULATOR
 #include <platform/driver/lcd/LCD16bpp.hpp>
 #endif
+#include <gui/mainscreen_1_screen/MainScreen_1View.hpp>
+#include <gui/mainscreen_1_screen/MainScreen_1Presenter.hpp>
 #include <gui/mainscreen_screen/MainScreenView.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/effectsselect_screen/EffectsSelectView.hpp>
@@ -56,6 +58,17 @@ void FrontendApplicationBase::gotoMainScreenScreenNoTransitionImpl()
     touchgfx::makeTransition<MainScreenView, MainScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
+void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoMainScreenScreenSlideTransitionSouthImpl()
+{
+    touchgfx::makeTransition<MainScreenView, MainScreenPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 // EffectsSelect
 
 void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouth()
@@ -67,4 +80,65 @@ void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouth()
 void FrontendApplicationBase::gotoEffectsSelectScreenWipeTransitionSouthImpl()
 {
     touchgfx::makeTransition<EffectsSelectView, EffectsSelectPresenter, touchgfx::WipeTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoEffectsSelectScreenSlideTransitionSouthImpl()
+{
+    touchgfx::makeTransition<EffectsSelectView, EffectsSelectPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Delay
+
+void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoDelayScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDelayScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<DelayView, DelayPresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// EQ
+
+void FrontendApplicationBase::gotoEQScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoEQScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoEQScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<EQView, EQPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoEQScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoEQScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoEQScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<EQView, EQPresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Reverb
+
+void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoReverbScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoReverbScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<ReverbView, ReverbPresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

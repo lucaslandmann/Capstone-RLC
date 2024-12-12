@@ -6,7 +6,8 @@
 #include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
-ReverbViewBase::ReverbViewBase()
+ReverbViewBase::ReverbViewBase() :
+    buttonCallback(this, &ReverbViewBase::buttonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -47,6 +48,12 @@ ReverbViewBase::ReverbViewBase()
     ReverbDecay.setLinespacing(0);
     ReverbDecay.setTypedText(touchgfx::TypedText(T___SINGLEUSE_B8L1));
     add(ReverbDecay);
+
+    buttonWithIcon1.setXY(82, 354);
+    buttonWithIcon1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID));
+    buttonWithIcon1.setIconXY(5, 5);
+    buttonWithIcon1.setAction(buttonCallback);
+    add(buttonWithIcon1);
 }
 
 ReverbViewBase::~ReverbViewBase()
@@ -57,4 +64,15 @@ ReverbViewBase::~ReverbViewBase()
 void ReverbViewBase::setupScreen()
 {
 
+}
+
+void ReverbViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &buttonWithIcon1)
+    {
+        //Interaction1
+        //When buttonWithIcon1 clicked change screen to EffectsSelect
+        //Go to EffectsSelect with screen transition towards South
+        application().gotoEffectsSelectScreenSlideTransitionSouth();
+    }
 }

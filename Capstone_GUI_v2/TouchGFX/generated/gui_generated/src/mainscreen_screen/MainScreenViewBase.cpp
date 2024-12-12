@@ -13,127 +13,73 @@ MainScreenViewBase::MainScreenViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    image1.setXY(0, 0);
-    image1.setBitmap(touchgfx::Bitmap(BITMAP_FULLBACKPLATEV3_ID));
-    add(image1);
+    CH1_Slider_1_1_1_1.setXY(479, 208);
+    CH1_Slider_1_1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH1_Slider_1_1_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
+    CH1_Slider_1_1_1_1.setValueRange(32, 100);
+    CH1_Slider_1_1_1_1.setValue(42);
+    add(CH1_Slider_1_1_1_1);
 
-    image1_1.setXY(0, 0);
-    image1_1.setBitmap(touchgfx::Bitmap(BITMAP_FULLBACKPLATEV3_ID));
-    add(image1_1);
+    CH1_Slider_1_1_1.setXY(379, 208);
+    CH1_Slider_1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH1_Slider_1_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
+    CH1_Slider_1_1_1.setValueRange(32, 100);
+    CH1_Slider_1_1_1.setValue(42);
+    add(CH1_Slider_1_1_1);
 
-    image1_2.setXY(0, 0);
-    image1_2.setBitmap(touchgfx::Bitmap(BITMAP_FULLBACKPLATEV3_ID));
-    add(image1_2);
+    CH1_Slider_1_1.setXY(279, 208);
+    CH1_Slider_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH1_Slider_1_1.setupVerticalSlider(21, 12, 12, 157, 174);
+    CH1_Slider_1_1.setValueRange(32, 100);
+    CH1_Slider_1_1.setValue(42);
+    add(CH1_Slider_1_1);
+
+    CH1_Slider_1.setXY(179, 208);
+    CH1_Slider_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH1_Slider_1.setupVerticalSlider(21, 12, 12, 157, 174);
+    CH1_Slider_1.setValueRange(32, 100);
+    CH1_Slider_1.setValue(42);
+    add(CH1_Slider_1);
 
     image1_3.setXY(0, 0);
     image1_3.setBitmap(touchgfx::Bitmap(BITMAP_FULLBACKPLATEV3_ID));
     add(image1_3);
 
-    textArea2_2_4.setXY(580, 42);
-    textArea2_2_4.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    textArea2_2_4.setLinespacing(0);
-    textArea2_2_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TDPA));
-    add(textArea2_2_4);
-
-    textArea2_2_3.setXY(480, 42);
-    textArea2_2_3.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    textArea2_2_3.setLinespacing(0);
-    textArea2_2_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_63AU));
-    add(textArea2_2_3);
-
-    textArea2_2_2.setXY(380, 42);
-    textArea2_2_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    textArea2_2_2.setLinespacing(0);
-    textArea2_2_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GP56));
-    add(textArea2_2_2);
-
-    textArea2_2_1.setXY(280, 42);
-    textArea2_2_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    textArea2_2_1.setLinespacing(0);
-    textArea2_2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NAT0));
-    add(textArea2_2_1);
-
-    textArea2_1_4.setXY(487, 85);
+    textArea2_1_4.setXY(487, 67);
     textArea2_1_4.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_4.setLinespacing(0);
     textArea2_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1CKN));
     add(textArea2_1_4);
 
-    textArea2_1_5.setXY(587, 85);
+    textArea2_1_5.setXY(587, 67);
     textArea2_1_5.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_5.setLinespacing(0);
     textArea2_1_5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5HMT));
     add(textArea2_1_5);
 
-    textArea2_1_3.setXY(87, 85);
+    textArea2_1_3.setXY(87, 67);
     textArea2_1_3.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_3.setLinespacing(0);
     textArea2_1_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8NGO));
     add(textArea2_1_3);
 
-    textArea2_1_2.setXY(287, 85);
+    textArea2_1_2.setXY(287, 67);
     textArea2_1_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_2.setLinespacing(0);
     textArea2_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DH6C));
     add(textArea2_1_2);
 
-    textArea2_1_1.setXY(189, 85);
+    textArea2_1_1.setXY(189, 67);
     textArea2_1_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1_1.setLinespacing(0);
     textArea2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4L1H));
     add(textArea2_1_1);
 
-    textArea2_2.setXY(180, 42);
-    textArea2_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    textArea2_2.setLinespacing(0);
-    textArea2_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NC6O));
-    add(textArea2_2);
-
-    textArea2_1.setXY(387, 85);
+    textArea2_1.setXY(387, 67);
     textArea2_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2_1.setLinespacing(0);
     textArea2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WC53));
     add(textArea2_1);
-
-    button2_5.setXY(582, 12);
-    button2_5.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    add(button2_5);
-
-    button2_3.setXY(382, 12);
-    button2_3.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    add(button2_3);
-
-    button2_4.setXY(482, 12);
-    button2_4.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    add(button2_4);
-
-    button2_2.setXY(282, 12);
-    button2_2.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    add(button2_2);
-
-    button2_1.setXY(182, 12);
-    button2_1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    add(button2_1);
-
-    button1_5.setXY(582, 66);
-    button1_5.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(button1_5);
-
-    button1_4.setXY(482, 66);
-    button1_4.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(button1_4);
-
-    button1_3.setXY(382, 66);
-    button1_3.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(button1_3);
-
-    button1_2.setXY(282, 66);
-    button1_2.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(button1_2);
-
-    button1_1.setXY(182, 66);
-    button1_1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(button1_1);
 
     textureMapper1_4.setXY(482, 112);
     textureMapper1_4.setBitmap(touchgfx::Bitmap(BITMAP_REDKNOBV2_ID));
@@ -217,13 +163,6 @@ MainScreenViewBase::MainScreenViewBase() :
     textArea1_1_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D2RN));
     add(textArea1_1_4);
 
-    slider1_5.setXY(592, 208);
-    slider1_5.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1_5.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1_5.setValueRange(0, 100);
-    slider1_5.setValue(16);
-    add(slider1_5);
-
     slider1_6.setXY(692, 208);
     slider1_6.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_MASTERSLIDER_ID));
     slider1_6.setupVerticalSlider(9, 12, 0, 16, 200);
@@ -231,46 +170,18 @@ MainScreenViewBase::MainScreenViewBase() :
     slider1_6.setValue(16);
     add(slider1_6);
 
-    slider1_3.setXY(392, 208);
-    slider1_3.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1_3.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1_3.setValueRange(0, 100);
-    slider1_3.setValue(16);
-    add(slider1_3);
-
     textArea1_1_2.setXY(462, 443);
     textArea1_1_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1_1_2.setLinespacing(0);
     textArea1_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S8HP));
     add(textArea1_1_2);
 
-    slider1_4.setXY(492, 208);
-    slider1_4.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1_4.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1_4.setValueRange(0, 100);
-    slider1_4.setValue(16);
-    add(slider1_4);
-
-    slider1_2.setXY(292, 208);
-    slider1_2.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1_2.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1_2.setValueRange(0, 100);
-    slider1_2.setValue(16);
-    add(slider1_2);
-
-    slider1.setXY(92, 208);
-    slider1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1.setupVerticalSlider(9, 12, 0, 16, 200);
-    slider1.setValueRange(0, 100);
-    slider1.setValue(16);
-    add(slider1);
-
-    slider1_1.setXY(192, 208);
-    slider1_1.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
-    slider1_1.setupVerticalSlider(10, 12, 0, 16, 200);
-    slider1_1.setValueRange(0, 100);
-    slider1_1.setValue(16);
-    add(slider1_1);
+    CH1_Slider.setXY(79, 208);
+    CH1_Slider.setBitmaps(touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_PATH27_ID), touchgfx::Bitmap(BITMAP_BETTERSLIDER2_ID));
+    CH1_Slider.setupVerticalSlider(21, 12, 12, 157, 174);
+    CH1_Slider.setValueRange(32, 100);
+    CH1_Slider.setValue(42);
+    add(CH1_Slider);
 
     RLCHeader.setPosition(0, 0, 49, 170);
     RLCHeader.setColor(touchgfx::Color::getColorFromRGB(90, 94, 209));
@@ -310,20 +221,41 @@ MainScreenViewBase::MainScreenViewBase() :
     CH2PanKnob.setRenderingAlgorithm(touchgfx::TextureMapper::NEAREST_NEIGHBOR);
     add(CH2PanKnob);
 
-    CH1Mute.setXY(82, 66);
-    CH1Mute.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSENDV3_ID), touchgfx::Bitmap(BITMAP_MUTEBUTTONPRESSEDV3_ID));
-    add(CH1Mute);
-
-    EXSendButton1.setXY(82, 12);
-    EXSendButton1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSSENDV4_ID), touchgfx::Bitmap(BITMAP_EFFECTSSENDV4PRESSED_ID));
-    EXSendButton1.setAction(buttonCallback);
-    add(EXSendButton1);
-
-    CH1EffectsSendText.setXY(80, 42);
+    CH1EffectsSendText.setXY(701, 67);
     CH1EffectsSendText.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     CH1EffectsSendText.setLinespacing(0);
     CH1EffectsSendText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0LDN));
     add(CH1EffectsSendText);
+
+    CH6_Mute.setXY(571, 21);
+    CH6_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH6_Mute);
+
+    CH5_Mute.setXY(471, 21);
+    CH5_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH5_Mute);
+
+    CH4_Mute.setXY(369, 21);
+    CH4_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH4_Mute);
+
+    CH3_Mute.setXY(273, 21);
+    CH3_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH3_Mute);
+
+    CH2_Mute.setXY(173, 21);
+    CH2_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH2_Mute);
+
+    CH1_Mute.setXY(71, 21);
+    CH1_Mute.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_ON_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUNDED_SMALL_OFF_LIGHT_ID));
+    add(CH1_Mute);
+
+    EffectsSelect.setXY(673, 21);
+    EffectsSelect.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_IMAGE_AUTO_AWESOME_30_30_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_IMAGE_AUTO_AWESOME_30_30_E8F6FB_SVG_ID));
+    EffectsSelect.setIconXY(36, 4);
+    EffectsSelect.setAction(buttonCallback);
+    add(EffectsSelect);
 }
 
 MainScreenViewBase::~MainScreenViewBase()
@@ -338,10 +270,10 @@ void MainScreenViewBase::setupScreen()
 
 void MainScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &EXSendButton1)
+    if (&src == &EffectsSelect)
     {
         //Interaction2
-        //When EXSendButton1 clicked change screen to EffectsSelect
+        //When EffectsSelect clicked change screen to EffectsSelect
         //Go to EffectsSelect with screen transition towards South
         application().gotoEffectsSelectScreenWipeTransitionSouth();
     }

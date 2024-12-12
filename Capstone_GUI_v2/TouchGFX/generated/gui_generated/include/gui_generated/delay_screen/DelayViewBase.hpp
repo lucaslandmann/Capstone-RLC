@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/Slider.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class DelayViewBase : public touchgfx::View<DelayPresenter>
 {
@@ -34,8 +35,19 @@ protected:
     touchgfx::Slider slider1_1;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea2;
+    touchgfx::ButtonWithIcon BackButtonDelayScreen;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<DelayViewBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

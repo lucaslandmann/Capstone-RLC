@@ -12,6 +12,7 @@
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class EffectsSelectViewBase : public touchgfx::View<EffectsSelectPresenter>
 {
@@ -30,50 +31,61 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::Image image1;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1_2;
-    touchgfx::ToggleButton toggleButton1_1_2;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2_2;
-    touchgfx::ToggleButton toggleButton1_2_2;
-    touchgfx::ButtonWithLabel buttonWithLabel1_4;
-    touchgfx::ToggleButton toggleButton1_4;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1_3;
-    touchgfx::ToggleButton toggleButton1_1_3;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2_3;
-    touchgfx::ToggleButton toggleButton1_2_3;
-    touchgfx::ButtonWithLabel buttonWithLabel1_5;
-    touchgfx::ToggleButton toggleButton1_5;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1_4;
-    touchgfx::ToggleButton toggleButton1_1_4;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2_4;
-    touchgfx::ToggleButton toggleButton1_2_4;
-    touchgfx::ButtonWithLabel buttonWithLabel1_6;
-    touchgfx::ToggleButton toggleButton1_6;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1_5;
-    touchgfx::ToggleButton toggleButton1_1_5;
-    touchgfx::TextArea CH1Text_1_1_1_2;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2_5;
-    touchgfx::ButtonWithLabel buttonWithLabel1_3;
-    touchgfx::ToggleButton toggleButton1_2_5;
-    touchgfx::ButtonWithLabel buttonWithLabel1_7;
-    touchgfx::ToggleButton toggleButton1_7;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1_1;
-    touchgfx::ToggleButton toggleButton1_1_1;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2_1;
-    touchgfx::ToggleButton toggleButton1_2_1;
+    touchgfx::ButtonWithLabel CH3_Delay;
+    touchgfx::ToggleButton CH3_Delay_Toggle;
+    touchgfx::ButtonWithLabel CH3_EQ;
+    touchgfx::ToggleButton CH3_EQ_Toggle;
+    touchgfx::ButtonWithLabel CH3_Reverb;
+    touchgfx::ToggleButton CH3_Reverb_Toggle;
+    touchgfx::ButtonWithLabel CH4_Delay;
+    touchgfx::ToggleButton CH4_Delay_Toggle;
+    touchgfx::ButtonWithLabel CH4_EQ;
+    touchgfx::ToggleButton CH4_EQ_Toggle;
+    touchgfx::ButtonWithLabel CH4_Reverb;
+    touchgfx::ToggleButton CH4_Reverb_Toggle;
+    touchgfx::ButtonWithLabel CH5_Delay;
+    touchgfx::ToggleButton CH5_Delay_Toggle;
+    touchgfx::ButtonWithLabel CH5_EQ;
+    touchgfx::ToggleButton CH5_EQ_Toggle;
+    touchgfx::ButtonWithLabel CH5_Reverb;
+    touchgfx::ToggleButton CH5_Reverb_Toggle;
+    touchgfx::ButtonWithLabel CH6_Delay;
+    touchgfx::ToggleButton CH6_Delay_Toggle;
+    touchgfx::TextArea CH6_Label;
+    touchgfx::ButtonWithLabel CH6_EQ;
+    touchgfx::ButtonWithLabel CH2_Reverb;
+    touchgfx::ToggleButton CH6_EQ_Toggle;
+    touchgfx::ButtonWithLabel CH6_Reverb;
+    touchgfx::ToggleButton CH6_Reverb_Toggle;
+    touchgfx::ButtonWithLabel CH2_Delay;
+    touchgfx::ToggleButton CH2_Delay_Toggle;
+    touchgfx::ButtonWithLabel CH2_EQ;
+    touchgfx::ToggleButton CH2_EQ_Toggle;
     touchgfx::TextArea CH1Text_1_1;
-    touchgfx::TextArea CH1Text_1_1_1;
-    touchgfx::TextArea CH1Text_1_1_1_1;
+    touchgfx::TextArea CH4_Label;
+    touchgfx::TextArea CH5_Label;
     touchgfx::ToggleButton toggleButton1_3;
     touchgfx::TextArea CH1Text_1;
-    touchgfx::ButtonWithLabel buttonWithLabel1_1;
-    touchgfx::ToggleButton toggleButton1_1;
-    touchgfx::ButtonWithLabel buttonWithLabel1_2;
-    touchgfx::ToggleButton toggleButton1_2;
-    touchgfx::ToggleButton toggleButton1;
+    touchgfx::ButtonWithLabel CH1_Delay;
+    touchgfx::ToggleButton CH1_Delay_Toggle;
+    touchgfx::ButtonWithLabel CH1_EQ;
+    touchgfx::ToggleButton CH1_EQ_Toggle;
+    touchgfx::ToggleButton CH1_Reverb_Toggle;
     touchgfx::TextArea CH1Text;
-    touchgfx::ButtonWithLabel buttonWithLabel1;
+    touchgfx::ButtonWithLabel CH1_Reverb;
+    touchgfx::ButtonWithIcon MainMenuReturn;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<EffectsSelectViewBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

@@ -54,7 +54,8 @@ TouchGFX/build/STM32U5G9J-DK2/TouchGFX/gui/src/effectsselect_screen/EffectsSelec
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
- Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp
 
 TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 
@@ -165,3 +166,5 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:

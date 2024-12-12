@@ -8,11 +8,12 @@
 #include <mvp/View.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
+#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/widgets/TextureMapper.hpp>
-#include <touchgfx/containers/Slider.hpp>
+#include <touchgfx/widgets/ToggleButton.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class MainScreenViewBase : public touchgfx::View<MainScreenPresenter>
 {
@@ -30,31 +31,17 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image image1;
-    touchgfx::Image image1_1;
-    touchgfx::Image image1_2;
+    touchgfx::Slider CH1_Slider_1_1_1_1;
+    touchgfx::Slider CH1_Slider_1_1_1;
+    touchgfx::Slider CH1_Slider_1_1;
+    touchgfx::Slider CH1_Slider_1;
     touchgfx::Image image1_3;
-    touchgfx::TextArea textArea2_2_4;
-    touchgfx::TextArea textArea2_2_3;
-    touchgfx::TextArea textArea2_2_2;
-    touchgfx::TextArea textArea2_2_1;
     touchgfx::TextArea textArea2_1_4;
     touchgfx::TextArea textArea2_1_5;
     touchgfx::TextArea textArea2_1_3;
     touchgfx::TextArea textArea2_1_2;
     touchgfx::TextArea textArea2_1_1;
-    touchgfx::TextArea textArea2_2;
     touchgfx::TextArea textArea2_1;
-    touchgfx::Button button2_5;
-    touchgfx::Button button2_3;
-    touchgfx::Button button2_4;
-    touchgfx::Button button2_2;
-    touchgfx::Button button2_1;
-    touchgfx::Button button1_5;
-    touchgfx::Button button1_4;
-    touchgfx::Button button1_3;
-    touchgfx::Button button1_2;
-    touchgfx::Button button1_1;
     touchgfx::TextureMapper textureMapper1_4;
     touchgfx::TextureMapper textureMapper1_5;
     touchgfx::TextureMapper textureMapper1_3;
@@ -64,21 +51,21 @@ protected:
     touchgfx::TextArea textArea1_2;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea1_1_4;
-    touchgfx::Slider slider1_5;
     touchgfx::Slider slider1_6;
-    touchgfx::Slider slider1_3;
     touchgfx::TextArea textArea1_1_2;
-    touchgfx::Slider slider1_4;
-    touchgfx::Slider slider1_2;
-    touchgfx::Slider slider1;
-    touchgfx::Slider slider1_1;
+    touchgfx::Slider CH1_Slider;
     touchgfx::TextArea RLCHeader;
     touchgfx::TextArea textArea1;
     touchgfx::TextureMapper Ch1PanKnob;
     touchgfx::TextureMapper CH2PanKnob;
-    touchgfx::Button CH1Mute;
-    touchgfx::Button EXSendButton1;
     touchgfx::TextArea CH1EffectsSendText;
+    touchgfx::ToggleButton CH6_Mute;
+    touchgfx::ToggleButton CH5_Mute;
+    touchgfx::ToggleButton CH4_Mute;
+    touchgfx::ToggleButton CH3_Mute;
+    touchgfx::ToggleButton CH2_Mute;
+    touchgfx::ToggleButton CH1_Mute;
+    touchgfx::ButtonWithIcon EffectsSelect;
 
 private:
 

@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/Slider.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class EQViewBase : public touchgfx::View<EQPresenter>
 {
@@ -40,8 +41,19 @@ protected:
     touchgfx::TextArea EQ;
     touchgfx::TextArea EQ_1;
     touchgfx::TextArea EQ_2;
+    touchgfx::ButtonWithIcon buttonWithIcon1;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<EQViewBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

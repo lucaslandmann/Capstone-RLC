@@ -14,7 +14,10 @@ KEEP extern const touchgfx::GlyphNode glyphs_ShareTechMono_Regular_48_4bpp[] FON
     {  2040, 0x0037,  16,  34,  34,   5,  26,   0,   0, 0x00 }, // seven
     {  2312, 0x0038,  18,  34,  34,   4,  26,   0,   0, 0x00 }, // eight
     {  2618, 0x0039,  18,  34,  34,   4,  26,   0,   0, 0x00 }, // nine
-    {  2924, 0x003F,  14,  34,  34,   6,  26,   0,   0, 0x00 }  // question
+    {  2924, 0x003F,  14,  34,  34,   6,  26,   0,   0, 0x00 }, // question
+    {  3162, 0x0043,  16,  34,  34,   5,  26,   0,   0, 0x00 }, // C
+    {  3434, 0x004C,  16,  34,  34,   5,  26,   0,   0, 0x00 }, // L
+    {  3706, 0x0052,  20,  34,  34,   3,  26,   0,   0, 0x00 }  // R
 };
 
 // ShareTechMono_Regular_48_4bpp
@@ -32,6 +35,6 @@ touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_48_4bpp();
 
 touchgfx::GeneratedFont& getFont_ShareTechMono_Regular_48_4bpp()
 {
-    static touchgfx::GeneratedFont ShareTechMono_Regular_48_4bpp(glyphs_ShareTechMono_Regular_48_4bpp, 11, 48, 48, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_48_4bpp, kerning_ShareTechMono_Regular_48_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont ShareTechMono_Regular_48_4bpp(glyphs_ShareTechMono_Regular_48_4bpp, 14, 48, 48, 0, 0, 4, 1, 0, 0, unicodes_ShareTechMono_Regular_48_4bpp, kerning_ShareTechMono_Regular_48_4bpp, 63, 0, 0, 0);
     return ShareTechMono_Regular_48_4bpp;
 }

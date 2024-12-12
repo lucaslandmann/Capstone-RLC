@@ -6,7 +6,8 @@
 #include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
-EQViewBase::EQViewBase()
+EQViewBase::EQViewBase() :
+    buttonCallback(this, &EQViewBase::buttonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -16,7 +17,7 @@ EQViewBase::EQViewBase()
     CH1DelayBackground.setBitmap(touchgfx::Bitmap(BITMAP_EFFECTSBACKGROUNDV1_ID));
     add(CH1DelayBackground);
 
-    EQ_3.setXY(162, 431);
+    EQ_3.setXY(176, 431);
     EQ_3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     EQ_3.setLinespacing(0);
     EQ_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WVBW));
@@ -86,6 +87,12 @@ EQViewBase::EQViewBase()
     EQ_2.setLinespacing(0);
     EQ_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OB1U));
     add(EQ_2);
+
+    buttonWithIcon1.setXY(82, 354);
+    buttonWithIcon1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID));
+    buttonWithIcon1.setIconXY(5, 5);
+    buttonWithIcon1.setAction(buttonCallback);
+    add(buttonWithIcon1);
 }
 
 EQViewBase::~EQViewBase()
@@ -96,4 +103,15 @@ EQViewBase::~EQViewBase()
 void EQViewBase::setupScreen()
 {
 
+}
+
+void EQViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &buttonWithIcon1)
+    {
+        //Interaction1
+        //When buttonWithIcon1 clicked change screen to EffectsSelect
+        //Go to EffectsSelect with screen transition towards South
+        application().gotoEffectsSelectScreenSlideTransitionSouth();
+    }
 }

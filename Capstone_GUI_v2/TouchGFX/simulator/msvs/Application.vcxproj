@@ -38,6 +38,9 @@
     <ClCompile Include="..\..\gui\src\reverb_screen\ReverbPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\reverb_screen\ReverbView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\reverb_screen\ReverbViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\mainscreen_1_screen\MainScreen_1Presenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\mainscreen_1_screen\MainScreen_1View.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\mainscreen_1_screen\MainScreen_1ViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -205,6 +208,9 @@
     <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\reverb_screen\ReverbView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\reverb_screen\ReverbViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_1_screen\MainScreen_1Presenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\mainscreen_1_screen\MainScreen_1View.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\mainscreen_1_screen\MainScreen_1ViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

@@ -6,7 +6,8 @@
 #include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
-DelayViewBase::DelayViewBase()
+DelayViewBase::DelayViewBase() :
+    buttonCallback(this, &DelayViewBase::buttonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -47,6 +48,12 @@ DelayViewBase::DelayViewBase()
     textArea2.setLinespacing(0);
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IZDW));
     add(textArea2);
+
+    BackButtonDelayScreen.setXY(82, 354);
+    BackButtonDelayScreen.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUND_TINY_FILL_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID));
+    BackButtonDelayScreen.setIconXY(5, 5);
+    BackButtonDelayScreen.setAction(buttonCallback);
+    add(BackButtonDelayScreen);
 }
 
 DelayViewBase::~DelayViewBase()
@@ -57,4 +64,15 @@ DelayViewBase::~DelayViewBase()
 void DelayViewBase::setupScreen()
 {
 
+}
+
+void DelayViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &BackButtonDelayScreen)
+    {
+        //Interaction1
+        //When BackButtonDelayScreen clicked change screen to EffectsSelect
+        //Go to EffectsSelect with screen transition towards South
+        application().gotoEffectsSelectScreenSlideTransitionSouth();
+    }
 }

@@ -6,7 +6,8 @@
 #include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
-EffectsSelectViewBase::EffectsSelectViewBase()
+EffectsSelectViewBase::EffectsSelectViewBase() :
+    buttonCallback(this, &EffectsSelectViewBase::buttonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -16,172 +17,187 @@ EffectsSelectViewBase::EffectsSelectViewBase()
     image1.setBitmap(touchgfx::Bitmap(BITMAP_EFFECTSSELECTBACKGROUNDV2_ID));
     add(image1);
 
-    buttonWithLabel1_1_2.setXY(293, 120);
-    buttonWithLabel1_1_2.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_8VKE));
-    buttonWithLabel1_1_2.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1_2);
+    CH3_Delay.setXY(293, 120);
+    CH3_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH3_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_8VKE));
+    CH3_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_Delay.setAction(buttonCallback);
+    add(CH3_Delay);
 
-    toggleButton1_1_2.setXY(305, 167);
-    toggleButton1_1_2.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1_2);
+    CH3_Delay_Toggle.setXY(305, 167);
+    CH3_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH3_Delay_Toggle);
 
-    buttonWithLabel1_2_2.setXY(293, 224);
-    buttonWithLabel1_2_2.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_QHAP));
-    buttonWithLabel1_2_2.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2_2);
+    CH3_EQ.setXY(293, 224);
+    CH3_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH3_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_QHAP));
+    CH3_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_EQ.setAction(buttonCallback);
+    add(CH3_EQ);
 
-    toggleButton1_2_2.setXY(304, 271);
-    toggleButton1_2_2.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2_2);
+    CH3_EQ_Toggle.setXY(304, 271);
+    CH3_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH3_EQ_Toggle);
 
-    buttonWithLabel1_4.setXY(293, 18);
-    buttonWithLabel1_4.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_4.setLabelText(touchgfx::TypedText(T___SINGLEUSE_BTAZ));
-    buttonWithLabel1_4.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_4);
+    CH3_Reverb.setXY(293, 18);
+    CH3_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH3_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_BTAZ));
+    CH3_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH3_Reverb.setAction(buttonCallback);
+    add(CH3_Reverb);
 
-    toggleButton1_4.setXY(305, 65);
-    toggleButton1_4.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_4);
+    CH3_Reverb_Toggle.setXY(305, 65);
+    CH3_Reverb_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH3_Reverb_Toggle);
 
-    buttonWithLabel1_1_3.setXY(413, 120);
-    buttonWithLabel1_1_3.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1_3.setLabelText(touchgfx::TypedText(T___SINGLEUSE_L61R));
-    buttonWithLabel1_1_3.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1_3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1_3);
+    CH4_Delay.setXY(413, 120);
+    CH4_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH4_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_L61R));
+    CH4_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_Delay.setAction(buttonCallback);
+    add(CH4_Delay);
 
-    toggleButton1_1_3.setXY(423, 168);
-    toggleButton1_1_3.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1_3);
+    CH4_Delay_Toggle.setXY(423, 168);
+    CH4_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH4_Delay_Toggle);
 
-    buttonWithLabel1_2_3.setXY(413, 224);
-    buttonWithLabel1_2_3.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2_3.setLabelText(touchgfx::TypedText(T___SINGLEUSE_Y3JF));
-    buttonWithLabel1_2_3.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2_3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2_3);
+    CH4_EQ.setXY(413, 224);
+    CH4_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH4_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_Y3JF));
+    CH4_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_EQ.setAction(buttonCallback);
+    add(CH4_EQ);
 
-    toggleButton1_2_3.setXY(423, 271);
-    toggleButton1_2_3.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2_3);
+    CH4_EQ_Toggle.setXY(423, 271);
+    CH4_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH4_EQ_Toggle);
 
-    buttonWithLabel1_5.setXY(413, 18);
-    buttonWithLabel1_5.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_5.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HKXV));
-    buttonWithLabel1_5.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_5);
+    CH4_Reverb.setXY(413, 18);
+    CH4_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH4_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HKXV));
+    CH4_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH4_Reverb.setAction(buttonCallback);
+    add(CH4_Reverb);
 
-    toggleButton1_5.setXY(423, 65);
-    toggleButton1_5.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_5);
+    CH4_Reverb_Toggle.setXY(423, 65);
+    CH4_Reverb_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH4_Reverb_Toggle);
 
-    buttonWithLabel1_1_4.setXY(533, 120);
-    buttonWithLabel1_1_4.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1_4.setLabelText(touchgfx::TypedText(T___SINGLEUSE_2IVN));
-    buttonWithLabel1_1_4.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1_4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1_4);
+    CH5_Delay.setXY(533, 120);
+    CH5_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH5_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_2IVN));
+    CH5_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_Delay.setAction(buttonCallback);
+    add(CH5_Delay);
 
-    toggleButton1_1_4.setXY(544, 168);
-    toggleButton1_1_4.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1_4);
+    CH5_Delay_Toggle.setXY(544, 168);
+    CH5_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH5_Delay_Toggle);
 
-    buttonWithLabel1_2_4.setXY(533, 224);
-    buttonWithLabel1_2_4.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2_4.setLabelText(touchgfx::TypedText(T___SINGLEUSE_VS46));
-    buttonWithLabel1_2_4.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2_4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2_4);
+    CH5_EQ.setXY(533, 224);
+    CH5_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH5_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_VS46));
+    CH5_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_EQ.setAction(buttonCallback);
+    add(CH5_EQ);
 
-    toggleButton1_2_4.setXY(544, 271);
-    toggleButton1_2_4.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2_4);
+    CH5_EQ_Toggle.setXY(544, 271);
+    CH5_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH5_EQ_Toggle);
 
-    buttonWithLabel1_6.setXY(533, 18);
-    buttonWithLabel1_6.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_6.setLabelText(touchgfx::TypedText(T___SINGLEUSE_2XHF));
-    buttonWithLabel1_6.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_6.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_6);
+    CH5_Reverb.setXY(533, 18);
+    CH5_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH5_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_2XHF));
+    CH5_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH5_Reverb.setAction(buttonCallback);
+    add(CH5_Reverb);
 
-    toggleButton1_6.setXY(544, 65);
-    toggleButton1_6.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_6);
+    CH5_Reverb_Toggle.setXY(544, 65);
+    CH5_Reverb_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH5_Reverb_Toggle);
 
-    buttonWithLabel1_1_5.setXY(653, 120);
-    buttonWithLabel1_1_5.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1_5.setLabelText(touchgfx::TypedText(T___SINGLEUSE_0N50));
-    buttonWithLabel1_1_5.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1_5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1_5);
+    CH6_Delay.setXY(653, 120);
+    CH6_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH6_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_0N50));
+    CH6_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_Delay.setAction(buttonCallback);
+    add(CH6_Delay);
 
-    toggleButton1_1_5.setXY(664, 168);
-    toggleButton1_1_5.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1_5);
+    CH6_Delay_Toggle.setXY(664, 168);
+    CH6_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH6_Delay_Toggle);
 
-    CH1Text_1_1_1_2.setXY(654, 355);
-    CH1Text_1_1_1_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    CH1Text_1_1_1_2.setLinespacing(0);
-    CH1Text_1_1_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_V2UP));
-    add(CH1Text_1_1_1_2);
+    CH6_Label.setXY(654, 355);
+    CH6_Label.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    CH6_Label.setLinespacing(0);
+    CH6_Label.setTypedText(touchgfx::TypedText(T___SINGLEUSE_V2UP));
+    add(CH6_Label);
 
-    buttonWithLabel1_2_5.setXY(653, 224);
-    buttonWithLabel1_2_5.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2_5.setLabelText(touchgfx::TypedText(T___SINGLEUSE_P6TE));
-    buttonWithLabel1_2_5.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2_5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2_5);
+    CH6_EQ.setXY(653, 224);
+    CH6_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH6_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_P6TE));
+    CH6_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_EQ.setAction(buttonCallback);
+    add(CH6_EQ);
 
-    buttonWithLabel1_3.setXY(173, 18);
-    buttonWithLabel1_3.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_3.setLabelText(touchgfx::TypedText(T___SINGLEUSE_DAGP));
-    buttonWithLabel1_3.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_3);
+    CH2_Reverb.setXY(173, 18);
+    CH2_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH2_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_DAGP));
+    CH2_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_Reverb.setAction(buttonCallback);
+    add(CH2_Reverb);
 
-    toggleButton1_2_5.setXY(664, 271);
-    toggleButton1_2_5.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2_5);
+    CH6_EQ_Toggle.setXY(664, 271);
+    CH6_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH6_EQ_Toggle);
 
-    buttonWithLabel1_7.setXY(653, 18);
-    buttonWithLabel1_7.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_7.setLabelText(touchgfx::TypedText(T___SINGLEUSE_40EF));
-    buttonWithLabel1_7.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_7.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_7);
+    CH6_Reverb.setXY(653, 18);
+    CH6_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH6_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_40EF));
+    CH6_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH6_Reverb.setAction(buttonCallback);
+    add(CH6_Reverb);
 
-    toggleButton1_7.setXY(664, 65);
-    toggleButton1_7.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_7);
+    CH6_Reverb_Toggle.setXY(664, 65);
+    CH6_Reverb_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH6_Reverb_Toggle);
 
-    buttonWithLabel1_1_1.setXY(173, 120);
-    buttonWithLabel1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_UVSS));
-    buttonWithLabel1_1_1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1_1);
+    CH2_Delay.setXY(173, 120);
+    CH2_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH2_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_UVSS));
+    CH2_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_Delay.setAction(buttonCallback);
+    add(CH2_Delay);
 
-    toggleButton1_1_1.setXY(188, 168);
-    toggleButton1_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1_1);
+    CH2_Delay_Toggle.setXY(188, 168);
+    CH2_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH2_Delay_Toggle);
 
-    buttonWithLabel1_2_1.setXY(173, 224);
-    buttonWithLabel1_2_1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_NG8X));
-    buttonWithLabel1_2_1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2_1);
+    CH2_EQ.setXY(173, 224);
+    CH2_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH2_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_NG8X));
+    CH2_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH2_EQ.setAction(buttonCallback);
+    add(CH2_EQ);
 
-    toggleButton1_2_1.setXY(188, 271);
-    toggleButton1_2_1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2_1);
+    CH2_EQ_Toggle.setXY(188, 271);
+    CH2_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH2_EQ_Toggle);
 
     CH1Text_1_1.setXY(295, 355);
     CH1Text_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -189,17 +205,17 @@ EffectsSelectViewBase::EffectsSelectViewBase()
     CH1Text_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GOPA));
     add(CH1Text_1_1);
 
-    CH1Text_1_1_1.setXY(414, 355);
-    CH1Text_1_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    CH1Text_1_1_1.setLinespacing(0);
-    CH1Text_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LKI3));
-    add(CH1Text_1_1_1);
+    CH4_Label.setXY(414, 355);
+    CH4_Label.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    CH4_Label.setLinespacing(0);
+    CH4_Label.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LKI3));
+    add(CH4_Label);
 
-    CH1Text_1_1_1_1.setXY(534, 355);
-    CH1Text_1_1_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    CH1Text_1_1_1_1.setLinespacing(0);
-    CH1Text_1_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NA81));
-    add(CH1Text_1_1_1_1);
+    CH5_Label.setXY(534, 355);
+    CH5_Label.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    CH5_Label.setLinespacing(0);
+    CH5_Label.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NA81));
+    add(CH5_Label);
 
     toggleButton1_3.setXY(188, 65);
     toggleButton1_3.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
@@ -211,31 +227,33 @@ EffectsSelectViewBase::EffectsSelectViewBase()
     CH1Text_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DSJZ));
     add(CH1Text_1);
 
-    buttonWithLabel1_1.setXY(52, 121);
-    buttonWithLabel1_1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_N88D));
-    buttonWithLabel1_1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_1);
+    CH1_Delay.setXY(52, 121);
+    CH1_Delay.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH1_Delay.setLabelText(touchgfx::TypedText(T___SINGLEUSE_N88D));
+    CH1_Delay.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_Delay.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_Delay.setAction(buttonCallback);
+    add(CH1_Delay);
 
-    toggleButton1_1.setXY(63, 169);
-    toggleButton1_1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_1);
+    CH1_Delay_Toggle.setXY(63, 169);
+    CH1_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH1_Delay_Toggle);
 
-    buttonWithLabel1_2.setXY(53, 224);
-    buttonWithLabel1_2.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
-    buttonWithLabel1_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_S7KC));
-    buttonWithLabel1_2.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1_2);
+    CH1_EQ.setXY(53, 224);
+    CH1_EQ.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH1_EQ.setLabelText(touchgfx::TypedText(T___SINGLEUSE_S7KC));
+    CH1_EQ.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_EQ.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_EQ.setAction(buttonCallback);
+    add(CH1_EQ);
 
-    toggleButton1_2.setXY(64, 271);
-    toggleButton1_2.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1_2);
+    CH1_EQ_Toggle.setXY(64, 271);
+    CH1_EQ_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH1_EQ_Toggle);
 
-    toggleButton1.setXY(63, 65);
-    toggleButton1.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
-    add(toggleButton1);
+    CH1_Reverb_Toggle.setXY(63, 65);
+    CH1_Reverb_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    add(CH1_Reverb_Toggle);
 
     CH1Text.setXY(53, 355);
     CH1Text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -243,12 +261,19 @@ EffectsSelectViewBase::EffectsSelectViewBase()
     CH1Text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZJQ6));
     add(CH1Text);
 
-    buttonWithLabel1.setXY(53, 18);
-    buttonWithLabel1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_PRESSED_ID));
-    buttonWithLabel1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_ZVD0));
-    buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    buttonWithLabel1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(buttonWithLabel1);
+    CH1_Reverb.setXY(52, 18);
+    CH1_Reverb.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_ACTION_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_INACTIVE_ID));
+    CH1_Reverb.setLabelText(touchgfx::TypedText(T___SINGLEUSE_ZVD0));
+    CH1_Reverb.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_Reverb.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CH1_Reverb.setAction(buttonCallback);
+    add(CH1_Reverb);
+
+    MainMenuReturn.setXY(52, 427);
+    MainMenuReturn.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUND_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUND_PRESSED_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID), touchgfx::Bitmap(BITMAP_ICON_THEME_IMAGES_NAVIGATION_ARROW_UPWARD_50_50_E8F6FB_SVG_ID));
+    MainMenuReturn.setIconXY(25, -7);
+    MainMenuReturn.setAction(buttonCallback);
+    add(MainMenuReturn);
 }
 
 EffectsSelectViewBase::~EffectsSelectViewBase()
@@ -259,4 +284,141 @@ EffectsSelectViewBase::~EffectsSelectViewBase()
 void EffectsSelectViewBase::setupScreen()
 {
 
+}
+
+void EffectsSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &MainMenuReturn)
+    {
+        //Interaction1
+        //When MainMenuReturn clicked change screen to MainScreen
+        //Go to MainScreen with screen transition towards South
+        application().gotoMainScreenScreenSlideTransitionSouth();
+    }
+    if (&src == &CH1_Reverb)
+    {
+        //Interaction2
+        //When CH1_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH1_Delay)
+    {
+        //Interaction3
+        //When CH1_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH1_EQ)
+    {
+        //Interaction4
+        //When CH1_EQ clicked change screen to EQ
+        //Go to EQ with no screen transition
+        application().gotoEQScreenNoTransition();
+    }
+    if (&src == &CH2_Reverb)
+    {
+        //Interaction6
+        //When CH2_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH2_Delay)
+    {
+        //Interaction7
+        //When CH2_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH2_EQ)
+    {
+        //Interaction8
+        //When CH2_EQ clicked change screen to EQ
+        //Go to EQ with screen transition towards North
+        application().gotoEQScreenSlideTransitionNorth();
+    }
+    if (&src == &CH3_Reverb)
+    {
+        //Interaction9
+        //When CH3_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH3_Delay)
+    {
+        //Interaction10
+        //When CH3_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH3_EQ)
+    {
+        //Interaction11
+        //When CH3_EQ clicked change screen to EQ
+        //Go to EQ with screen transition towards North
+        application().gotoEQScreenSlideTransitionNorth();
+    }
+    if (&src == &CH4_Reverb)
+    {
+        //Interaction12
+        //When CH4_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH4_Delay)
+    {
+        //Interaction13
+        //When CH4_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH4_EQ)
+    {
+        //Interaction14
+        //When CH4_EQ clicked change screen to EQ
+        //Go to EQ with screen transition towards North
+        application().gotoEQScreenSlideTransitionNorth();
+    }
+    if (&src == &CH5_Reverb)
+    {
+        //Interaction15
+        //When CH5_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH5_Delay)
+    {
+        //Interaction16
+        //When CH5_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH5_EQ)
+    {
+        //Interaction17
+        //When CH5_EQ clicked change screen to EQ
+        //Go to EQ with screen transition towards North
+        application().gotoEQScreenSlideTransitionNorth();
+    }
+    if (&src == &CH6_Reverb)
+    {
+        //Interaction18
+        //When CH6_Reverb clicked change screen to Reverb
+        //Go to Reverb with screen transition towards North
+        application().gotoReverbScreenSlideTransitionNorth();
+    }
+    if (&src == &CH6_Delay)
+    {
+        //Interaction19
+        //When CH6_Delay clicked change screen to Delay
+        //Go to Delay with screen transition towards North
+        application().gotoDelayScreenSlideTransitionNorth();
+    }
+    if (&src == &CH6_EQ)
+    {
+        //Interaction20
+        //When CH6_EQ clicked change screen to EQ
+        //Go to EQ with screen transition towards North
+        application().gotoEQScreenSlideTransitionNorth();
+    }
 }

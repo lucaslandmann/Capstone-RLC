@@ -67,29 +67,35 @@ build/MINGW32_NT-6.2/generated/simulator/src/mainBase.o: \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/WipeTransition.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp \
  gui/include/gui/common/FrontendApplication.hpp \
  generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/MVPApplication.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/Presenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp \
  gui/include/gui/model/Model.hpp \
- gui/include/gui/mainscreen_screen/MainScreenView.hpp \
- generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp \
+ gui/include/gui/mainscreen_1_screen/MainScreen_1View.hpp \
+ generated/gui_generated/include/gui_generated/mainscreen_1_screen/MainScreen_1ViewBase.hpp \
  ../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp \
- gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp \
+ gui/include/gui/mainscreen_1_screen/MainScreen_1Presenter.hpp \
  gui/include/gui/model/ModelListener.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Box.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp \
+ gui/include/gui/mainscreen_screen/MainScreenView.hpp \
+ generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp \
+ gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp \
  gui/include/gui/effectsselect_screen/EffectsSelectView.hpp \
  generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelectViewBase.hpp \
  gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp \
  gui/include/gui/delay_screen/DelayView.hpp \
  generated/gui_generated/include/gui_generated/delay_screen/DelayViewBase.hpp \
  gui/include/gui/delay_screen/DelayPresenter.hpp \
@@ -266,6 +272,10 @@ generated/gui_generated/include/gui_generated/common/FrontendHeapBase.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/EasingEquations.hpp:
 
+../Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp:
+
 gui/include/gui/common/FrontendApplication.hpp:
 
 generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
@@ -278,13 +288,13 @@ generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp
 
 gui/include/gui/model/Model.hpp:
 
-gui/include/gui/mainscreen_screen/MainScreenView.hpp:
+gui/include/gui/mainscreen_1_screen/MainScreen_1View.hpp:
 
-generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp:
+generated/gui_generated/include/gui_generated/mainscreen_1_screen/MainScreen_1ViewBase.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:
 
-gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp:
+gui/include/gui/mainscreen_1_screen/MainScreen_1Presenter.hpp:
 
 gui/include/gui/model/ModelListener.hpp:
 
@@ -294,13 +304,23 @@ gui/include/gui/model/ModelListener.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
 
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
+
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Button.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AbstractButton.hpp:
 
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:
 
-../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/Slider.hpp:
+gui/include/gui/mainscreen_screen/MainScreenView.hpp:
+
+generated/gui_generated/include/gui_generated/mainscreen_screen/MainScreenViewBase.hpp:
+
+gui/include/gui/mainscreen_screen/MainScreenPresenter.hpp:
 
 gui/include/gui/effectsselect_screen/EffectsSelectView.hpp:
 
@@ -309,8 +329,6 @@ generated/gui_generated/include/gui_generated/effectsselect_screen/EffectsSelect
 gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
-
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ToggleButton.hpp:
 
 gui/include/gui/delay_screen/DelayView.hpp:
 
