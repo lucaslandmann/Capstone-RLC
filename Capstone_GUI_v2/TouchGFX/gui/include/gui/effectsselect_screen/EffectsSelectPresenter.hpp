@@ -27,6 +27,10 @@ public:
 
     virtual ~EffectsSelectPresenter() {}
 
+    //virtual void newCH1ReverbToggleValue(bool button);
+
+    void effectsDelayToggle(int selection);
+
 private:
     EffectsSelectPresenter();
 

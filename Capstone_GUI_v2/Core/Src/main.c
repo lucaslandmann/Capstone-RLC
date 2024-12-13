@@ -45,7 +45,7 @@
 #define sampleSize 512
 //System will capture specificed number of samples per channel
 #define denoiseSize 1
-#define maxGain 10.0f
+#define maxGain 10
 #define channelCount 8
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
 //TODO: Determine the actual array position of these values
@@ -177,6 +177,7 @@ uint16_t test = 0;
 uint16_t test2 = 0;
 
 extern osMutexId_t lrPollMutexHandle;
+extern osMutexId_t toggleMutexHandle;
 
 extern osSemaphoreId_t dacSemaphoreHandle;
 extern osSemaphoreId_t adcSemaphoreHandle;
@@ -222,6 +223,9 @@ struct delayInit{
 
 struct delayInit delayChannel[6] = {0};
 
+bool ch1ReverbToggle = 0;
+
+bool delayCH1 = 1;
 
 /* USER CODE END PV */
 
@@ -253,11 +257,46 @@ void leds(char opt);
 static inline int32_t signExtend24(uint32_t value);
 void Audio_Function(void* argument);
 void StartTask04(void* argument);
+void delayOn(int channel);
 
 //functions for delay
-float Do_Comb0(float inSample, int channelNum);
-float Do_Allpass0(float inSample, int channelNum);
-float Do_Delay(float inSample, int channelNum);
+float Do_Comb0(float inSample, int channelNum)
+{
+	delayChannel[2].cf_g = 0.8;
+
+	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
+	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
+	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new;
+	delayChannel[channelNum].cf_p++;
+	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim)
+	{
+		delayChannel[channelNum].cf_p = 0;
+	}
+	return readback;
+
+}
+float Do_Allpass0(float inSample, int channelNum)
+{
+	delayChannel[2].ap_g = 0.7;
+
+	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
+	readback += (-delayChannel[channelNum].ap_g) * inSample;
+	float new = readback*delayChannel[0].ap_g + inSample;
+	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new;
+	delayChannel[channelNum].ap_p++;
+	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim)
+	{
+		delayChannel[channelNum].ap_p = 0;
+	}
+	return readback;
+
+}
+float Do_Delay(float inSample, int channelNum) {
+	float newsample = (Do_Comb0(inSample, channelNum));
+	newsample = Do_Allpass0(newsample, channelNum);
+	return newsample;
+}
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -273,7 +312,37 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	  delayChannel[0].cf_lim = (int)(time*CB);
+	  delayChannel[0].ap_lim = (int)(time*AP);
 
+	  delayChannel[1].cf_lim = (int)(time*CB);
+	  delayChannel[1].ap_lim = (int)(time*AP);
+
+	  delayChannel[2].cf_lim = (int)(time*CB);
+	  delayChannel[2].ap_lim = (int)(time*AP);
+
+	  delayChannel[3].cf_lim = (int)(time*CB);
+	  delayChannel[3].ap_lim = (int)(time*AP);
+
+	  delayChannel[4].cf_lim = (int)(time*CB);
+	  delayChannel[4].ap_lim = (int)(time*AP);
+
+	  delayChannel[5].cf_lim = (int)(time*CB);
+	  delayChannel[5].ap_lim = (int)(time*AP);
+
+	  delayChannel[0].cf_p = 0;
+	  delayChannel[1].cf_p = 0;
+	  delayChannel[2].cf_p = 0;
+	  delayChannel[3].cf_p = 0;
+	  delayChannel[4].cf_p = 0;
+	  delayChannel[5].cf_p = 0;
+
+	  delayChannel[0].ap_p = 0;
+	  delayChannel[1].ap_p = 0;
+	  delayChannel[2].ap_p = 0;
+	  delayChannel[3].ap_p = 0;
+	  delayChannel[4].ap_p = 0;
+	  delayChannel[5].ap_p = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -285,14 +354,14 @@ int main(void)
 
   /* USER CODE END Init */
 
+  /* Configure the System Power */
+  SystemPower_Config();
+
   /* Configure the system clock */
   SystemClock_Config();
 
   /* Configure the peripherals common clocks */
   PeriphCommonClock_Config();
-
-  /* Configure the System Power */
-  SystemPower_Config();
 
   /* USER CODE BEGIN SysInit */
 
@@ -353,7 +422,7 @@ int main(void)
   /* Init scheduler */
   osKernelInitialize();
 
-  /* Call init function for freertos objects (in cmsis_os2.c) */
+  /* Call init function for freertos objects (in app_freertos.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
@@ -1423,47 +1492,26 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-float Do_Comb0(float inSample, int channelNum)
-{
-	delayChannel[2].cf_g = 0.8;
 
-	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
-	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
-	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new;
-	delayChannel[channelNum].cf_p++;
-	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim)
-	{
-		delayChannel[channelNum].cf_p = 0;
-	}
-	return readback;
-
-}
-float Do_Allpass0(float inSample, int channelNum)
-{
-	delayChannel[2].ap_g = 0.7;
-
-	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
-	readback += (-delayChannel[channelNum].ap_g) * inSample;
-	float new = readback*delayChannel[0].ap_g + inSample;
-	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new;
-	delayChannel[channelNum].ap_p++;
-	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim)
-	{
-		delayChannel[channelNum].ap_p = 0;
-	}
-	return readback;
-
-}
-float Do_Delay(float inSample, int channelNum) {
-	float newsample = (Do_Comb0(inSample, channelNum));
-	newsample = Do_Allpass0(newsample, channelNum);
-	return newsample;
-}
 
 
 static inline int32_t signExtend24(uint32_t value)
 {
     return (int32_t)((value & (1 << 23)) ? value | 0xFF000000 : value & 0x007FFFFF);
+}
+
+void delayOn(int channel)
+{
+	osMutexAcquire(toggleMutexHandle, osWaitForever);
+//	if(channel == 1)
+//	{
+//		delayCH1 = 1;
+//	}
+	//else
+	//{
+	//	delayCH1 = 0;
+	//}
+	osMutexRelease(toggleMutexHandle);
 }
 
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
@@ -1502,6 +1550,7 @@ void Audio_Function(void* argument)
 	for(;;) {
 
 	  osSemaphoreAcquire(adcSemaphoreHandle, osWaitForever);
+	  osMutexAcquire(toggleMutexHandle, osWaitForever);
 	  if(adcReady)
 	  {
 		  //Loads sample data into Structs
@@ -1511,31 +1560,33 @@ void Audio_Function(void* argument)
 		        {
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
-		            //if(channel == 1){
-		            //annels[channel].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
-					//    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
-		            //}
+		            if(channel == 1){
+		            channels[1].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
+					    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+		            }
 		        }
 		  }
 		  //TODO: apply effects
 		  //TODO: mixs
 		  adcReady = false;
 	  }
+	  osMutexRelease(toggleMutexHandle);
+
 
 	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever);
 	  osMutexAcquire(lrPollMutexHandle, osWaitForever);
 
-//	  uint16_t currChannelLR = channels[index % 6].lr >> 2;
-//	  if(currChannelLR >= 512)
-//	  {
-//		  channels[index % 6].lFloat = 1;
-//		  channels[index % 6].rFloat = 1.0f - ((float)(currChannelLR - 512) / 512.0f);
-//	  }
-//	  else
-//	  {
-//		  channels[index % 6].lFloat = (float)currChannelLR / 512.0f;
-//		  channels[index %6].rFloat = 1;
-//	  }
+	  uint16_t currChannelLR = channels[index % 6].lr;
+	  if(currChannelLR >= 128)
+	  {
+		  channels[index % 6].lFloat = 1;
+		  channels[index % 6].rFloat = 1.0f - ((float)(currChannelLR - 128) / 128.0f);
+	  }
+	  else
+	  {
+		  channels[index % 6].lFloat = (float)currChannelLR / 128.0f;
+		  channels[index %6].rFloat = 1;
+	  }
 
 	  if(dacReady)
 	  {
@@ -1545,8 +1596,8 @@ void Audio_Function(void* argument)
 			  int32_t mixedSignalRight = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
-				  mixedSignalLeft += channels[currChannel].channelData[sample] * gain[currChannel] * pan[currChannel]; //* channels[currChannel].lFloat);
-				  mixedSignalRight += channels[currChannel].channelData[sample] * gain[currChannel] * (1 - pan[currChannel]); //* channels[currChannel].rFloat);
+				  mixedSignalLeft += channels[currChannel].channelData[sample] * gain[currChannel]* channels[currChannel].lFloat;
+				  mixedSignalRight += channels[currChannel].channelData[sample] * gain[currChannel] * channels[currChannel].rFloat;
 			  }
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;
@@ -1597,39 +1648,39 @@ void StartTask04(void* argument) {
 //		  channels[5].volumeRunner += channels[5].volumeBuffer[index % (sizeof(channels[5].volumeBuffer) / 2)];
 //		  channels[5].volumeRunner -= channels[5].volumeBuffer[(index + 1) % (sizeof(channels[5].volumeBuffer) / 2)];
 //
-//		  //Channel 1 LR
-//		  channels[0].lr = adcGroup1[c1LR];
-//
-//		  //Channel 2 LR
-//		  channels[1].lr = adcGroup1[c2LR];
-//
-//		  //Channel 3 LR
-//		  channels[2].lr = adcGroup1[c3LR];
-//
-//		  //Channel 4 LR
-//		  channels[3].lr = adcGroup1[c4LR];
-//
-//		  //Channel 5 LR
-//		  channels[4].lr = adcGroup4[c5LR];
-//
-//		  //Channel 6 LR
-//		  channels[5].lr = adcGroup4[c6LR];
-//
-//		  index++;
+		  //Channel 1 LR
+		  channels[0].lr = adcGroup1[c1LR];
 
-		  gain[0] = ((float) adcGroup1[c1Vol]) / 128.0f;
-		  gain[1] = ((float) adcGroup1[c2Vol]) / 128.0f;
-		  gain[2] = ((float) adcGroup1[c3Vol]) / 128.0f;
-		  gain[3] = ((float) adcGroup1[c4Vol]) / 128.0f;
-		  gain[4] = ((float) adcGroup1[c5Vol]) / 128.0f;
-		  gain[5] = ((float) adcGroup1[c6Vol]) / 128.0f;
+		  //Channel 2 LR
+		  channels[1].lr = adcGroup1[c2LR];
 
-		  pan[0] = ((float) adcGroup1[c1LR]) / 256.0f;
-		  pan[1] = ((float) adcGroup1[c2LR]) / 256.0f;
-		  pan[2] = ((float) adcGroup1[c3LR]) / 256.0f;
-		  pan[3] = ((float) adcGroup1[c4LR]) / 256.0f;
-		  pan[4] = ((float) adcGroup4[c5LR]) / 256.0f;
-		  pan[5] = ((float) adcGroup4[c6LR]) / 256.0f;
+		  //Channel 3 LR
+		  channels[2].lr = adcGroup1[c3LR];
+
+		  //Channel 4 LR
+		  channels[3].lr = adcGroup1[c4LR];
+
+		  //Channel 5 LR
+		  channels[4].lr = adcGroup4[c5LR];
+//
+		  //Channel 6 LR
+		  channels[5].lr = adcGroup4[c6LR];
+
+		  index++;
+
+		  gain[0] = (((float) adcGroup1[c1Vol]) / 128.0f) * maxGain;
+		  gain[1] = (((float) adcGroup1[c2Vol]) / 128.0f) * maxGain;
+		  gain[2] = (((float) adcGroup1[c3Vol]) / 128.0f) * maxGain;
+		  gain[3] = (((float) adcGroup1[c4Vol]) / 128.0f) * maxGain;
+		  gain[4] = (((float) adcGroup1[c5Vol]) / 128.0f) * maxGain;
+		  gain[5] = (((float) adcGroup1[c6Vol]) / 128.0f) * maxGain;
+
+		  pan[0] = ((float) adcGroup1[c1LR]) / 128.0f;
+		  pan[1] = ((float) adcGroup1[c2LR]) / 128.0f;
+		  pan[2] = ((float) adcGroup1[c3LR]) / 128.0f;
+		  pan[3] = ((float) adcGroup1[c4LR]) / 128.0f;
+		  pan[4] = ((float) adcGroup4[c5LR]) / 128.0f;
+		  pan[5] = ((float) adcGroup4[c6LR]) / 128.0f;
 		  osMutexRelease(lrPollMutexHandle);
 	}
 

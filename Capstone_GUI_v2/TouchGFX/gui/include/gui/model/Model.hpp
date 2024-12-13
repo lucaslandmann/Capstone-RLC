@@ -15,8 +15,12 @@ public:
 
     void tick();
     bool getButtonValue();
+    bool getCH1ToggleValue();
 
     void toggleLed(char selection);
+
+    void toggleDelay(int selection);
+
 protected:
     ModelListener* modelListener;
 };

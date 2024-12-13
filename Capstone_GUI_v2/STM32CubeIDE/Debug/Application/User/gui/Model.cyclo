@@ -1,4 +1,6 @@
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:11:6:bool Model::getButtonValue()	1
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:22:6:void Model::toggleLed(char)	1
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:31:1:Model::Model()	1
-C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:36:6:void Model::tick()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:13:6:bool Model::getButtonValue()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:24:6:bool Model::getCH1ToggleValue()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:35:6:void Model::toggleLed(char)	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:44:6:void Model::toggleDelay(int)	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:54:1:Model::Model()	1
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/model/Model.cpp:59:6:void Model::tick()	1

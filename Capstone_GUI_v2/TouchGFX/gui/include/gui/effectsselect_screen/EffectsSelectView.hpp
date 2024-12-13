@@ -11,6 +11,7 @@ public:
     virtual ~EffectsSelectView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    void setButtonState(bool bstate);
 protected:
 };
 

@@ -18,6 +18,11 @@ public:
     virtual void newButtonValue(bool button){}
 
     virtual void toggleLed(char selection){}
+
+    virtual void newCH1ReverbToggleValue(bool button){}
+
+    virtual void toggleDelay(int selection) {}
+
 protected:
     Model* model;
 };

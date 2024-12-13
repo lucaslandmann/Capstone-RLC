@@ -1,9 +1,10 @@
 ../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:3648:22:LL_ADC_SetOffset	8	static
-../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:7968:26:LL_ADC_IsEnabled	0	static
-../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:8102:26:LL_ADC_REG_IsConversionOngoing	0	static
-../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:4703:22:LL_ADC_REG_SetSequencerRanks.part.0	8	static,ignoring_inline_asm
-../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:6408:22:LL_ADC_SetChannelSamplingTime	12	static,ignoring_inline_asm
-../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:7250:22:LL_ADC_ConfigAnalogWDThresholds.part.0	8	static
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:3722:26:LL_ADC_GetOffsetChannel	0	static
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:7902:26:LL_ADC_IsEnabled	0	static
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:8036:26:LL_ADC_REG_IsConversionOngoing	0	static
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:4705:22:LL_ADC_REG_SetSequencerRanks.part.0	8	static,ignoring_inline_asm
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:6342:22:LL_ADC_SetChannelSamplingTime	12	static,ignoring_inline_asm
+../../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_ll_adc.h:7184:22:LL_ADC_ConfigAnalogWDThresholds.part.0	8	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:1212:13:HAL_ADC_MspInit	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:406:19:HAL_ADC_Init	32	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_adc.c:1229:13:HAL_ADC_MspDeInit	0	static

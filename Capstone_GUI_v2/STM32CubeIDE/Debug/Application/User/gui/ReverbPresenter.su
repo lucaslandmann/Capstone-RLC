@@ -1,5 +1,7 @@
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:18:18:virtual void ModelListener::newButtonValue(bool)	0	static
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:22:18:virtual void ModelListener::newCH1ReverbToggleValue(bool)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:24:18:virtual void ModelListener::toggleDelay(int)	0	static
 ../../TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp:28:13:ReverbPresenter::~ReverbPresenter()	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/reverb_screen/ReverbPresenter.cpp:10:6:virtual void ReverbPresenter::activate()	0	static
 ../../TouchGFX/gui/include/gui/reverb_screen/ReverbPresenter.hpp:28:13:virtual ReverbPresenter::~ReverbPresenter()	8	static

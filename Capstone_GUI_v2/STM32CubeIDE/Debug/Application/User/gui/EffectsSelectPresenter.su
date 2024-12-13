@@ -1,7 +1,10 @@
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:18:18:virtual void ModelListener::newButtonValue(bool)	0	static
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:22:18:virtual void ModelListener::newCH1ReverbToggleValue(bool)	0	static
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:24:18:virtual void ModelListener::toggleDelay(int)	0	static
 ../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:EffectsSelectPresenter::~EffectsSelectPresenter()	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp:10:6:virtual void EffectsSelectPresenter::activate()	0	static
 ../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:virtual EffectsSelectPresenter::~EffectsSelectPresenter()	8	static
 ../../TouchGFX/gui/include/gui/effectsselect_screen/EffectsSelectPresenter.hpp:28:13:virtual void* EffectsSelectPresenter::_ZThn4_N22EffectsSelectPresenterD1Ev()	0	static
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp:4:1:EffectsSelectPresenter::EffectsSelectPresenter(EffectsSelectView&)	0	static
+C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/effectsselect_screen/EffectsSelectPresenter.cpp:25:6:void EffectsSelectPresenter::effectsDelayToggle(int)	0	static

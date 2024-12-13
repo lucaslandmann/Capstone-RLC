@@ -1,5 +1,7 @@
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:18:18:virtual void ModelListener::newButtonValue(bool)	1
 ../../TouchGFX/gui/include/gui/model/ModelListener.hpp:20:18:virtual void ModelListener::toggleLed(char)	1
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:22:18:virtual void ModelListener::newCH1ReverbToggleValue(bool)	1
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:24:18:virtual void ModelListener::toggleDelay(int)	1
 ../../TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp:28:13:EQPresenter::~EQPresenter()	1
 C:/Users/c0524083/Documents/GitHub/Capstone-RLC/Capstone_GUI_v2/TouchGFX/gui/src/eq_screen/EQPresenter.cpp:10:6:virtual void EQPresenter::activate()	1
 ../../TouchGFX/gui/include/gui/eq_screen/EQPresenter.hpp:28:13:virtual EQPresenter::~EQPresenter()	1

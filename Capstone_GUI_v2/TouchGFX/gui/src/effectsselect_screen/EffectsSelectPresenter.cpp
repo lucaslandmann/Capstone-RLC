@@ -16,3 +16,13 @@ void EffectsSelectPresenter::deactivate()
 {
 
 }
+
+//void EffectsSelectPresenter::newButtonValue(bool button)
+//{
+//	view.setButtonState(button);
+//}
+
+void EffectsSelectPresenter::effectsDelayToggle(int selection)
+{
+	model->toggleDelay(selection);
+}

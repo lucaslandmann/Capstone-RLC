@@ -237,6 +237,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH1_Delay_Toggle.setXY(63, 169);
     CH1_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH1_Delay_Toggle.setAction(buttonCallback);
     add(CH1_Delay_Toggle);
 
     CH1_EQ.setXY(53, 224);
@@ -420,5 +421,12 @@ void EffectsSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //When CH6_EQ clicked change screen to EQ
         //Go to EQ with screen transition towards North
         application().gotoEQScreenSlideTransitionNorth();
+    }
+    if (&src == &CH1_Delay_Toggle)
+    {
+        //Interaction21
+        //When CH1_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(1);
     }
 }

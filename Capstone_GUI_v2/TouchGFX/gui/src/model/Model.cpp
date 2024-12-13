@@ -3,8 +3,10 @@
 
 extern "C" {
 
+extern bool ch1ReverbToggle;
 extern bool fxButtonPressed;
 extern void leds(char opt);
+extern void delayOn(int channel);
 
 }
 
@@ -19,6 +21,17 @@ bool Model::getButtonValue()
 #endif //Simulator
 }
 
+bool Model::getCH1ToggleValue()
+{
+#ifndef SIMULATOR
+	return ch1ReverbToggle;
+#else
+// Implimentation for the simulator;
+	return false;
+#endif //Simulator
+}
+
+
 void Model::toggleLed(char selection)
 {
 #ifndef SIMULATOR
@@ -27,6 +40,16 @@ void Model::toggleLed(char selection)
 	//leds(selection);
 #endif
 }
+
+void Model::toggleDelay(int channel)
+{
+#ifndef SIMULATOR
+	delayOn(channel);
+#else
+	//leds(selection);
+#endif
+}
+
 
 Model::Model() : modelListener(0)
 {

@@ -79,6 +79,11 @@ osMutexId_t lrPollMutexHandle;
 const osMutexAttr_t lrPollMutex_attributes = {
   .name = "lrPollMutex"
 };
+/* Definitions for toggleMutex */
+osMutexId_t toggleMutexHandle;
+const osMutexAttr_t toggleMutex_attributes = {
+  .name = "toggleMutex"
+};
 /* Definitions for dacSemaphore */
 osSemaphoreId_t dacSemaphoreHandle;
 const osSemaphoreAttr_t dacSemaphore_attributes = {
@@ -132,6 +137,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END Init */
   /* creation of lrPollMutex */
   lrPollMutexHandle = osMutexNew(&lrPollMutex_attributes);
+
+  /* creation of toggleMutex */
+  toggleMutexHandle = osMutexNew(&toggleMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */

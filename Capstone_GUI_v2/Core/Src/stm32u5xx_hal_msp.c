@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -91,6 +90,7 @@ void HAL_MspInit(void)
   /* USER CODE END MspInit 0 */
 
   __HAL_RCC_PWR_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
   HAL_PWREx_EnableVddA();
 
   /* System interrupt init*/
@@ -1122,7 +1122,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
     PeriphClkInit.PLL3.PLL3Q = 2;
     PeriphClkInit.PLL3.PLL3R = 20;
     PeriphClkInit.PLL3.PLL3RGE = RCC_PLLVCIRANGE_0;
-    PeriphClkInit.PLL3.PLL3FRACN = 0.0;
+    PeriphClkInit.PLL3.PLL3FRACN = 0;
     PeriphClkInit.PLL3.PLL3ClockOut = RCC_PLL3_DIVR;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
     {
