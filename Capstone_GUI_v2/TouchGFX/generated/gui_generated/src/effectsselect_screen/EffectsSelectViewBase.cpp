@@ -27,6 +27,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH3_Delay_Toggle.setXY(305, 167);
     CH3_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH3_Delay_Toggle.setAction(buttonCallback);
     add(CH3_Delay_Toggle);
 
     CH3_EQ.setXY(293, 224);
@@ -63,6 +64,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH4_Delay_Toggle.setXY(423, 168);
     CH4_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH4_Delay_Toggle.setAction(buttonCallback);
     add(CH4_Delay_Toggle);
 
     CH4_EQ.setXY(413, 224);
@@ -99,6 +101,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH5_Delay_Toggle.setXY(544, 168);
     CH5_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH5_Delay_Toggle.setAction(buttonCallback);
     add(CH5_Delay_Toggle);
 
     CH5_EQ.setXY(533, 224);
@@ -135,6 +138,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH6_Delay_Toggle.setXY(664, 168);
     CH6_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH6_Delay_Toggle.setAction(buttonCallback);
     add(CH6_Delay_Toggle);
 
     CH6_Label.setXY(654, 355);
@@ -185,6 +189,7 @@ EffectsSelectViewBase::EffectsSelectViewBase() :
 
     CH2_Delay_Toggle.setXY(188, 168);
     CH2_Delay_Toggle.setBitmaps(touchgfx::Bitmap(BITMAP_EFFECTSELECTOFF_ID), touchgfx::Bitmap(BITMAP_EFFECTSSELECTONV2_ID));
+    CH2_Delay_Toggle.setAction(buttonCallback);
     add(CH2_Delay_Toggle);
 
     CH2_EQ.setXY(173, 224);
@@ -428,5 +433,40 @@ void EffectsSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //When CH1_Delay_Toggle clicked execute C++ code
         //Execute C++ code
         presenter->effectsDelayToggle(1);
+    }
+    if (&src == &CH2_Delay_Toggle)
+    {
+        //Interaction22
+        //When CH2_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(2);
+    }
+    if (&src == &CH3_Delay_Toggle)
+    {
+        //Interaction23
+        //When CH3_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(3);
+    }
+    if (&src == &CH4_Delay_Toggle)
+    {
+        //Interaction24
+        //When CH4_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(4);
+    }
+    if (&src == &CH5_Delay_Toggle)
+    {
+        //Interaction25
+        //When CH5_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(5);
+    }
+    if (&src == &CH6_Delay_Toggle)
+    {
+        //Interaction26
+        //When CH6_Delay_Toggle clicked execute C++ code
+        //Execute C++ code
+        presenter->effectsDelayToggle(6);
     }
 }

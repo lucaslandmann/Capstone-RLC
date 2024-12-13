@@ -223,9 +223,16 @@ struct delayInit{
 
 struct delayInit delayChannel[6] = {0};
 
+
+
 bool ch1ReverbToggle = 0;
 
-bool delayCH1 = 1;
+bool delayCH1 = 0;
+bool delayCH2 = 0;
+bool delayCH3 = 0;
+bool delayCH4 = 0;
+bool delayCH5 = 0;
+bool delayCH6 = 0;
 
 /* USER CODE END PV */
 
@@ -262,7 +269,7 @@ void delayOn(int channel);
 //functions for delay
 float Do_Comb0(float inSample, int channelNum)
 {
-	delayChannel[2].cf_g = 0.8;
+	//delayChannel[2].cf_g = 0.8;
 
 	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
 	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
@@ -277,7 +284,7 @@ float Do_Comb0(float inSample, int channelNum)
 }
 float Do_Allpass0(float inSample, int channelNum)
 {
-	delayChannel[2].ap_g = 0.7;
+	//delayChannel[2].ap_g = 0.7;
 
 	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
 	readback += (-delayChannel[channelNum].ap_g) * inSample;
@@ -343,6 +350,13 @@ int main(void)
 	  delayChannel[3].ap_p = 0;
 	  delayChannel[4].ap_p = 0;
 	  delayChannel[5].ap_p = 0;
+
+	  delayChannel[0].ap_g = 0.7;
+	  delayChannel[1].ap_g = 0.7;
+	  delayChannel[2].ap_g = 0.7;
+	  delayChannel[3].ap_g = 0.7;
+	  delayChannel[4].ap_g = 0.7;
+	  delayChannel[5].ap_g = 0.7;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -1503,14 +1517,67 @@ static inline int32_t signExtend24(uint32_t value)
 void delayOn(int channel)
 {
 	osMutexAcquire(toggleMutexHandle, osWaitForever);
-//	if(channel == 1)
-//	{
-//		delayCH1 = 1;
-//	}
-	//else
-	//{
-	//	delayCH1 = 0;
-	//}
+	switch(channel) {
+	case 1:
+		if(delayCH1 == 0)
+		{
+			delayCH1 = 1;
+		}
+		else
+		{
+			delayCH1 = 0;
+		}
+	break;
+	case 2:
+		if(delayCH2 == 0)
+		{
+			delayCH2 = 1;
+		}
+		else
+		{
+			delayCH2 = 0;
+		}
+	break;
+	case 3:
+		if(delayCH3 == 0)
+		{
+			delayCH3 = 1;
+		}
+		else
+		{
+			delayCH3 = 0;
+		}
+	break;
+	case 4:
+		if(delayCH4 == 0)
+		{
+			delayCH4 = 1;
+		}
+		else
+		{
+			delayCH4 = 0;
+		}
+	break;
+	case 5:
+		if(delayCH5 == 0)
+		{
+			delayCH5 = 1;
+		}
+		else
+		{
+			delayCH5 = 0;
+		}
+	case 6:
+		if(delayCH6 == 0)
+		{
+			delayCH6 = 1;
+		}
+		else
+		{
+			delayCH6 = 0;
+		}
+	break;
+	}
 	osMutexRelease(toggleMutexHandle);
 }
 
@@ -1560,9 +1627,29 @@ void Audio_Function(void* argument)
 		        {
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
-		            if(channel == 1){
+		            if(channel == 1 && delayCH1 == 1){
+		            channels[0].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[0].channelData[sample])
+					    + wet*Do_Delay((float)channels[0].channelData[sample], 0));
+		            }
+		            if(channel == 2 && delayCH2 == 1){
 		            channels[1].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[1].channelData[sample])
 					    + wet*Do_Delay((float)channels[1].channelData[sample], 1));
+		            }
+		            if(channel == 3 && delayCH3 == 1){
+		            channels[2].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[2].channelData[sample])
+					    + wet*Do_Delay((float)channels[2].channelData[sample], 2));
+		            }
+		            if(channel == 4 && delayCH4 == 1){
+		            channels[3].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[3].channelData[sample])
+					    + wet*Do_Delay((float)channels[3].channelData[sample], 3));
+		            }
+		            if(channel == 5 && delayCH5 == 1){
+		            channels[4].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[4].channelData[sample])
+					    + wet*Do_Delay((float)channels[4].channelData[sample], 4));
+		            }
+		            if(channel == 6 && delayCH6 == 1){
+		            channels[5].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[5].channelData[sample])
+					    + wet*Do_Delay((float)channels[5].channelData[sample], 5));
 		            }
 		        }
 		  }

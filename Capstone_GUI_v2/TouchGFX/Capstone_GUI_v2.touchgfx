@@ -1488,6 +1488,61 @@
               "Type": "ActionExecuteCode",
               "Code": "presenter->effectsDelayToggle(1);\r\n"
             }
+          },
+          {
+            "InteractionName": "Interaction22",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "CH2_Delay_Toggle"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode",
+              "Code": "presenter->effectsDelayToggle(2);"
+            }
+          },
+          {
+            "InteractionName": "Interaction23",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "CH3_Delay_Toggle"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode",
+              "Code": "presenter->effectsDelayToggle(3);"
+            }
+          },
+          {
+            "InteractionName": "Interaction24",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "CH4_Delay_Toggle"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode",
+              "Code": "presenter->effectsDelayToggle(4);"
+            }
+          },
+          {
+            "InteractionName": "Interaction25",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "CH5_Delay_Toggle"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode",
+              "Code": "presenter->effectsDelayToggle(5);"
+            }
+          },
+          {
+            "InteractionName": "Interaction26",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "CH6_Delay_Toggle"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode",
+              "Code": "presenter->effectsDelayToggle(6);"
+            }
           }
         ]
       },
