@@ -42,13 +42,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define sampleSize 512
-//System will capture specificed number of samples per channel
-#define denoiseSize 1
-#define maxGain 10
-#define channelCount 8
+
+#define sampleSize 512 //Number of samples that will be stored before processing
+#define maxGain 10 //Maximum digital gain multiplier, when using digital gain sliders
+#define channelCount 8 //Number of channel slots that need to be created and iterated through
 #define devAddress 0x90 //Device address of PCM6260, pre-shift
-//TODO: Determine the actual array position of these values
+
+//Array position of the relevant control in the onboard ADC DMA arrays
 #define c1Vol 0
 #define c2Vol 1
 #define c3Vol 2
@@ -63,7 +63,8 @@
 #define c5LR 0
 #define c6LR 1
 
-#define channelSettings 0xA0
+
+#define channelSettings 0xA0 //I2C for single ended AC coupled input with HIGH SNR mode and no gain control
 
 //delays form samples
 #define CB 3250*2
@@ -122,22 +123,24 @@ DMA_HandleTypeDef handle_GPDMA1_Channel5;
 TIM_HandleTypeDef htim15;
 
 /* USER CODE BEGIN PV */
+
+//Structure for containing everything needed to represent a channel
 struct channelStruct{
-	int32_t channelData[sampleSize / 2];
-	uint8_t channelNum;
-	bool masterMute;
-	uint16_t volumeBuffer[8];
-	uint16_t volumeRunner;
-	uint16_t digGain;
-	uint16_t lr;
-	float lFloat;
-	float rFloat;
-	bool reverbEnable;
-	bool EQEnable;
-	bool distortionEnable;
-	float reverbStrength;
-	float eqLevels[5];
-	float distortionStrength;
+	int32_t channelData[sampleSize / 2]; //Audio data buffer
+	uint8_t channelNum; //Channel identifier
+	bool masterMute; //A boolean to mute or unmute the channel, NOT IMPLEMENTED
+	uint16_t volumeBuffer[8]; //Small sampling buffer to denoise onboard ADC for sliders
+	uint16_t volumeRunner; //A running total of the last 8 samples from the onboard ADC for the volume slider
+	uint16_t digGain; //A computed digital gain value based on VolumeRunner
+	uint16_t lr; //The Left/Right position of the panning faders
+	float lFloat; //A float multiplier representing the percentage of left to output
+	float rFloat; //A float multiplier representing the percentage of right to output
+	bool reverbEnable; //A toggle for enabling the Reverb Effect, NOT IMPLEMENTED
+	bool EQEnable; //A toggle for enabling the EQ effect, NOT IMPLEMENTED
+	bool distortionEnable; //A toggle for enabling the distortion effect, NOT IMPLMENTED
+	float reverbStrength; //Placeholder parameter for Reverb strength, NOT IMPLEMENTED
+	float eqLevels[5]; //Placeholder for gain for each band of EQ, NOT IMPLEMENTED
+	float distortionStrength; //Placeholder for distortion strength, NOT IMPLEMENTED
 };
 
 uint16_t adcGroup1[12] = {0}; //buffer for all ADC values connected to ADC1(volume and LR pots)
@@ -154,13 +157,13 @@ static uint8_t pcm6260Config[][2] =
 		{0x02, 0x81},//Set to awake
 		{0x28,0x10},//Settings reset
 		{0x07, 0x38}, //Sets FSYNC polarity
-		{0x3C,channelSettings}, //config channels
+		{0x3C,channelSettings}, //config channels to be AC coupled, singled ended, high SNR with no automatic gain
 		{0x41,channelSettings},
 		{0x46,channelSettings},
 		{0x4B,channelSettings},
 		{0x50,channelSettings},
 		{0x55,channelSettings},
-		{0x3B, 0x70}, //
+		{0x3B, 0x70},
 		{0x73,0xFE}, //Enable Input Channels
 		{0x74, 0xFE}, //Enable ASI output
 		{0x3B, 0xF0}, //Config MicBias 9v
@@ -171,10 +174,9 @@ struct channelStruct channels[channelCount] = {0}; //Creates a blank channelStru
 
 static volatile bool adcReady = false;
 static volatile bool dacReady = false;
-static volatile int32_t *adcData = 0;
-static volatile int32_t *dacData = 0;
-uint16_t test = 0;
-uint16_t test2 = 0;
+static volatile int32_t *adcData = 0; //Pointer referencing adc data buffer
+static volatile int32_t *dacData = 0; //pointer referencing dac data buffer
+
 
 extern osMutexId_t lrPollMutexHandle;
 extern osMutexId_t toggleMutexHandle;
@@ -414,16 +416,20 @@ int main(void)
     HAL_TIM_Base_Start(&htim15);
     //Config ADC/DAC
 
+
+    //PCM6260 requires waiting period to achieve steady state charge before enabling power on pin
     HAL_Delay(2000);
     HAL_GPIO_WritePin(ADC_Power_On_GPIO_Port, ADC_Power_On_Pin, GPIO_PIN_SET); //Powers SHDNZ High to enable PCM6260
     HAL_Delay(2000);
 
+    //Sends each I2C command in the pcm6260Config buffer to the PCM6260 sequentially, with waiting time for response
     for(int i = 0; i < sizeof(pcm6260Config); i++)
     {
   	  HAL_I2C_Master_Transmit(&hi2c1, devAddress, pcm6260Config[i], DIM(pcm6260Config[i]), 100);
   	  HAL_Delay(10);
     }
 
+    //Final wait for PCM6260 to complete initializations
     HAL_Delay(100);
 
     //Begins DMA transfer for PCM6260
@@ -1625,6 +1631,8 @@ void Audio_Function(void* argument)
 		  {
 		        for (uint16_t sample = 0; sample < (sampleSize / 2); sample++)
 		        {
+		        	//Reads the relevant slot in the input data buffer, converts it from a 24-bit int in a 32 bit frame with a junk bit
+		        	//To appropriate 24-bit value
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
 		            if(channel == 1 && delayCH1 == 1){
@@ -1663,6 +1671,8 @@ void Audio_Function(void* argument)
 	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever);
 	  osMutexAcquire(lrPollMutexHandle, osWaitForever);
 
+
+	  //Determines a left and right multiplier based on current channel fader position
 	  uint16_t currChannelLR = channels[index % 6].lr;
 	  if(currChannelLR >= 128)
 	  {
@@ -1675,6 +1685,7 @@ void Audio_Function(void* argument)
 		  channels[index %6].rFloat = 1;
 	  }
 
+	  //Loads processed data into output buffer
 	  if(dacReady)
 	  {
 		  for(uint16_t sample = 0; sample < sampleSize / 2; sample++)
@@ -1683,13 +1694,17 @@ void Audio_Function(void* argument)
 			  int32_t mixedSignalRight = 0;
 			  for(uint16_t currChannel = 0; currChannel < 6; currChannel ++)
 			  {
+				  //As each channel is processed, it is multiplied by digital gain value and left/right percentage value
 				  mixedSignalLeft += channels[currChannel].channelData[sample] * gain[currChannel]* channels[currChannel].lFloat;
 				  mixedSignalRight += channels[currChannel].channelData[sample] * gain[currChannel] * channels[currChannel].rFloat;
 			  }
+			  //Signal amplitude is averaged across all channels
+			  //TODO: Implement dynamic scaling algorithm
 			  mixedSignalLeft = mixedSignalLeft / 6;
 			  mixedSignalRight = mixedSignalRight / 6;
-			  dacData[(sample * 2)] =  mixedSignalLeft;//channels[2].channelData[sample];
-			  dacData[(sample * 2) + 1] = mixedSignalRight;//channels[2].channelData[sample];
+			  //Writes left into current sample, then right into the following sample
+			  dacData[(sample * 2)] =  mixedSignalLeft;
+			  dacData[(sample * 2) + 1] = mixedSignalRight;
 		  }
 		  dacReady = false;
 	  }
