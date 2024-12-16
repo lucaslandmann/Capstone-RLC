@@ -223,8 +223,7 @@ struct delayInit{
 	int ap_p;
 };
 
-struct delayInit delayChannel[6] = {0};
-
+struct delayInit delayChannel[6] = {0}; //
 
 
 bool ch1ReverbToggle = 0;
@@ -271,39 +270,37 @@ void delayOn(int channel);
 //functions for delay
 float Do_Comb0(float inSample, int channelNum)
 {
-	//delayChannel[2].cf_g = 0.8;
 
-	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p];
-	float new = readback*(delayChannel[channelNum].cf_g) + inSample;
-	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new;
-	delayChannel[channelNum].cf_p++;
-	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim)
+	float readback = delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p]; // Retrieve the previous delayed sample for the specified channel
+	float new = readback*(delayChannel[channelNum].cf_g) + inSample; //Calculate the new sample by applying the feedback gain and adding the input sample
+	delayChannel[channelNum].cfbuf[delayChannel[channelNum].cf_p] = new; // store the new sample in the delay buffer
+	delayChannel[channelNum].cf_p++; // move the pointer to the next position
+	if (delayChannel[channelNum].cf_p==delayChannel[channelNum].cf_lim) // if the pointer reaches it's limits reset it
 	{
 		delayChannel[channelNum].cf_p = 0;
 	}
-	return readback;
+	return readback; //return the delayed sample
 
 }
 float Do_Allpass0(float inSample, int channelNum)
 {
-	//delayChannel[2].ap_g = 0.7;
 
-	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p];
-	readback += (-delayChannel[channelNum].ap_g) * inSample;
-	float new = readback*delayChannel[0].ap_g + inSample;
-	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new;
-	delayChannel[channelNum].ap_p++;
-	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim)
+	float readback = delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p]; // Retrieve the previous delayed sample for the specified channel
+	readback += (-delayChannel[channelNum].ap_g) * inSample; // Apply the all-pass filter equation
+	float new = readback*delayChannel[0].ap_g + inSample; // calculate the new sample value
+	delayChannel[channelNum].apbuf[delayChannel[channelNum].ap_p] = new; // store the newly calculated sample in the delay buffer
+	delayChannel[channelNum].ap_p++; // move the pointer to the next position
+	if (delayChannel[channelNum].ap_p == delayChannel[0].ap_lim) // if the pointer reaches it's limits reset it
 	{
 		delayChannel[channelNum].ap_p = 0;
 	}
-	return readback;
+	return readback; //return the previously retrieved sample
 
 }
 float Do_Delay(float inSample, int channelNum) {
-	float newsample = (Do_Comb0(inSample, channelNum));
-	newsample = Do_Allpass0(newsample, channelNum);
-	return newsample;
+	float newsample = (Do_Comb0(inSample, channelNum)); // apply comb filter to the input sample
+	newsample = Do_Allpass0(newsample, channelNum); //pass the output of the comb filter to the all-pass filter
+	return newsample; // return final processed sample
 }
 
 /* USER CODE END PFP */
@@ -321,6 +318,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+
+	  //set the buffers for each delay channel
 	  delayChannel[0].cf_lim = (int)(time*CB);
 	  delayChannel[0].ap_lim = (int)(time*AP);
 
@@ -339,6 +338,7 @@ int main(void)
 	  delayChannel[5].cf_lim = (int)(time*CB);
 	  delayChannel[5].ap_lim = (int)(time*AP);
 
+	  //set pointers for each delay channel
 	  delayChannel[0].cf_p = 0;
 	  delayChannel[1].cf_p = 0;
 	  delayChannel[2].cf_p = 0;
@@ -353,6 +353,7 @@ int main(void)
 	  delayChannel[4].ap_p = 0;
 	  delayChannel[5].ap_p = 0;
 
+	  //set filter gain for each delay channel
 	  delayChannel[0].ap_g = 0.7;
 	  delayChannel[1].ap_g = 0.7;
 	  delayChannel[2].ap_g = 0.7;
@@ -1522,7 +1523,9 @@ static inline int32_t signExtend24(uint32_t value)
 
 void delayOn(int channel)
 {
-	osMutexAcquire(toggleMutexHandle, osWaitForever);
+	osMutexAcquire(toggleMutexHandle, osWaitForever); //wait for the audio task to be finished with delayCHx resources, by acquiring the mutex
+
+	// turn a delay channel on or off depending on which toggle switch is pressed in the GUI
 	switch(channel) {
 	case 1:
 		if(delayCH1 == 0)
@@ -1622,8 +1625,8 @@ void Audio_Function(void* argument)
 {
 	for(;;) {
 
-	  osSemaphoreAcquire(adcSemaphoreHandle, osWaitForever);
-	  osMutexAcquire(toggleMutexHandle, osWaitForever);
+	  osSemaphoreAcquire(adcSemaphoreHandle, osWaitForever); //wait for a SAI callback to release a semaphore
+	  osMutexAcquire(toggleMutexHandle, osWaitForever); //wait for the GUI to be finished with delayCHx resources, by acquiring the mutex
 	  if(adcReady)
 	  {
 		  //Loads sample data into Structs
@@ -1635,6 +1638,7 @@ void Audio_Function(void* argument)
 		        	//To appropriate 24-bit value
 		            channels[channel].channelData[sample] = signExtend24((uint32_t)(adcData[channelCount*sample + channel]));
 
+		            //apply the delay effect to the channels that have been toggled by the GUI
 		            if(channel == 1 && delayCH1 == 1){
 		            channels[0].channelData[sample] = (int32_t)((1.0f-wet)*((float)channels[0].channelData[sample])
 					    + wet*Do_Delay((float)channels[0].channelData[sample], 0));
@@ -1668,8 +1672,8 @@ void Audio_Function(void* argument)
 	  osMutexRelease(toggleMutexHandle);
 
 
-	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever);
-	  osMutexAcquire(lrPollMutexHandle, osWaitForever);
+	  osSemaphoreAcquire(dacSemaphoreHandle, osWaitForever); //wait for a SAI callback to release a semaphore
+	  osMutexAcquire(lrPollMutexHandle, osWaitForever); //wait for a the adc polling task to release the lrPoll mutex
 
 
 	  //Determines a left and right multiplier based on current channel fader position
@@ -1719,7 +1723,7 @@ void StartTask04(void* argument) {
 
 	for(;;) {
 
-		  osMutexAcquire(lrPollMutexHandle, osWaitForever);
+		  osMutexAcquire(lrPollMutexHandle, osWaitForever); //wait for a the audio task to release the lrPoll mutex
 		  //Channel 1 Volume
 //		  channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)] = adcGroup1[c1Vol];
 //		  channels[0].volumeRunner += channels[0].volumeBuffer[index % (sizeof(channels[0].volumeBuffer) / 2)];
